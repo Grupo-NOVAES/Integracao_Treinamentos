@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../CSS/videos.css">
+    <link rel="shortcut icon" href="../IMAGES/IdentidadeVisual/Logos Grupo Novaes_6.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/a56b5a1294.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../CSS/nav.css" />
+    <title>NOVAES Treinamentos</title>
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="../IMAGES/IdentidadeVisual/Logos Grupo Novaes.png" alt="Novaes Logo" height="50px"
+            width="200px">
+    </header>
+
+    <nav class="BarraLateral close">
+        <div class="menu-bar">
+          <div class="menu">
+            <ul class="menu_links">
+                <li class="nav-link">
+                    <a href="#" style="text-decoration: none;">
+                      <input class="form-check-input" type="checkbox" value="NR6" id="nr6Checkbox">
+                      <label class="form-check-label" for="nr6Checkbox">
+                        <span class="text nav-text">NR 6</span>
+                      </label>
+                    </a>
+                  </li>
+                  
+              <li class="nav-link">
+                <a href="#" style="text-decoration: none;">
+                    <input class="form-check-input" type="checkbox" value="NR10" id="nr10Checkbox">
+                    <label class="form-check-label" for="nr10Checkbox">
+                         <span class="text nav-text"> NR 10</span>
+                    </label>
+                </a>
+              </li>
+              <li class="nav-link">
+                <a :href="#" style="text-decoration: none;">
+                    <input class="form-check-input" type="checkbox" value="NR11" id="nr11Checkbox">
+                    <label class="form-check-label" for="nr11Checkbox">
+                        <span class="text nav-text"> NR 11</span>
+                    </label>
+                </a>
+              </li>
+              <li class="nav-link">
+                <a href="#" style="text-decoration: none;">
+                    <input class="form-check-input" type="checkbox" value="NR12" id="nr12Checkbox">
+                    <label class="form-check-label" for="nr12Checkbox">
+                        <span class="text nav-text"> NR 12</span>
+                    </label>
+                </a>
+              </li>
+              <li class="nav-link">
+                <a href="#" style="text-decoration: none;">
+                    <input class="form-check-input" type="checkbox" value="NR15" id="nr15Checkbox">
+                    <label class="form-check-label" for="nr15Checkbox">
+                        <span class="text nav-text"> NR 15</span>
+                    </label>
+                </a>
+              </li>
+              <li class="nav-link">
+                <a href="#" style="text-decoration: none;">
+                    <input class="form-check-input" type="checkbox" value="NR18" id="nr18Checkbox">
+                    <label class="form-check-label" for="nr18Checkbox">
+                        <span class="text nav-text"> NR 18</span>
+                    </label>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </nav>
+
+      <button id="btnMenu" class="btnMenu" onclick="showSidebar()">
+        <i class="fa-solid fa-square-caret-down fa-xl" style="color: #007B8F;"></i>    
+      </button>
+    <!--ESSA TELA VAI SER DE VIDEOS-->
+    <div id="formulario">
+        <form id="form" action="#" method="post">
+            <div id="cards-container">
+                <div class="card question-card" id="question1">
+                    <div class="card-body">
+                        <p id="texto">Módulo I - Riscos</p>
+                        <iframe width="300" height="270" src="https://www.youtube.com/embed/qO0oK5G21Cw" frameborder="0"
+                            allowfullscreen></iframe>
+
+                    </div>
+                </div>
+                <div class="card question-card" id="question2">
+                    <div class="card-body">
+                        <p>Módulo II - Acidentes</p>
+                        <iframe width="300" height="270" src="https://www.youtube.com/embed/jFSkvAKAd4c" frameborder="0"
+                            allowfullscreen></iframe>
+
+                    </div>
+                </div>
+                <div class="card question-card" id="question3">
+                    <div class="card-body">
+                        <p>Módulo III - NR 06</p>
+                        <iframe width="300" height="270" src="https://www.youtube.com/embed/ps1ARzlPhK4" frameborder="0"
+                            allowfullscreen></iframe>
+
+                    </div>
+                </div>
+                <div class="card question-card" id="question4">
+                    <div class="card-body">
+                        <p>Módulo III (Anexo) - NR 06</p>
+                        <iframe width="300" height="270" src="https://www.youtube.com/embed/w48sgiC1rQg" frameborder="0"
+                            allowfullscreen></iframe>
+
+                    </div>
+                </div>
+                <div class="card question-card" id="question5">
+                    <div class="card-body">
+                        <p>Módulo IV - Procedimentos</p>
+                        <iframe width="300" height="270" src="https://www.youtube.com/embed/iJVBH-knsGQ" frameborder="0"
+                            allowfullscreen></iframe>
+
+                    </div>
+                </div>
+                <div class="card question-card" id="question6">
+                    <div class="card-body">
+                        <p>Módulo V - NR12</p>
+                        <iframe width="300" height="270" src="https://www.youtube.com/embed/X9TT5zon5-I" frameborder="0"
+                            allowfullscreen></iframe>
+
+                    </div>
+                </div>
+            </div>
+            <div id="buttons-container">
+                <div id="actionsBtn">
+                    <button type="button" id="prevBtn">Anterior</button>
+                    <button type="button" id="nextBtn">Próximo</button>
+                </div>
+
+                <div id="testBtn">
+                    <button type="button" id="startTest"><a href="/HTML/indexForms.html" style="text-decoration: none; color: white;">Avaliação</a></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script type="module" src="../JS/videos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

@@ -1,0 +1,267 @@
+@font-face {
+    font-family: fonteNexa;
+    src: url(../font/Nexa\ Bold.otf);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    width: 100%;
+    height: 90px;
+    /* position: fixed;
+    z-index: 2; */
+    background-color: white;
+}
+
+#logo {
+    margin-top: 20px;
+    margin-left: 50px;
+    width: 200px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#h1novaes {
+    font-family: "Montserrat", sans-serif;
+    margin-top: 60px;
+    color: #007B8F;
+    font-weight: 600;
+    font-size: 30pt;
+}
+
+#form_main {
+    background-color: rgb(236, 236, 236);
+    width: 450px;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(#b3dfe7, rgb(226, 226, 226), rgb(255, 255, 255));
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#h1Entrar {
+    font-family: "Montserrat", sans-serif;
+    margin-top: 10px;
+    color: #007B8F;
+    margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    font-size: 20pt;
+}
+
+label,
+button {
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    display: block;
+}
+
+label {
+    justify-content: flex-start;
+    align-items: start;
+}
+
+#input_name {
+    width: 80%;
+}
+
+#input_lastname {
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#input_email {
+    width: 80%;
+}
+#input_senha {
+    margin-top: 20px;
+    width: 80%;
+}
+
+#btn_login {
+    font-family: "Montserrat", sans-serif;
+    background-color: #007B8F;
+    color: rgb(255, 255, 255);
+    padding: 5px 30px;
+    border-radius: 5px;
+    border: none;
+    transition: 0.4s ease-in-out;
+    margin-top: 20px;
+}
+
+#btn_login:hover {
+    background-color: #083C52;
+    cursor: pointer;
+    transform: scale(105%);
+}
+
+@media screen and (max-width: 610px) {
+    #logo {
+        width: 180px;
+        margin-left: 30px;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    #logo {
+        width: 160px;
+        margin-left: 12px;
+    }
+
+    #h1novaes {
+        margin-top: 48px;
+        font-weight: 600;
+        font-size: 25pt;
+    }
+
+    #h1Entrar {
+        font-size: 19pt;
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+
+    #form_main {
+        width: 100%;
+        border-radius: 0;
+        padding-top: 15px;
+        /* padding-bottom: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+        margin-top: 10px; */
+    }
+
+    #input_name {
+        font-size: 11pt;
+    }
+
+    #input_lastname {
+        font-size: 11pt;
+    }
+
+    #input_email {
+        font-size: 11pt;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    #logo {
+        width: 130px;
+        margin-left: 10px;
+    }
+
+    #h1novaes {
+        margin-top: 42px;
+        font-weight: 600;
+        font-size: 20pt;
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+
+    #h1Entrar {
+        font-size: 15pt;
+        margin-top: 8px;
+        margin-bottom: 20px;
+    }
+
+    #form_main {
+        width: 100%;
+        border-radius: 0;
+        padding-top: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
+        /* padding-bottom: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+        margin-top: 10px; */
+    }
+    #input_name {
+        font-size: 10pt;
+    }
+
+    #input_lastname {
+        font-size: 10pt;
+    }
+
+    #input_email {
+        font-size: 10pt;
+    }
+
+}
+
+@media screen and (max-width: 300px) {
+    #logo {
+        width: 110px;
+        margin-left: 10px;
+    }
+
+    #h1novaes {
+        margin-top: 30px;
+        font-weight: 600;
+        font-size: 18pt;
+    }
+
+    #h1Entrar {
+        font-size: 14pt;
+        margin-top: 8px;
+        margin-bottom: 20px;
+    }
+
+    #form_main {
+        width: 100%;
+        border-radius: 0;
+        padding-top: 15px;
+        /* padding-bottom: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+        margin-top: 10px; */
+    }
+    #input_name {
+        font-size: 10pt;
+    }
+
+    #input_lastname {
+        font-size: 10pt;
+    }
+
+    #input_email {
+        font-size: 10pt;
+    }
+    #btn_login{
+        font-size: 10.5pt;
+    }
+}
