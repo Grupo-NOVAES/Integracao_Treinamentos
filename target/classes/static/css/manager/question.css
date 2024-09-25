@@ -1,0 +1,212 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    display: grid;
+    grid-template-rows: 10vh 90vh;
+    grid-row: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+header {
+    display: grid;
+    grid-template-columns: 25% 50% 15%;
+    justify-content: space-around;
+    align-items: center; 
+    background-color: #f9f9f9;
+    padding: 5px;
+}
+
+header .menu{
+    display: none;
+}
+
+
+header .navContent{
+    display: grid;
+    grid-template-columns: 150px 150px 150px 150px;
+    gap: 5px;
+
+}
+
+header .navContent a{
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #007b8f;
+    font-size: 1.2em;
+}
+
+header .navContent a:hover{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #007b8f;
+    background-color: lightgrey;
+    border-radius: 5px;
+}
+
+.media{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+main{
+    display: grid;
+    grid-template-rows: 10vh 10vh 60vh;
+    padding: 5px;
+    background-color: white;
+    gap: 5px;
+}
+
+.title{
+    align-self: end;
+    margin-left: 70px;
+}
+.title h3{
+    color: #007B8F;
+}
+
+.content{
+    align-self: center;
+    padding-left: 70px;
+}
+
+select{
+    align-self: flex-start;
+    background-color: #f9f9f9;
+    border: solid 1px #d7d7d7;
+    border-radius: 5px;
+}
+select:focus{
+    border: solid 2px #d7d7d7;
+}
+
+.box-questions{
+    justify-self: center;
+    height: auto;
+    width: 500px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #007B8F;
+    overflow-y: auto;
+}
+
+.box-questions-content{
+    height: auto;
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+}
+
+
+select::-webkit-scrollbar {
+    width: 4px; /* Largura do scroll */
+    height: 4px;
+}
+
+select::-webkit-scrollbar-thumb {
+    background-color: #007B8F;
+    border-radius: 10px;
+}
+
+select::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+
+.box-questions::-webkit-scrollbar {
+    width: 4px; /* Largura do scroll */
+    height: 4px;
+}
+
+.box-questions::-webkit-scrollbar-thumb {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.box-questions::-webkit-scrollbar-track {
+    background-color: #007B8F;
+    border-radius: 5px;
+}
+
+
+@media (max-width: 1070px) {
+    .media{
+        display: none;
+    }
+    header .navContent{
+        display: grid;
+        grid-template-columns: 30% 30% 30% 30%;
+        gap: 5px;
+    
+    }
+}
+
+@media (max-width: 750px){
+    header .navContent{
+        display: none;
+    }
+    header .menu{
+        display: block; 
+        position: absolute;
+        right: 40px;
+        border: none;
+        background-color: transparent;
+    }
+}
+
+@media (max-width: 510px) {
+    .box-questions{
+        width: 300px;
+    }
+}
+
+@media (max-width: 500px) {
+    .header{
+        padding-left: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .title{
+        margin-left: 30px;
+    }
+    .content{
+        padding-left: 30px;
+    }
+}
+
+@media (max-width: 310px) {
+    .box-questions{
+        width: 200px;
+    }
+}
+
+
+@media (max-width:265px){
+    .logo{
+        height: 50px;
+        width: 150px;
+    }
+}
+
+@media (max-width: 235px) {
+    .title{
+        margin-left: 10px;
+    }
+    .content{
+        padding-left: 10px;
+    }
+}
