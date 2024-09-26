@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a56b5a1294.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../CSS/manager/addmodalstandart.css">
     <link rel="stylesheet" href="../../CSS/manager/standart.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +19,7 @@
     <div class="navContent">
       <a href="user.html"><i class="fa-solid fa-users" style="color: #007b8f;"></i> Usuários</a>
       <a href="standart.html"><i class="fa-solid fa-scale-balanced" style="color: #007b8f;"></i> Normas</a>
-      <a href="question.html"><i class="fa-solid fa-list-ol" style="color: #007b8f;"></i> Perguntas</a>
-      <a href="course.html"><i class="fa-solid fa-graduation-cap" style="color: #007b8f;"></i> Cursos</a>
+      <a href="role.html"><i class="fa-solid fa-screwdriver-wrench" style="color: #007b8f;"></i> Cargos</a>
     </div>
     <button class="menu"><i class="fa-solid fa-bars fa-xl" style="color: #007b8f;"></i></button>
     <div class="media">
@@ -36,7 +36,7 @@
     </div>
     <div class="content">
       <div class="button-add">
-        <button class="btnAdd">Adicionar NR's</button>
+        <button class="btnAdd" onclick="showModalAdd(this)">Adicionar NR's</button>
       </div>
       <div class="table">
         <table>
@@ -53,61 +53,90 @@
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
             <tr>
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
             <tr>
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
             <tr>
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
             <tr>
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
             <tr>
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
             <tr>
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
             <tr>
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
             <tr>
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
               <td>06</td>
               <td>EPI</td>
-              <td><a href="standartdata.html"><button class="btnAction"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></a></td>
+              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
             </tr>
           </tbody>
         </table>
       </div>
         
       </div>
+
+      <div class="addModal" id="addModal">
+        <form>
+          <div class="img-form">
+            <i class="fa-solid fa-scale-balanced fa-2xl" style="color: #007b8f;"></i>
+          </div>
+          <div class="header-form">
+            <input class="introInput" type="number" placeholder="Numero">
+            <input class="introInput" type="text" placeholder="Título">
+          </div>
+          <div class="main-form">
+            <input class="mainInput" type="text" placeholder="Descrição">
+            <input class="mainInput" type="number" placeholder="Carga Horária">
+            <textarea class="textArea" name="9" rows="4" cols="50" placeholder="Lista de Requisitos"></textarea>            
+          </div>
+          <div class="header-form">
+            <button class="btnSave">Enviar</button>
+            <button onclick="hideModelAdd()" class="btnExit"> <p class="cancel">Cancelar</p></button>
+          </div>
+        </form>
+      </div>
+
+      <div class="options" id="options">
+        <a href="standartdata.html"><button class="btnOption"><i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Informações</button></a>
+        <a href="question.html"><button class="btnOption"><i class="fa-solid fa-list-ol fa-lg" style="color: #007b8f;"></i> Perguntas</button></a>
+        <a href=""><button class="btnOptionDelete"> <i class="fa-solid fa-trash fa-lg" style="color: #fb5555"></i> Deletar</button></a>
+      </div>
+
+      <script src="../../JS/manager/options.js" defer></script>
   </main>
 
 </body>

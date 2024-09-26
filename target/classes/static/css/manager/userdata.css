@@ -26,7 +26,7 @@ header .menu{
 
 header .navContent{
     display: grid;
-    grid-template-columns: 150px 150px 150px 150px;
+    grid-template-columns: 175px 175px 175px;
     gap: 5px;
 
 }
@@ -157,9 +157,7 @@ td{
 
 
 @media (max-width: 1070px) {
-    .media{
-        display: none;
-    }
+
     header .navContent{
         display: grid;
         grid-template-columns: 30% 30% 30% 30%;
@@ -169,6 +167,9 @@ td{
 }
 
 @media (max-width: 750px){
+    .media{
+        display: none;
+    }
     header .navContent{
         display: none;
     }

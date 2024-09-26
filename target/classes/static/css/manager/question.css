@@ -27,7 +27,7 @@ header .menu{
 
 header .navContent{
     display: grid;
-    grid-template-columns: 150px 150px 150px 150px;
+    grid-template-columns: 175px 175px 175px;
     gap: 5px;
 
 }
@@ -77,18 +77,75 @@ main{
 }
 
 .content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
     align-self: center;
-    padding-left: 70px;
 }
 
 select{
-    align-self: flex-start;
     background-color: #f9f9f9;
     border: solid 1px #d7d7d7;
     border-radius: 5px;
 }
 select:focus{
     border: solid 2px #d7d7d7;
+}
+
+.btnAction{
+    height: 35px;
+    width: 35px;
+    border: none;
+    background-color: #f3f3f3;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+
+
+.options{
+    width: 120px;
+    height: auto;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color: #F9F9F9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 0px 2px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.options .btnOption{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #ffffff;
+    color: #007b8f;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.options .btnOptionDelete{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #ffffff;
+    color: #FB5555;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.options .btnOption:hover{
+    background-color: lightgrey;
+    border-radius: 5px;
+}
+.options .btnOptionDelete:hover{
+    background-color: lightgrey;
+    border-radius: 5px;
 }
 
 .box-questions{
@@ -142,10 +199,9 @@ select::-webkit-scrollbar-track {
 }
 
 
+
 @media (max-width: 1070px) {
-    .media{
-        display: none;
-    }
+
     header .navContent{
         display: grid;
         grid-template-columns: 30% 30% 30% 30%;
@@ -155,6 +211,9 @@ select::-webkit-scrollbar-track {
 }
 
 @media (max-width: 750px){
+    .media{
+        display: none;
+    }
     header .navContent{
         display: none;
     }

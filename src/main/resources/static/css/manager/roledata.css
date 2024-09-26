@@ -24,7 +24,6 @@ header .menu{
     display: none;
 }
 
-
 header .navContent{
     display: grid;
     grid-template-columns: 175px 175px 175px;
@@ -62,32 +61,46 @@ header .navContent a:hover{
 
 main{
     display: grid;
-    grid-template-rows: 10vh 77vh;
+    grid-template-rows: 15vh 70vh 10vh;
     min-height: 100vh;
     padding: 5px;
     background-color: white;
-    gap: 5px;
 }
+
 
 .header{
     display: flex;
-    align-items: end;
-    justify-content: left;
+    flex-direction: column;
+    height: 100%;
     padding-left: 70px;
+    justify-content: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
 }
 
 .header h2{
     color: #007b8f;
     font-weight: bold;
+    margin-bottom: 5px;
+}
+.header p{
+    color: #003f48;
+    margin: 1px;
+}
+
+.header .user-status{
+    margin-top: 10px;
+    color: #FB5555;
 }
 
 .content{
     display: grid;
-    grid-template-rows: 10% 70%;
+    grid-template-rows: 85%;
     grid-template-columns: 90%;
     justify-content: center;
     align-items: center;
 }
+
 
 .button-add{
     display: flex;
@@ -106,23 +119,13 @@ main{
     font-size: 12pt;
 }
 
-.btnAction{
-    height: 35px;
-    width: 35px;
-    border: none;
-    background-color: #f3f3f3;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
 .table{
     display: flex;
     justify-content: center;
-    max-height: 350px;
+    max-height: 300px;
     overflow-y: auto;
     justify-self: center;
     width: 100%;
-    margin-top: 100px;
 }
 
 table{
@@ -142,7 +145,7 @@ th, td{
 }
 tbody tr{
     background-color: #fff;
-    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
     border-radius: 5px; 
 }
 
@@ -156,8 +159,7 @@ td{
 
 
 .table::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 4px; /* Largura do scroll */
 }
 
 .table::-webkit-scrollbar-thumb {
@@ -168,53 +170,6 @@ td{
 .table::-webkit-scrollbar-track {
     background-color: #f9f9f9;
 }
-
-
-
-.options{
-    width: 120px;
-    height: auto;
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    background-color: #F9F9F9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 4px 0px 2px rgba(0,0,0,0.2);
-    z-index: 1000;
-}
-
-.options .btnOption{
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #ffffff;
-    color: #007b8f;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-}
-
-.options .btnOptionDelete{
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #ffffff;
-    color: #FB5555;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-}
-
-.options .btnOption:hover{
-    background-color: lightgrey;
-    border-radius: 5px;
-}
-.options .btnOptionDelete:hover{
-    background-color: lightgrey;
-    border-radius: 5px;
-}
-
 
 
 
@@ -248,16 +203,5 @@ td{
 @media (max-width: 500px) {
     .header{
         padding-left: 30px;
-    }
-    .tdEmail{
-        overflow-y: scroll;
-        max-width: 75px;
-    }
-}
-
-@media (max-width:265px){
-    .logo{
-        height: 50px;
-        width: 150px;
     }
 }

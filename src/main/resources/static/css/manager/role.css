@@ -59,7 +59,6 @@ header .navContent a:hover{
     flex-direction: row;
     justify-content: space-evenly;
 }
-
 main{
     display: grid;
     grid-template-rows: 10vh 77vh;
@@ -80,6 +79,7 @@ main{
     color: #007b8f;
     font-weight: bold;
 }
+
 
 .content{
     display: grid;
@@ -105,6 +105,7 @@ main{
     cursor: pointer;
     font-size: 12pt;
 }
+
 
 .btnAction{
     height: 35px;
@@ -156,8 +157,7 @@ td{
 
 
 .table::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 4px; /* Largura do scroll */
 }
 
 .table::-webkit-scrollbar-thumb {
@@ -217,8 +217,6 @@ td{
 
 
 
-
-
 @media (max-width: 1070px) {
 
     header .navContent{
@@ -248,10 +246,6 @@ td{
 @media (max-width: 500px) {
     .header{
         padding-left: 30px;
-    }
-    .tdEmail{
-        overflow-y: scroll;
-        max-width: 75px;
     }
 }
 
