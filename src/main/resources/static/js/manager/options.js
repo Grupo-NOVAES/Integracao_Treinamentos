@@ -42,6 +42,7 @@ function hideModalOptions(){
 
 
 function showModalAdd(){
+    console.log('scipr ta funcionando');
     const AddModal = document.getElementById('addModal');
     AddModal.style.display = 'block';
     modalVisible = true;
@@ -50,4 +51,10 @@ function hideModalAdd(){
     const AddModal = document.getElementById('addModal');
     AddModal.style.display="none";
     modalVisible = false;
+}
+
+
+function showMenu() {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    dropdownMenu.classList.toggle('active');
 }

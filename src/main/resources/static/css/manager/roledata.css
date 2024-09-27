@@ -159,7 +159,7 @@ td{
 
 
 .table::-webkit-scrollbar {
-    width: 4px; /* Largura do scroll */
+    width: 4px;
 }
 
 .table::-webkit-scrollbar-thumb {
