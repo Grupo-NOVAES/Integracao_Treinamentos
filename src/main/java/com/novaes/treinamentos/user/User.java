@@ -8,11 +8,14 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.novaes.treinamentos.office.Office;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User implements UserDetails {
@@ -29,13 +32,34 @@ public class User implements UserDetails {
     private String login;
 
     private String password;
+    
+    private String phoneNumber;
 
-    private boolean enabled;
+    public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Office getOffice() {
+		return office;
+	}
+
+	public void setOffice(Office office) {
+		this.office = office;
+	}
+
+	private boolean enabled;
 
     @Column(nullable = false)
     private Role role;
 
     private ZonedDateTime activationDate;
+    
+    @ManyToOne
+    private Office office;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

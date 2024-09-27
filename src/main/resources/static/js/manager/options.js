@@ -16,6 +16,7 @@ document.addEventListener('click', function(event) {
 
 });
 
+document.getElementById("btnOptionUser").addEventListener('click')
 
 function showModalOptions(button){
     const options = document.getElementById('options');
@@ -42,7 +43,6 @@ function hideModalOptions(){
 
 
 function showModalAdd(){
-    console.log('scipr ta funcionando');
     const AddModal = document.getElementById('addModal');
     AddModal.style.display = 'block';
     modalVisible = true;
@@ -52,6 +52,7 @@ function hideModalAdd(){
     AddModal.style.display="none";
     modalVisible = false;
 }
+
 
 
 function showMenu() {

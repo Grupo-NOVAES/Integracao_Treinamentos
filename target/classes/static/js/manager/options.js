@@ -16,6 +16,7 @@ document.addEventListener('click', function(event) {
 
 });
 
+document.getElementById("btnOptionUser").addEventListener('click')
 
 function showModalOptions(button){
     const options = document.getElementById('options');
@@ -50,4 +51,11 @@ function hideModalAdd(){
     const AddModal = document.getElementById('addModal');
     AddModal.style.display="none";
     modalVisible = false;
+}
+
+
+
+function showMenu() {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    dropdownMenu.classList.toggle('active');
 }

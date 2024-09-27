@@ -33,6 +33,7 @@ public class DatabaseInit  implements CommandLineRunner{
 			user.setLastname("master");
 			user.setLogin("admin@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456"));
+			user.setPhoneNumber("(16) 99738-3588");
 			user.setRole(Role.ADMIN);
 			user.setEnabled(true);
 			userRepository.save(user);
@@ -47,6 +48,7 @@ public class DatabaseInit  implements CommandLineRunner{
 			client.setName("cliente");
 			client.setLastname("teste");
 			client.setLogin("client@gmail.com");
+			client.setPhoneNumber("(16) 99738-3588");
 			client.setPassword(passwordEncoder.encode("123456"));
 			client.setRole(Role.USER);
 			userRepository.save(client);

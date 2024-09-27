@@ -50,23 +50,21 @@ public class UserService {
 	
 	protected void activateUser(Long userId) {
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+            .orElseThrow(UserNotFoundException::new);
         
         if (user.getRole() == Role.USER) {
             user.activate();
             userRepository.save(user);
         } else {
-            throw new RuntimeException("Only CLIENT users can be activated");
+            throw new OnlyClientUsersCanBeActivatedException();
         }
     }
 	
 	@Scheduled(fixedRate = 60000)
     protected void deactivateExpiredAccounts() {
         List<User> clients = userRepository.findByRole(Role.USER); 
-        System.out.println("verificando usuarios ativados...");
         for (User user : clients) {
             if (user.isEnabled() && !user.isActive()) { 
-            	System.out.println(user.toString());
                 user.deactivate();
                 userRepository.save(user);
             }

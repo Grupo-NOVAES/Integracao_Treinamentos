@@ -43,11 +43,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("email")
                         .failureUrl("/login?error")
-                        .successHandler((request, response, authentication) -> {
-                            Long userId = ((User) authentication.getPrincipal()).getId();
-                            response.setStatus(200);
-                            response.getWriter().write(userId.toString());
-                        })
+                        .defaultSuccessUrl("/user", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

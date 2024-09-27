@@ -11,54 +11,6 @@ body{
     min-height: 100vh;
     overflow: hidden;
 }
-header {
-    display: grid;
-    grid-template-columns: 25% 50% 15%;
-    justify-content: space-around;
-    align-items: center; 
-    background-color: #f9f9f9;
-    padding: 5px;
-}
-
-header .menu{
-    display: none;
-}
-
-
-header .navContent{
-    display: grid;
-    grid-template-columns: 175px 175px 175px;
-    gap: 5px;
-
-}
-
-header .navContent a{
-    height: 30px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: #007b8f;
-    font-size: 1.2em;
-}
-
-header .navContent a:hover{
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: #007b8f;
-    background-color: lightgrey;
-    border-radius: 5px;
-}
-
-.media{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
 
 main{
     display: grid;
@@ -168,7 +120,7 @@ select:focus{
 
 
 select::-webkit-scrollbar {
-    width: 4px; /* Largura do scroll */
+    width: 4px;
     height: 4px;
 }
 
@@ -184,7 +136,7 @@ select::-webkit-scrollbar-track {
 
 
 .box-questions::-webkit-scrollbar {
-    width: 4px; /* Largura do scroll */
+    width: 4px;
     height: 4px;
 }
 
@@ -199,44 +151,12 @@ select::-webkit-scrollbar-track {
 }
 
 
-
-@media (max-width: 1070px) {
-
-    header .navContent{
-        display: grid;
-        grid-template-columns: 30% 30% 30% 30%;
-        gap: 5px;
-    
-    }
-}
-
-@media (max-width: 750px){
-    .media{
-        display: none;
-    }
-    header .navContent{
-        display: none;
-    }
-    header .menu{
-        display: block; 
-        position: absolute;
-        right: 40px;
-        border: none;
-        background-color: transparent;
-    }
-}
-
 @media (max-width: 510px) {
     .box-questions{
         width: 300px;
     }
 }
 
-@media (max-width: 500px) {
-    .header{
-        padding-left: 30px;
-    }
-}
 
 @media (max-width: 500px) {
     .title{

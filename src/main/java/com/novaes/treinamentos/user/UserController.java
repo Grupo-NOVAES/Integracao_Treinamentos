@@ -1,6 +1,7 @@
 package com.novaes.treinamentos.user;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,16 +20,16 @@ public class UserController {
 	}
 	
 	@GetMapping
-	public ModelAndView AllClientPage() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/pages/manager/user");
-		return modelAndView;
+	public String AllClientPage(Model model) {
+		model.addAttribute("listUser", userService.getAllClients());
+		return "pages/manager/user";
 	}
 	
 	
-	@GetMapping("/infoClient")
-	public String getInfoCurseCompleteClient() {
-		return "infoUser";
+	@GetMapping("/infoClient/{idUser}")
+	public String getInfoCurseCompleteClient(@PathVariable Long idUser,Model model) {
+		model.addAttribute("infoUser", userService.getUserById(idUser));
+		return "pages/manager/infoUser";
 	}
 	
 	@PostMapping

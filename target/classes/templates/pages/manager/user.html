@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a56b5a1294.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../CSS/manager/addmodaluser.css">
-    <link rel="stylesheet" href="../../CSS/manager/user.css">
+    <link rel="stylesheet" th:href="@{/css/manager/addmodaluser.css}">
+    <link rel="stylesheet" th:href="@{/css/manager/user.css}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -14,12 +15,13 @@
 <body>
   <header>
     <div>
-      <img class="logo" src="../../IMAGES/IdentidadeVisual/Logos Grupo Novaes.png" alt="Logo_NOVAES" width="170px" height="50px"/>
+      <img class="logo" th:src="@{/img/IdentidadeVisual/Logos Grupo Novaes.png}" alt="Logo_NOVAES" width="170px" height="50px"/>
     </div>
     <div class="navContent">
       <a href="user.html"><i class="fa-solid fa-users" style="color: #007b8f;"></i> Usuários</a>
       <a href="standart.html"><i class="fa-solid fa-scale-balanced" style="color: #007b8f;"></i> Normas</a>
-      <a href="role.html"><i class="fa-solid fa-screwdriver-wrench" style="color: #007b8f;"></i> Cargos</a>
+      <a href="question.html"><i class="fa-solid fa-list-ol" style="color: #007b8f;"></i> Perguntas</a>
+      <a href="course.html"><i class="fa-solid fa-graduation-cap" style="color: #007b8f;"></i> Cursos</a>
     </div>
     <button class="menu"><i class="fa-solid fa-bars fa-xl" style="color: #007b8f;"></i></button>
     <div class="media">
@@ -36,96 +38,48 @@
     </div>
     <div class="content">
       <div class="button-add">
-        <button class="btnAdd" onclick="showModalAdd(this)">Adicionar Usuário</button>
+        <button class="btnAdd" onclick="showModalAdd(this)">Adicionar Usuários</button>
       </div>
       <div class="table">
         <table>
           <thead>
             <tr>
-              <th></th>
               <th>Nome</th>
               <th>Sobrenome</th>
-              <th>Email</th>
+              <th>email</th>
+              <th>numero de telefone</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction" onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
-            </tr>
-            <tr>
-              <td><i class="fa-regular fa-circle-user fa-xl" style="color: #007b8f;"></i></td>
-              <td>Luigi</td>
-              <td>Bruno</td>
-              <td class="tdEmail">luigifalconibruno@gmail.com</td>
-              <td><button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
+            <tr 
+              th:each="user : ${listUser}"
+              th:data-id="${user.id}"
+              th:data-name="${user.name}"
+              th:data-lastname="${user.lastname}"
+              th:data-login="${user.login}"
+              th:data-phoneNumber="${user.phoneNumber}"
+              th:data-role="${user.role}"
+              class="userItem">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.lastname}"></td>
+                <td th:text="${user.login}"></td>
+                <td th:text="${user.phoneNumber}">a</td>
+                <td style="white-space: nowrap">
+                  <button
+                    onclick="showModalOptions(this)"
+                    style="
+                      border: none;
+                      height: 40px;
+                      width: 40px;
+                      border-radius: 15px;
+                      background-color: none;
+                    "
+                    >
+                    <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                  </button>
+                </td>
+            
             </tr>
           </tbody>
         </table>
@@ -167,10 +121,17 @@
     
 
     <div class="options" id="options">
-      <a href="userdata.html"><button class="btnOption"><i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Informações</button></a>
+      <a th:href="@{/user/infoClient/{idClient}(idClient=${user.id})}" id="btnOptionUserLink">
+        <button class="btnOption">
+          <i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Informações
+        </button>
+      </a>
       <a href=""><button class="btnOptionDelete"> <i class="fa-solid fa-trash fa-lg" style="color: #fb5555"></i> Deletar</button></a>
     </div>
+    
+
   </main>
-    <script src="../../JS/manager/options.js" defer></script>
+
+  <script th:src="@{/js/manager/options.js}"></script>
 </body>
 </html>
