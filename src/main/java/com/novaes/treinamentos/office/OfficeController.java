@@ -16,7 +16,7 @@ public class OfficeController {
 	
 	private OfficeService officeService;
 	private NrService nrService;
-	private static final String OfficeHomePage = "redirect:/office";
+	private static final String OFFICEHOMEPAGE = "redirect:/office";
 	
 	public OfficeController(OfficeService officeService,NrService nrService) {
 		this.officeService=officeService;
@@ -38,19 +38,19 @@ public class OfficeController {
 	@PostMapping("/linkNr")
 	public String linkNrToOffice(@RequestParam Long idOffice,@RequestParam Long idNr) {
 		officeService.linkNrToOffice(idOffice, nrService.findNrById(idNr));
-		return OfficeHomePage;
+		return OFFICEHOMEPAGE;
 	}
 	
 	@PostMapping("/newOffice")
 	public String addNewOffice(@RequestParam(value = "specialization" , required = true) String specialization) {
 		officeService.addNewOffice(specialization);
-		return OfficeHomePage;
+		return OFFICEHOMEPAGE;
 	}
 	
 	@PostMapping("/deleteOffice/{idOffice}")
 	public String deleteOffice(@PathVariable Long idOffice) {
 		officeService.deleteOffice(idOffice);
-		return OfficeHomePage;
+		return OFFICEHOMEPAGE;
 	}
 
 }

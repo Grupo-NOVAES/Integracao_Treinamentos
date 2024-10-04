@@ -19,7 +19,7 @@ public class UserController {
 	
 	private final UserNrService userNrService;
 	
-	private static final String UserHomePage = "redirect:/user";
+	private static final String USERHOMEPAGE = "redirect:/user";
 	
 	public UserController(UserService userService,UserNrService userNrService) {
 		this.userService=userService;
@@ -46,14 +46,14 @@ public class UserController {
 		if(user.getOffice() != null) {
 			userNrService.vinculedUserToNr(user, user.getOffice());
 		}
-		return UserHomePage;
+		return USERHOMEPAGE;
 	}
 	
 	@PostMapping("/updateUser")
 	public String updateClient(UserDTO user , Long id) {
 		
 		userService.updateUser(user, id);
-		return UserHomePage;
+		return USERHOMEPAGE;
 	}
 	
 	@PostMapping("/activeUser/{idUser}")
@@ -69,7 +69,7 @@ public class UserController {
 	@PostMapping("/deleteUser")
 	public String deleteClient(Long id) {
 		userService.deleteUser(id);
-		return UserHomePage;
+		return USERHOMEPAGE;
 	}
 	
 
