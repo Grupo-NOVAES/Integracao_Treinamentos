@@ -17,7 +17,7 @@ public class NrController {
 	
 	
 	private final NrService nrService;
-	private static final String homePageNr = "redirect:/Nr";
+	private static final String NRHOMEPAGE = "redirect:/Nr";
 	
 	public NrController(NrService nrService) {
 		this.nrService=nrService;
@@ -45,7 +45,7 @@ public class NrController {
 	public String addRequirimentsWithNr(@RequestParam(value="requiriment", required = true) String requiriment,
 										@RequestParam(value="idNr", required = true) Long idNr)	{
 		nrService.addRequirimentInNr(idNr , requiriment);
-		return homePageNr;
+		return NRHOMEPAGE;
 	}
 	
 	@PostMapping("/newNr")
@@ -64,7 +64,7 @@ public class NrController {
 			nrService.addNewNr(nr);
 		}
 		
-		return homePageNr;
+		return NRHOMEPAGE;
 	}
 	
 	@PostMapping("/updateNr/{idNr}")
@@ -82,13 +82,13 @@ public class NrController {
 		nr.setWorkload(workload);
 		
 		nrService.updateNr(idNr, nr);
-		return "redirect:/Nr";
+		return NRHOMEPAGE;
 	}
 	
 	@PostMapping("/deleteNr/{idNr}")
 	public String deleteNr(@PathVariable Long idNr) {
 		nrService.deleteNr(idNr);
-		return homePageNr;
+		return NRHOMEPAGE;
 	}
 	
 	
