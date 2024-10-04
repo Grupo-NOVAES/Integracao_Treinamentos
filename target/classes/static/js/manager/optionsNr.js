@@ -40,6 +40,10 @@ function hideModalOptionsNr(){
     options.style.display="none";
 }
 
+function redirectToNrInfo(){
+    window.location.href="/Nr/"+selectedNrId;
+}
+
 function redirectToQuestionBynR(){
     window.location.href="/question/"+selectedNrId;
 }
