@@ -1,0 +1,125 @@
+
+.addModal{
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f9f9f9;
+    width: 350px;
+    height: 400px;
+    box-shadow: 1.5px 1.5px 4px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+form{
+    display: grid;
+    grid-template-rows: 15% 15% 35% 20% 15%;
+    min-height: 100%;
+    padding: 10px;
+}
+
+.img-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-form{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    max-width: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+.introInput{
+    height: 35px;
+    width: 80%;
+    border: solid 1px rgba(0, 123, 143, 0.2);
+    border-radius: 5px;
+    padding-left: 5px;
+}
+.introInput:focus{
+    border: solid 1px #007b8f;
+    outline: none;
+}
+
+
+.main-form{
+    display: grid;
+    grid-template-rows: 33.3% 33.3% 33.3%;
+    min-height: 100%;
+    min-width: 100%;
+    align-items: center;
+    padding-left: 17px;
+}
+
+.main-form .mainInput{
+    height: 35px;
+    width: 95%;
+    border: solid 1px rgba(0, 123, 143, 0.2);
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+.main-form .textArea{
+    height: 50px;
+    width: 95%;
+    border: solid 1px rgba(0, 123, 143, 0.2);
+    border-radius: 5px;
+    padding-left: 6px;
+    padding-top: 5px;
+}
+
+.main-form .mainInput:focus{
+    outline: none;
+    border: solid 1px #007b8f;
+}
+
+.main-form .textArea:focus{
+    outline: none;
+    border: solid 1px #007b8f;
+}
+
+
+.btnSave{
+    height: 30px;
+    width: 78%;
+    border: none;
+    border-radius: 5px;
+    background-color: #007b8f;
+    color: white;
+    cursor: pointer;
+    font-size: 11pt;
+}
+
+.btnSave:hover{
+    width: 80%;
+    height: 32px;
+    background-color:  rgba(0, 89, 103, 0.9);
+    font-size: 12pt;
+    transition: 0.2s;
+}
+
+.btnExit{
+    height: 30px;
+    width: 78%;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.cancel{
+    font-size: 11pt;
+    color: #FB5555;
+}
+
+@media (max-width: 500px){
+    .addModal{
+        width: 250px;
+        height: 300px;
+    }
+}
