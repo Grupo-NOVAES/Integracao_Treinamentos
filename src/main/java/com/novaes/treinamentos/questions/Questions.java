@@ -12,19 +12,13 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Questions {
-	
-	public NR getNr() {
-		return nr;
-	}
-
-	public void setNr(NR nr) {
-		this.nr = nr;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private int questionNumber;
+
 	private String enunciation;
 	
 	@ManyToOne
@@ -52,6 +46,14 @@ public class Questions {
 		this.id = id;
 	}
 
+	public NR getNr() {
+		return nr;
+	}
+
+	public void setNr(NR nr) {
+		this.nr = nr;
+	}
+	
 	public String getEnunciation() {
 		return enunciation;
 	}
@@ -74,6 +76,14 @@ public class Questions {
 
 	public void setCorrectAnwser(String correctAnwser) {
 		this.correctAnwser = correctAnwser;
+	}
+	
+	public int getQuestionNumber() {
+		return questionNumber;
+	}
+
+	public void setQuestionNumber(int questionNumber) {
+		this.questionNumber = questionNumber;
 	}
 	
 	

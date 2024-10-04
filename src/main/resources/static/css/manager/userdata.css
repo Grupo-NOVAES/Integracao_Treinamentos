@@ -42,9 +42,14 @@ main{
     margin: 1px;
 }
 
-.header .user-status{
+.header .user-disabled{
     margin-top: 10px;
     color: #FB5555;
+}
+
+.header .user-active{
+    margin-top: 10px;
+    color: #01a109;
 }
 
 .content{

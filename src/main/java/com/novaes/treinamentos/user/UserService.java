@@ -7,17 +7,23 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.novaes.treinamentos.UserNR.UserNRRepository;
+import com.novaes.treinamentos.office.Office;
+
 @Service
 public class UserService {
 
 	
 	private final UserRepository userRepository;
 	
+	private final UserNRRepository userNrRepository;
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository,UserNRRepository userNrRepository) {
 		this.userRepository=userRepository;
+		this.userNrRepository=userNrRepository;
 	}
 	
 	protected void addUser(User user) {
@@ -70,5 +76,7 @@ public class UserService {
             }
         }
     }
+	
+	
 
 }

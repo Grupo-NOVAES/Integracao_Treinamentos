@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Nova Nr</title>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <form id="formContainer">
+        <input type="text" name="enunciation" class="inputEnunciation" id="enunciationInput">
+        <input type="text" name="anwser1" class="input" id="anwser1Input">
+        <input type="text" name="anwser2" class="input" id="anwser2Input">
+        <input type="text" name="anwser3" class="input" id="anwser3Input">
+        <input type="text" name="anwser4" class="input" id="anwser4Input">
+        <input type="text" name="correctAnwser" class="input" id="correctAnwserInput">  
+         
+        <button type="submit" id="sendBtn"></button>
+    </form>
+</body>
+</html>

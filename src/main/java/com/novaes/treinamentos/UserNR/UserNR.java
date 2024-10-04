@@ -24,4 +24,38 @@ public class UserNR {
 	
 	private boolean status;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public NR getNr() {
+		return nr;
+	}
+
+	public void setNr(NR nr) {
+		this.nr = nr;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	
+
 }

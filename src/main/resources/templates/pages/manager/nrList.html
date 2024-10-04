@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a56b5a1294.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/manager/addmodalstandart.css}">
+    <link rel="stylesheet" th:href="@{/css/manager/standart.css}">
+    <link rel="stylesheet" th:href="@{/css/manager/header.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Gerenciar NR's</title>
+</head>
+<body>
+  <div th:replace="fragments/header :: header"></div>
+
+  <main>
+    <div class="header">
+      <h2>Lista de NR's</h2>
+    </div>
+    <div class="content">
+      <div class="button-add">
+        <button class="btnAdd" onclick="showModalAddNr(this)">Adicionar NR's</button>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>NR</th>
+              <th>Título</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr 
+            th:each="nr: ${listNr}"
+            th:data-id="${nr.id}">
+              <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
+                <td th:text="${nr.number}"></td>
+                <td th:text="${nr.title}"></td>
+                <td><button class="btnAction" onclick="showModalOptionsNr(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+        
+      </div>
+
+      <div class="addModal" id="addModal">
+        <form>
+          <div class="img-form">
+            <i class="fa-solid fa-scale-balanced fa-2xl" style="color: #007b8f;"></i>
+          </div>
+          <div class="header-form">
+            <input class="introInput" type="number" placeholder="Numero">
+            <input class="introInput" type="text" placeholder="Título">
+          </div>
+          <div class="main-form">
+            <input class="mainInput" type="text" placeholder="Descrição">
+            <input class="mainInput" type="number" placeholder="Carga Horária">
+            <textarea class="textArea" name="9" rows="4" cols="50" placeholder="Lista de Requisitos"></textarea>            
+          </div>
+          <div class="header-form">
+            <button class="btnSave">Enviar</button>
+            <button onclick="hideModelAddNr()" class="btnExit"> <p class="cancel">Cancelar</p></button>
+          </div>
+        </form>
+      </div>
+
+      <div class="options" id="options">
+        <button class="btnOption" onclick="redirectToNrInfo()"><i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Informações</button>
+        <button class="btnOption" onclick="redirectToQuestionBynR()"><i class="fa-solid fa-list-ol fa-lg" style="color: #007b8f;"></i> Perguntas</button>
+        <a href=""><button class="btnOptionDelete"> <i class="fa-solid fa-trash fa-lg" style="color: #fb5555"></i> Deletar</button></a>
+      </div>
+
+      <script th:src="@{/js/manager/optionsNr.js}" defer></script>
+  </main>
+
+</body>
+</html>

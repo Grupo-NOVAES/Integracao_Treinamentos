@@ -1,36 +1,39 @@
 package com.novaes.treinamentos.questions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.novaes.treinamentos.NR.NrService;
+
 @Controller
 @RequestMapping("/question")
 public class QuestionController {
 	
 	private final QuestionService questionService;
+	private final NrService nrService;
 	
-	public QuestionController(QuestionService questionService) {
+	public QuestionController(QuestionService questionService,NrService nrService) {
 		this.questionService=questionService;
+		this.nrService=nrService;
 	}
 	
 
-	//tela que listará as questoes por NR
-	@GetMapping("/{nrNumber}")
-	public String QuestionByNR(@PathVariable int nrNumber) {
-		
-		return "question";
+	@GetMapping("/{nrNumber}")	
+	public String questionByNR(@PathVariable int nrNumber,Model model) {
+		model.addAttribute("listQuestions", questionService.getQuestionsByNRNumber(nrNumber));
+		return "pages/manager/question";
 	}
 	
 	@GetMapping("/newQuestion")
-	public String addNewQuestionPage() {
-		return "newQuestion";
+	public String addNewQuestionPage(Model model) {
+		return "pages/manager/newQuestion";
 	}
 	
 	@PostMapping("/newQuestion/{numberNR}")
@@ -44,7 +47,7 @@ public class QuestionController {
 		
 		Questions question = new Questions();
 		question.setEnunciation(enunciation);
-		//question.setNr(NRService.findById(numberNR));
+		question.setNr(nrService.findNrById(numberNR));
 		
 		ArrayList<String> listAnwser = new ArrayList<>();
 		listAnwser.add(anwser1);
@@ -61,8 +64,10 @@ public class QuestionController {
 	}
 	
 	@PostMapping("/deleteQuestion/{idQuestion}")
-	public void deleteQuestion(@PathVariable Long idQuestion) {
+	public String deleteQuestion(@PathVariable Long idQuestion) {
+		int nrNumber = questionService.getQuestionById(idQuestion).getNr().getNumber();
 		questionService.deleteQuestion(idQuestion);
+		return "redirect:/question/"+nrNumber;
 	}
 	
 

@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.novaes.treinamentos.UserNR.UserNrService;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
 	private final UserService userService;
 	
-	public UserController(UserService userService) {
+	private final UserNrService userNrService;
+	
+	public UserController(UserService userService,UserNrService userNrService) {
 		this.userService=userService;
+		this.userNrService=userNrService;
 	}
 	
 	@GetMapping
@@ -29,12 +34,16 @@ public class UserController {
 	@GetMapping("/infoClient/{idUser}")
 	public String getInfoCurseCompleteClient(@PathVariable Long idUser,Model model) {
 		model.addAttribute("infoUser", userService.getUserById(idUser));
-		return "pages/manager/infoUser";
+		model.addAttribute("listNrUser" , userNrService.getListNrByUser(idUser));
+		return "pages/manager/userdata";
 	}
 	
 	@PostMapping
 	public String addNewClient(@RequestParam("user") User user) {
 		userService.addUser(user);
+		if(user.getOffice() != null) {
+			userNrService.vinculedUserToNr(user, user.getOffice());
+		}
 		return "redirect:/user";
 	}
 	

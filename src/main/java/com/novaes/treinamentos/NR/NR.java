@@ -69,6 +69,10 @@ public class NR {
 	public void setListRequiriments(List<String> listRequiriments) {
 		this.listRequiriments = listRequiriments;
 	}
+	
+	public void addRequirimentInList(String requiriment) {
+		this.listRequiriments.add(requiriment);
+	}
 
 	public String getWorkload() {
 		return workload;

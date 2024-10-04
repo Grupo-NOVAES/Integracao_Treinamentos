@@ -52,4 +52,8 @@ public class Office {
 	public void setListNR(List<NR> listNR) {
 		this.listNR = listNR;
 	}
+	
+	public void addNrToList(NR nr) {
+		this.listNR.add(nr);
+	}
 }

@@ -21,5 +21,13 @@ public class QuestionService {
 		questionsRepository.deleteById(idQuestion);
 	}
 	
+	public List<Questions> getQuestionsByNRNumber(int nrNumber){
+		return questionsRepository.getByNr(nrNumber);
+	}
+	
+	public Questions getQuestionById(Long idQuestion) {
+		return questionsRepository.findById(idQuestion).orElseThrow(QuestionNotFoundException::new);
+	}
+	
 	
 }
