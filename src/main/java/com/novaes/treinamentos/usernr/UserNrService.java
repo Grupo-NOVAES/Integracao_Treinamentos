@@ -1,10 +1,10 @@
-package com.novaes.treinamentos.UserNr;
+package com.novaes.treinamentos.usernr;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.novaes.treinamentos.Nr.NR;
+import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.user.User;
 

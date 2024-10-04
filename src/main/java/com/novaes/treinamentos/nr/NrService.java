@@ -1,4 +1,4 @@
-package com.novaes.treinamentos.Nr;
+package com.novaes.treinamentos.nr;
 
 import java.util.List;
 
@@ -49,16 +49,16 @@ public class NrService {
 		if(number == null || number == 0) {
 			somethingIsNull=true;
 		}
-		if(title == null || title == "") {
+		if(title == null || title.equals("")) {
 			somethingIsNull=true;
 		}
-		if(description == null|| description == "") {
+		if(description == null|| description.equals("")) {
 			somethingIsNull=true;
 		}
 		if(listRequiriments.isEmpty()) {
 			somethingIsNull=true;
 		}
-		if(workload == null|| workload == "") {
+		if(workload == null|| workload.equals("")) {
 			somethingIsNull=true;
 		}
 		return somethingIsNull;

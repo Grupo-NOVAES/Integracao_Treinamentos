@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.novaes.treinamentos.Nr.NrService;
+import com.novaes.treinamentos.nr.NrService;
 
 @Controller
 @RequestMapping("/question")

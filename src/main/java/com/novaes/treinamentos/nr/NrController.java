@@ -1,4 +1,4 @@
-package com.novaes.treinamentos.Nr;
+package com.novaes.treinamentos.nr;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class NrController {
 	
 	
 	private final NrService nrService;
-	private final String homePageNr = "redirect:/Nr";
+	private static final String homePageNr = "redirect:/Nr";
 	
 	public NrController(NrService nrService) {
 		this.nrService=nrService;

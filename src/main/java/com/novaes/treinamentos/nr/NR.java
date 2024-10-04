@@ -1,4 +1,4 @@
-package com.novaes.treinamentos.Nr;
+package com.novaes.treinamentos.nr;
 
 import java.util.List;
 

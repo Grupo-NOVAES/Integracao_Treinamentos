@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.novaes.treinamentos.Nr.NrService;
+import com.novaes.treinamentos.nr.NrService;
 
 @Controller
 @RequestMapping("/office")
@@ -16,6 +16,7 @@ public class OfficeController {
 	
 	private OfficeService officeService;
 	private NrService nrService;
+	private static final String OfficeHomePage = "redirect:/office";
 	
 	public OfficeController(OfficeService officeService,NrService nrService) {
 		this.officeService=officeService;
@@ -37,19 +38,19 @@ public class OfficeController {
 	@PostMapping("/linkNr")
 	public String linkNrToOffice(@RequestParam Long idOffice,@RequestParam Long idNr) {
 		officeService.linkNrToOffice(idOffice, nrService.findNrById(idNr));
-		return "redirect:/office";
+		return OfficeHomePage;
 	}
 	
 	@PostMapping("/newOffice")
 	public String addNewOffice(@RequestParam(value = "specialization" , required = true) String specialization) {
 		officeService.addNewOffice(specialization);
-		return "redirect:/office";
+		return OfficeHomePage;
 	}
 	
 	@PostMapping("/deleteOffice/{idOffice}")
 	public String deleteOffice(@PathVariable Long idOffice) {
 		officeService.deleteOffice(idOffice);
-		return "redirect:/office";
+		return OfficeHomePage;
 	}
 
 }

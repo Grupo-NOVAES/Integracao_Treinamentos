@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.novaes.treinamentos.UserNr.UserNrService;
+import com.novaes.treinamentos.usernr.UserNrService;
 
 @Controller
 @RequestMapping("/user")
@@ -19,7 +19,7 @@ public class UserController {
 	
 	private final UserNrService userNrService;
 	
-	private final String UserHomePage = "redirect:/user";
+	private static final String UserHomePage = "redirect:/user";
 	
 	public UserController(UserService userService,UserNrService userNrService) {
 		this.userService=userService;
