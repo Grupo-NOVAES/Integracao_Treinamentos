@@ -1,4 +1,4 @@
-package com.novaes.treinamentos.UserNR;
+package com.novaes.treinamentos.UserNr;
 
 public class UserNRDTO {
 	

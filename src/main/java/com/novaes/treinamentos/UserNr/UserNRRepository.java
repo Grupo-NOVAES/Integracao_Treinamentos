@@ -1,11 +1,11 @@
-package com.novaes.treinamentos.UserNR;
+package com.novaes.treinamentos.UserNr;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.novaes.treinamentos.NR.NR;
+import com.novaes.treinamentos.Nr.NR;
 
 public interface UserNRRepository extends JpaRepository<UserNR, Long>{
 	

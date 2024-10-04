@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.novaes.treinamentos.UserNR.UserNRRepository;
+import com.novaes.treinamentos.UserNr.UserNRRepository;
 import com.novaes.treinamentos.office.Office;
 
 @Service

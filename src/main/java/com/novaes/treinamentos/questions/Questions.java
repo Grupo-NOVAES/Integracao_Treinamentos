@@ -2,7 +2,7 @@ package com.novaes.treinamentos.questions;
 
 import java.util.List;
 
-import com.novaes.treinamentos.NR.NR;
+import com.novaes.treinamentos.Nr.NR;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

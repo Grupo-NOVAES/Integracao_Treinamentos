@@ -1,6 +1,6 @@
-package com.novaes.treinamentos.UserNR;
+package com.novaes.treinamentos.UserNr;
 
-import com.novaes.treinamentos.NR.NR;
+import com.novaes.treinamentos.Nr.NR;
 import com.novaes.treinamentos.user.User;
 
 import jakarta.persistence.Entity;

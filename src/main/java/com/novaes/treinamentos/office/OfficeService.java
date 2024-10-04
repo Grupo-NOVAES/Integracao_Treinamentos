@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.novaes.treinamentos.NR.NR;
+import com.novaes.treinamentos.Nr.NR;
 
 @Service
 public class OfficeService {
@@ -21,7 +21,7 @@ public class OfficeService {
 		return officeRepository.findAll();
 	}
 
-	public void LinkNrToOffice(Long idOffice,NR nr) {
+	public void linkNrToOffice(Long idOffice,NR nr) {
 		Office office = officeRepository.findById(idOffice)
 			.orElseThrow(OfficeNotFoundException::new);
 		office.addNrToList(nr);

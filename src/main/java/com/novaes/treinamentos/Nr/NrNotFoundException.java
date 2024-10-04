@@ -1,4 +1,4 @@
-package com.novaes.treinamentos.NR;
+package com.novaes.treinamentos.Nr;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

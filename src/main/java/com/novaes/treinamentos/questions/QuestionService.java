@@ -13,7 +13,7 @@ public class QuestionService {
 		this.questionsRepository=questionsRepository;
 	}
 	
-	public void AddQuestion(Questions question){
+	public void addQuestion(Questions question){
 		questionsRepository.save(question);
 	}
 	

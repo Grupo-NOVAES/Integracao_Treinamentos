@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.novaes.treinamentos.UserNR.UserNrService;
+import com.novaes.treinamentos.UserNr.UserNrService;
 
 @Controller
 @RequestMapping("/user")
@@ -19,13 +19,15 @@ public class UserController {
 	
 	private final UserNrService userNrService;
 	
+	private final String UserHomePage = "redirect:/user";
+	
 	public UserController(UserService userService,UserNrService userNrService) {
 		this.userService=userService;
 		this.userNrService=userNrService;
 	}
 	
 	@GetMapping
-	public String AllClientPage(Model model) {
+	public String allClientPage(Model model) {
 		model.addAttribute("listUser", userService.getAllClients());
 		return "pages/manager/user";
 	}
@@ -44,14 +46,14 @@ public class UserController {
 		if(user.getOffice() != null) {
 			userNrService.vinculedUserToNr(user, user.getOffice());
 		}
-		return "redirect:/user";
+		return UserHomePage;
 	}
 	
 	@PostMapping("/updateUser")
 	public String updateClient(UserDTO user , Long id) {
 		
 		userService.updateUser(user, id);
-		return "redirect:/user";
+		return UserHomePage;
 	}
 	
 	@PostMapping("/activeUser/{idUser}")
@@ -67,7 +69,7 @@ public class UserController {
 	@PostMapping("/deleteUser")
 	public String deleteClient(Long id) {
 		userService.deleteUser(id);
-		return "redirect:/user";
+		return UserHomePage;
 	}
 	
 

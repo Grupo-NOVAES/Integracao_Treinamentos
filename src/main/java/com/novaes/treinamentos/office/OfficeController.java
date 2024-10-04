@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.novaes.treinamentos.NR.NrService;
+import com.novaes.treinamentos.Nr.NrService;
 
 @Controller
 @RequestMapping("/office")
@@ -23,20 +23,20 @@ public class OfficeController {
 	}
 	
 	@GetMapping
-	public String AllOffice(Model model) {
+	public String allOffice(Model model) {
 		model.addAttribute("listOffice", officeService.getAllOffice());
 		return "pages/manager/office";
 	}
 	
 	@GetMapping("/{idOffice}")
-	public String OfficeById(@PathVariable Long idOffice,Model model) {
+	public String officeById(@PathVariable Long idOffice,Model model) {
 		model.addAttribute("officeData", officeService.findOfficeById(idOffice));
 		return "pages/manager/officeInfo";
 	}
 	
 	@PostMapping("/linkNr")
-	public String LinkNrToOffice(@RequestParam Long idOffice,@RequestParam Long idNr) {
-		officeService.LinkNrToOffice(idOffice, nrService.findNrById(idNr));
+	public String linkNrToOffice(@RequestParam Long idOffice,@RequestParam Long idNr) {
+		officeService.linkNrToOffice(idOffice, nrService.findNrById(idNr));
 		return "redirect:/office";
 	}
 	

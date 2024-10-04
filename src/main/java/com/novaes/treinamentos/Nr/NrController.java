@@ -1,4 +1,4 @@
-package com.novaes.treinamentos.NR;
+package com.novaes.treinamentos.Nr;
 
 import java.util.List;
 
@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/Nr")
 public class NrController {
 	
+	
+	
 	private final NrService nrService;
+	private final String homePageNr = "redirect:/Nr";
 	
 	public NrController(NrService nrService) {
 		this.nrService=nrService;
@@ -23,9 +26,6 @@ public class NrController {
 	
 	@GetMapping
 	public String allNrPage(Model model) {
-		for(NR nr : nrService.getAllNr()) {
-			System.out.println(nr.getId());
-		}
 		model.addAttribute("listNr", nrService.getAllNr());
 		return "pages/manager/nrList";
 	}
@@ -45,7 +45,7 @@ public class NrController {
 	public String addRequirimentsWithNr(@RequestParam(value="requiriment", required = true) String requiriment,
 										@RequestParam(value="idNr", required = true) Long idNr)	{
 		nrService.addRequirimentInNr(idNr , requiriment);
-		return "redirect:/Nr";
+		return homePageNr;
 	}
 	
 	@PostMapping("/newNr")
@@ -64,7 +64,7 @@ public class NrController {
 			nrService.addNewNr(nr);
 		}
 		
-		return "redirect:/Nr";
+		return homePageNr;
 	}
 	
 	@PostMapping("/updateNr/{idNr}")
@@ -88,7 +88,7 @@ public class NrController {
 	@PostMapping("/deleteNr/{idNr}")
 	public String deleteNr(@PathVariable Long idNr) {
 		nrService.deleteNr(idNr);
-		return "redirect:/Nr";
+		return homePageNr;
 	}
 	
 	

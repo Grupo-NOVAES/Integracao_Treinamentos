@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.novaes.treinamentos.NR.NrService;
+import com.novaes.treinamentos.Nr.NrService;
 
 @Controller
 @RequestMapping("/question")
@@ -58,7 +58,7 @@ public class QuestionController {
 		
 		question.setCorrectAnwser(correctAnwser);
 		
-		questionService.AddQuestion(question);
+		questionService.addQuestion(question);
 		
 		return "redirect:/question/"+numberNR;
 	}
