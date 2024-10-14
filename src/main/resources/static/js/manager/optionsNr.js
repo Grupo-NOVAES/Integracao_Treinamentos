@@ -1,5 +1,6 @@
 let modalVisible = false;
 let selectedNrId = null
+let selectedNrNumber = null;
 
 document.addEventListener('click', function(event) {
     const btnOptions = document.getElementById('options');
@@ -22,6 +23,7 @@ function showModalOptionsNr(button){
     const options = document.getElementById('options');
     const rect = button.getBoundingClientRect();
     selectedNrId = button.closest('tr').getAttribute('data-id');
+    selectedNrNumber = button.closest('tr').getAttribute('data-number');
 
     const marginLeft = 125;
     const marginTop = -40;
@@ -45,7 +47,7 @@ function redirectToNrInfo(){
 }
 
 function redirectToQuestionBynR(){
-    window.location.href="/question/"+selectedNrId;
+    window.location.href="/Nr/"+selectedNrNumber+"/question";
 }
 
 

@@ -1,4 +1,5 @@
 const btnOptions = document.getElementById("btnOptionUser").addEventListener('click',showModalOptionsUser)
+const userIdFormInput = document.getElementById("userIdFormInput");
 let selectedUserId = null;
 let modalVisible = false;
 
@@ -21,6 +22,7 @@ function showModalOptionsUser(button){
     const options = document.getElementById('options');
     const rect = button.getBoundingClientRect();
     selectedUserId = button.closest('tr').getAttribute('data-id');
+    userIdFormInput.value = selectedUserId;
 
     const marginLeft = 125;
     const marginTop = -40;

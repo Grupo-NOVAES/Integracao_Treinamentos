@@ -28,6 +28,10 @@ public class UserNrService {
 		}
 	}
 	
+	public List<UserNR> getListNrUserByUser (Long userId){
+		return userNrRepository.findAllNrUserByUserId(userId);
+	}
+	
 	public List<NR> getListNrByUser(Long userId){
 		return userNrRepository.findAllNrByUserId(userId);
 	}

@@ -19,16 +19,21 @@
           <p th:text="${infoUser.login}"></p>
           <p th:text="${infoUser.office}"></p>
           <p th:text="${infoUser.phoneNumber}"></p>
+          <div th:if="${dateTimeActivation != null}"><p th:text="${'O usuario sera desativado: '+dateTimeActivation}"></p></div>
           <p th:if="${infoUser.enabled}" class="user-active">Usuario Ativo</p>
           <p th:unless="${infoUser.enabled}" class="user-disabled">Usuario Desativado</p>
+          <input id="userId" type="hidden" th:value="${infoUser.id}">
+          <button id="btnActiveUser" onclick="activeUser()">Ativar Usuario</button>
         </div>
         <div class="content">
           <div class="table">
             <table aria-hidden="true">
-                <tr th:each="nr: ${listNrUser}">
+                <tr th:each="userNr: ${listNrUser}">
                   <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></i></td>
-                  <td th:text="${nr.number}"></td>
-                  <td th:if="${nr.}"><i class="fa-regular fa-circle-check fa-lg" style="color: #0fa958;"></i></td>
+                  <td th:text="${userNr.nr.number}"></td>
+                  <td th:text="${userNr.nr.title}"></td>
+                  <td th:if="${userNr.status}"><i class="fa-regular fa-circle-check fa-lg" style="color: #0fa958;"></i></td>
+                  <td th:enless="${userNr.status}"><i class="fa-regular fa-circle-xmark fa-lg" style="color: #f5665e;"></i></td>
                 </tr>
             </table>
           </div>
@@ -37,6 +42,6 @@
   
       </main>
 
-      <script src="../../JS/manager/options.js" defer></script>
+      <script th:src="@{/js/manager/userData.js}" defer></script>
   </body>
 </html>

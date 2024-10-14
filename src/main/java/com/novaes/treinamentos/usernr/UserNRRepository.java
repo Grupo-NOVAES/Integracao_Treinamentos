@@ -11,5 +11,8 @@ public interface UserNRRepository extends JpaRepository<UserNR, Long>{
 	
 	@Query("SELECT u.nr FROM UserNR u WHERE u.user.id = :userId")
 	public List<NR> findAllNrByUserId(Long userId);
+	
+	@Query("SELECT u FROM UserNR u WHERE u.user.id = :userId")
+	public List<UserNR> findAllNrUserByUserId (Long userId);
 
 }

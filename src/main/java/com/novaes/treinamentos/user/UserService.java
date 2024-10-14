@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.usernr.UserNRRepository;
 
@@ -30,6 +32,31 @@ public class UserService {
 		String encodePassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodePassword);
 		userRepository.save(user);
+	}
+	
+	protected User createUser(String name , String lastname,String phoneNumber,String login,String password,Role role,Office office) {
+		User user = new User();
+		if(!name.equals("")) {
+			user.setName(name);
+		}
+		if(!lastname.equals("")) {
+			user.setLastname(lastname);
+		}
+		if(!phoneNumber.equals("")) {
+			user.setPhoneNumber(phoneNumber);
+		}
+		if(!login.equals("")) {
+			user.setLogin(login);
+		}
+		user.setRole(role);
+		if(!password.equals("")) {
+			user.setPassword(passwordEncoder.encode(password));
+		}
+		if(!ObjectUtils.isEmpty(office)) {
+			user.setOffice(office);
+		}
+		
+		return user;
 	}
 	
 	protected void updateUser(UserDTO user, Long idUser) {

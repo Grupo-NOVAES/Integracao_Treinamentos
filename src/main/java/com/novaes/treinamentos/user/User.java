@@ -2,6 +2,7 @@ package com.novaes.treinamentos.user;
 
 import static java.util.Collections.singleton;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Collection;
 
@@ -98,7 +99,8 @@ public class User implements UserDetails {
 
     public void activate() {
         this.enabled = true; 
-        this.activationDate = ZonedDateTime.now(); 
+        this.activationDate =  ZonedDateTime.now();
+        System.out.println(activationDate);
     }
 
     public void deactivate() {

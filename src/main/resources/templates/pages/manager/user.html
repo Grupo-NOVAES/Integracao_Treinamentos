@@ -71,33 +71,33 @@
     </div>
 
     <div class="addModal" id="addModal">
-      <form>
+
+      <form th:action="@{/user}" method="post">
+
         <div class="img-form">
           <i class="fa-solid fa-users fa-2xl" style="color: #007b8f;"></i>
         </div>
+
         <div class="header-form">
-          <input class="introInput" type="text" placeholder="Nome">
-          <input class="introInput" type="text" placeholder="Sobrenome">
+          <input class="introInput" type="text" placeholder="Nome" name="name">
+          <input class="introInput" type="text" placeholder="Sobrenome" name="lastname">
         </div>
+        
         <div class="main-form">
-          <input class="mainInput" type="text" placeholder="Email">
-          <input class="mainInput" type="text" placeholder="Telefone">
-          <select class="mainInput" name="role" id="role">
-            <option value="1" selected>Selecione o Cargo</option>
-            <option value="1">Operador de Máquinas</option>
-            <option value="1">Operador de Máquinas</option>
-            <option value="1">Operador de Máquinas</option>
-            <option value="1">Operador de Máquinas</option>
-            <option value="1">Operador de Máquinas</option>
+          <input class="mainInput" type="text" placeholder="Email" name="login">
+          <input class="mainInput" name="phoneNumber" type="text" placeholder="Telefone">
+          <select class="mainInput" name="office" id="office">
+            <option value="0" selected>Selecione o Cargo</option>
+            <option th:each="office : ${listOffice}" th:value="${office.specialization}" th:text="${office.specialization}"></option>
           </select>
         </div>
         <div class="header-form">
-          <input class="introInput" type="text" placeholder="Senha">
-          <input class="introInput" type="text" placeholder="Confirmar Senha">
+          <input class="introInput" type="text" placeholder="Senha" name="password">
+          <input class="introInput" type="text" placeholder="Confirmar Senha" name="confirmPassword">
         </div>
         <div class="header-form">
-          <button class="btnSave">Enviar</button>
-          <button onclick="hideModelAdd()" class="btnExit"> <p class="cancel">Cancelar</p></button>
+          <button class="btnSave" type="submit">Enviar</button>
+          <button onclick="hideModalAddUser()" class="btnExit" type="button"> <p class="cancel">Cancelar</p></button>
         </div>
       </form>
     </div>
@@ -107,7 +107,11 @@
   		<button class="btnOption" id="btnOptionUser" onclick="redirectToInfo()">
     		<i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Informações
   		</button>
-  		<button class="btnOptionDelete"> <i class="fa-solid fa-trash fa-lg" style="color: #fb5555"></i> Deletar</button>
+      <form th:action="@{/user/deleteUser}" method="post">
+        <input id="userIdFormInput" type="hidden" th:name="userId" value="">
+        <button class="btnOptionDelete" type="submit"><i class="fa-solid fa-trash fa-lg" style="color: #fb5555"></i> Deletar</button>
+      </form>
+  		
 	</div>
 
     
@@ -115,6 +119,5 @@
   </main>
 
   <script th:src="@{/js/manager/optionsUser.js}"></script>
-  <script th:src="@{js/manager/showMenu.js}"></script>
 </body>
 </html>

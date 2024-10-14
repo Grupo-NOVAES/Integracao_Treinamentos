@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.novaes.treinamentos.questions.QuestionService;
+
 @Controller
 @RequestMapping("/Nr")
 public class NrController {
@@ -17,10 +19,12 @@ public class NrController {
 	
 	
 	private final NrService nrService;
+	private final QuestionService questionService;
 	private static final String NRHOMEPAGE = "redirect:/Nr";
 	
-	public NrController(NrService nrService) {
+	public NrController(NrService nrService,QuestionService questionService) {
 		this.nrService=nrService;
+		this.questionService=questionService;
 	}
 
 	
@@ -39,6 +43,12 @@ public class NrController {
 		model.addAttribute("iconPath", iconPath);
 		
 		return "pages/manager/nrInfo";
+	}
+	
+	@GetMapping("/{nrNumber}/question")	
+	public String questionByNR(@PathVariable int nrNumber,Model model) {
+		model.addAttribute("listQuestions", questionService.getQuestionsByNRNumber(nrNumber));
+		return "pages/manager/question";
 	}
 	
 	@PostMapping

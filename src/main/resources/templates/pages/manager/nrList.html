@@ -36,7 +36,8 @@
           <tbody>
             <tr 
             th:each="nr: ${listNr}"
-            th:data-id="${nr.id}">
+            th:data-id="${nr.id}"
+            th:data-number="${nr.number}">
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
                 <td th:text="${nr.number}"></td>
                 <td th:text="${nr.title}"></td>

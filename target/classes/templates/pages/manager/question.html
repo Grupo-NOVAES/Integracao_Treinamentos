@@ -20,29 +20,6 @@
             <h3>Perguntas</h3>
         </div>
         <div class="content">
-            <select name="question" id="question">
-                <option selected>Selecione a Questão</option>
-                <option value="1">Questão 1</option>
-                <option value="1">Questão 2</option>
-                <option value="1">Questão 3</option>
-                <option value="1">Questão 4</option>
-                <option value="1">Questão 5</option>
-                <option value="1">Questão 6</option>
-                <option value="1">Questão 7</option>
-                <option value="1">Questão 8</option>
-                <option value="1">Questão 9</option>
-                <option value="1">Questão 10</option>
-                <option value="1">Questão 11</option>
-                <option value="1">Questão 12</option>
-                <option value="1">Questão 13</option>
-                <option value="1">Questão 14</option>
-                <option value="1">Questão 15</option>
-                <option value="1">Questão 16</option>
-                <option value="1">Questão 17</option>
-                <option value="1">Questão 18</option>
-                <option value="1">Questão 19</option>
-                <option value="1">Questão 20</option>
-            </select>
             <button class="btnAction"  onclick="showModalOptions(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button>        
             <div class="options" id="options">
               <button onclick="showModalAdd(this)" class="btnOption"><i class="fa-solid fa-plus fa-lg" style="color: #007b8f;"></i> Adicionar</button>
@@ -50,22 +27,20 @@
             </div>
           </div>
 
-
-        <div class="box-questions">
+        <div 
+          th:each="question : ${listQuestions}"
+          class="box-questions">
             <div class="box-questions-content">
-                <p>Qual das medidas abaixo estão corretas, quanto ao processo de sinalização?</p>
-                <p>* Valendo 1 ponto</p>
-                <input type="radio" name="10" value="colocar a primeira sinalização através de placas, e após, complementar com cones">
-                Colocar a primeira sinalização através de placas, e após, complementar com cones<br>
-                <input type="radio" name="10" value="isolar todo o local com fita zebrada, e em serviços realizados à noite, utilizar pisca-pisca">
-                Isolar todo o local com fita zebrada, e em serviços realizados à noite, utilizar pisca-pisca<br>
-                <input type="radio" name="10" value="todas as alternativas estão corretas"> Todas as
-                alternativas estão corretas<br>
-                <input type="radio" name="10" value="em serviços realizados à noite é obrigatório o uso de colete refletivo"> Em serviços
-                realizados à noite é obrigatório o uso de colete refletivo<br>
-                <input type="radio" name="10" value="os materiais utilizados no serviço deverão estar dentro da área isolada"> Os
-                materiais utilizados no serviço deverão estar dentro da área isolada<br>
-            </div>
+              <p th:text="${question.enunciation}"></p>
+              <p>* Valendo 1 ponto</p>
+              <section 
+                th:each="alternative : ${question.listAlternative}"
+                class="inputContainer">
+
+              <input type="radio" name="question+${question.questionNumber}" value="${alternative}">
+              <p th:text="${alternative}"></p>
+            </section>
+          </div>
         </div>
       
         <div class="addModal" id="addModal">
@@ -89,6 +64,5 @@
           </form>
         </div>
       </main>
-      <script src="../../JS/manager/options.js" defer></script>
 </body>
 </html>

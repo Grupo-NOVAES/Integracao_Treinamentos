@@ -36,18 +36,18 @@ public class QuestionController {
 		return "pages/manager/newQuestion";
 	}
 	
-	@PostMapping("/newQuestion/{numberNR}")
+	@PostMapping("/newQuestion")
 	public String addNewQuestion(@RequestParam(value = "enunciation" , required = true) String enunciation,
 								 @RequestParam(value = "anwser1", required = true) String anwser1,
 								 @RequestParam(value = "anwser2", required = true) String anwser2,
 								 @RequestParam(value = "anwser3", required = true) String anwser3,
 								 @RequestParam(value = "anwser4", required = true) String anwser4,
 								 @RequestParam(value = "correctAnwser", required = true) String correctAnwser,
-								 @PathVariable Long  numberNR) {
+								 @RequestParam(value = "nrId", required = true) Long  nrId) {
 		
 		Questions question = new Questions();
 		question.setEnunciation(enunciation);
-		question.setNr(nrService.findNrById(numberNR));
+		question.setNr(nrService.findNrById(nrId));
 		
 		ArrayList<String> listAnwser = new ArrayList<>();
 		listAnwser.add(anwser1);
@@ -60,7 +60,7 @@ public class QuestionController {
 		
 		questionService.addQuestion(question);
 		
-		return "redirect:/question/"+numberNR;
+		return "redirect:/question/"+nrId;
 	}
 	
 	@PostMapping("/deleteQuestion/{idQuestion}")

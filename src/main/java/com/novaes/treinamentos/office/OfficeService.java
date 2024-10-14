@@ -16,7 +16,9 @@ public class OfficeService {
 	public Office findOfficeById(Long idOffice) {
 		return officeRepository.findById(idOffice).orElseThrow(OfficeNotFoundException::new);
 	}
-	
+	public Office findOfficeByName(String officeName) {
+		return officeRepository.findByName(officeName);
+	}
 	public List<Office> getAllOffice() {
 		return officeRepository.findAll();
 	}
