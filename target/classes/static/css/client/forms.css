@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    grid-row: 100%;
+    justify-content: center;
+
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#logo{
+    width: 300px;
+    height: 100px;
+}
+
+.btnDeleteQuestion{
+    border: none;
+    background-color: none;
+}
+
+
+.box-questions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 500px;   
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    background-color: #083C52;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.box-questions-content{
+    height: 90%;
+    width: 90%;
+    border-radius: 10px;
+    background-color: white;
+    padding-left: 20px;
+    padding-top: 30px;
+    
+}
+#formResponses{ 
+    display: flex;
+    flex-direction: column;
+}
+
+.btnOptionContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnOption{
+    width: 150px;
+    height: 45px;
+    border: none;
+    background-color: #083C52;
+    color: white;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+.radioInput{
+    margin-right: 10px;
+}
+
+@media (max-width: 510px) {
+    .box-questions{
+        width: 300px;
+    }
+}
+
+
+@media (max-width: 310px) {
+    .box-questions{
+        width: 200px;
+    }
+}

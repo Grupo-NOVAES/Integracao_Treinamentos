@@ -42,7 +42,17 @@ body{
     justify-content: space-evenly;
     box-shadow:  0 1px 1px rgba(0, 0, 0, 0.5);
     padding: 20px;
-    color: #007b8f;
+}
+.box_requiriments{
+    background-color: #f9f9f9;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow:  0 1px 1px rgba(0, 0, 0, 0.5);
+    color: #007B8F;
+    padding: 20px;
 }
 
 .box #logo{
@@ -108,7 +118,16 @@ body{
     background-color: #f9f9f9;
     border-radius: 5px;
 }
-
+.infoTextNr{
+    display: flex;
+    flex-direction: row;
+}
+.infoTextNr p{
+    margin-right: 20px;
+}
+.labelNrText{
+    color: #007B8F;
+}
 
 
 

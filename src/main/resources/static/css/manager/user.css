@@ -152,22 +152,27 @@ td{
 
 .options .btnOptionDelete{
     width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #ffffff;
+    height: 30px;   
     color: #FB5555;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
+    border: none;
+    padding-left: 10px;
+    
 }
 
 .options .btnOption:hover{
     background-color: lightgrey;
-    border-radius: 5px;
+
 }
 .options .btnOptionDelete:hover{
     background-color: lightgrey;
-    border-radius: 5px;
+
+}
+.containerFromDeleteUser{
+    width: 100%;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: none;
 }
 
 

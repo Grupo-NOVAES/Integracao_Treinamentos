@@ -23,6 +23,8 @@ public class NR {
 	
 	private String description;
 	
+	
+	
 	private List<String> listRequiriments;
 	
 	private String workload;

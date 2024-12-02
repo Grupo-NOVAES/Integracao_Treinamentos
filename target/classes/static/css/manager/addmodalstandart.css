@@ -117,6 +117,14 @@ form{
     color: #FB5555;
 }
 
+#iconRemoveNr{
+    cursor: pointer;
+}
+#btnRmvNrOffice{
+    border: none;
+    background: none;
+}
+
 @media (max-width: 500px){
     .addModal{
         width: 250px;

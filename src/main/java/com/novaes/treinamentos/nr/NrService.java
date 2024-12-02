@@ -5,11 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.novaes.treinamentos.office.Office;
+import com.novaes.treinamentos.office.OfficeRepository;
+import com.novaes.treinamentos.usernr.UserNRRepository;
+
+import jakarta.transaction.Transactional;
+
 @Service
 public class NrService {
 	
 	@Autowired
 	private NrRepository nrRepository;
+	
+	@Autowired
+	private OfficeRepository officeRepository;
+	
+	@Autowired
+	private UserNRRepository userNrRepository;
 
 	
 	public void addNewNr(NR nr) {
@@ -23,6 +35,15 @@ public class NrService {
 	public NR findNrById(Long idNr) {
 		return nrRepository.findById(idNr).orElseThrow(NrNotFoundException::new);
 	}
+	
+	public NR findNrByNumber(int nrNumber) {
+		return nrRepository.findNrByNumber(nrNumber);
+	}
+	
+	public List<NR> findNrByOffice(Long officeId) {
+        return officeRepository.findNrsByOfficeId(officeId);
+    }
+	
 	
 	public void updateNr(Long idNr,NR nr) {
 		NR nrFounded = nrRepository.findById(idNr).orElseThrow(NrNotFoundException::new);
@@ -40,9 +61,23 @@ public class NrService {
 		nrRepository.save(nrFounded);
 	}
 	
-	public void deleteNr(Long idNr) {
-		nrRepository.deleteById(idNr);
-	}
+	@Transactional
+    public void deleteNrById(Long idNr) {
+        NR nr = nrRepository.findById(idNr)
+                .orElseThrow(NrNotFoundException::new);
+
+        List<Office> offices = officeRepository.findByIdNr(idNr);
+
+        for (Office office : offices) {
+            if (office.getListNR().contains(nr)) {
+                office.getListNR().remove(nr);
+                officeRepository.save(office); 
+            }
+        }
+        
+        userNrRepository.deleteUserNrByNrId(idNr);
+        nrRepository.delete(nr);
+    }
 	
 	protected boolean validateIfSomethingIsNull(Integer number,String title,String description,List<String> listRequiriments, String workload) {
 		boolean somethingIsNull=false;

@@ -17,7 +17,7 @@
         <div class="header">
           <h2 th:text="${infoUser.name} + ' ' + ${infoUser.lastname}" id="nameUser">.</h2>
           <p th:text="${infoUser.login}"></p>
-          <p th:text="${infoUser.office}"></p>
+          <p th:text="${infoUser.office.specialization}"></p>
           <p th:text="${infoUser.phoneNumber}"></p>
           <div th:if="${dateTimeActivation != null}"><p th:text="${'O usuario sera desativado: '+dateTimeActivation}"></p></div>
           <p th:if="${infoUser.enabled}" class="user-active">Usuario Ativo</p>
@@ -43,5 +43,6 @@
       </main>
 
       <script th:src="@{/js/manager/userData.js}" defer></script>
+      <script th:src="@{/js/header.js}"></script>
   </body>
 </html>

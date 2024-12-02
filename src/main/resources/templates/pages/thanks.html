@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -24,7 +24,30 @@
             <p id="textOk">Agradecemos por toda a dedicação em assistir aos vídeos e realizar o formulário! Agora
                 aguarde, pois em breve, entraremos em contato.
             </p>
-            <a id="back" href="https://grupo-novaes.github.io/Treinamento-Seguranca-Trabalho/index.html">Voltar ao início</a>
+            <a id="back" th:href="@{/user/home}">Voltar ao início</a>
+            <div id="feedbackContainer">
+                <h3>Obrigado por participar!</h3>
+                <p>Você acertou <span th:text="${correctCount}">0</span> de <span th:text="${totalQuestions}">0</span> questões.</p>
+
+                <h4>Seu desempenho:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Enunciado da Questão</th>
+                            <th>Sua Resposta</th>
+                            <th>Resposta Correta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="feedback : ${feedbackList}">
+                            <td th:text="${feedback[0]}"></td> 
+                            <td th:text="${feedback[1]}"></td> 
+                            <td th:text="${feedback[2]}"></td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </main>
 

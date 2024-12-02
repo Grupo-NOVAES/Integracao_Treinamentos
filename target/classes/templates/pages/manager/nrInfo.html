@@ -22,9 +22,15 @@
                     <img th:src="${iconPath}" alt="Ícone da NR" id="logo" height="150px" width="150px">
 
                     <div class="box-content">
-                        <p th:text="${InfoNr.number}" id="numberNr"></p>
-                        <p th:text="${InfoNr.title}" class="textIntro"></p>
-                        <P th:text="${InfoNr.workload}" class="textIntro"></P>
+                        <div class="infoTextNr">
+                            <p class="labelNrText">Numero:</p><p th:text="${InfoNr.number}" class="textIntro"></p>  
+                        </div>
+                        <div class="infoTextNr">
+                            <p class="labelNrText">Titulo:</p><p th:text="${InfoNr.title}" class="textIntro"></p>
+                        </div>
+                        <div class="infoTextNr">
+                            <p class="labelNrText">Carga Horaria:</p><p th:text="${InfoNr.workload}" class="textIntro"></p>
+                        </div>
                     </div>
                     
             </div>
@@ -32,7 +38,7 @@
         </section>
 
         <section class="sectionMain col-md-6">
-            <div class="box">
+            <div class="box_requiriments">
                 <ul th:each="requiriments : ${InfoNr.listRequiriments}">
                     <li th:text="${requiriments}"></li>
                 </ul>
@@ -40,6 +46,8 @@
         </section>
   
       </main>
-      
+      <script th:src="@{/js/header.js}"></script>
+
     </body>
+    
 </html>

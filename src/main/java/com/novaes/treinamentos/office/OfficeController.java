@@ -26,18 +26,28 @@ public class OfficeController {
 	@GetMapping
 	public String allOffice(Model model) {
 		model.addAttribute("listOffice", officeService.getAllOffice());
+		model.addAttribute("listNr", nrService.getAllNr());
 		return "pages/manager/office";
 	}
 	
 	@GetMapping("/{idOffice}")
 	public String officeById(@PathVariable Long idOffice,Model model) {
 		model.addAttribute("officeData", officeService.findOfficeById(idOffice));
+		model.addAttribute("listNr", nrService.findNrByOffice(idOffice));
+		model.addAttribute("listNrByAdd", nrService.getAllNr());
 		return "pages/manager/officeInfo";
 	}
 	
 	@PostMapping("/linkNr")
 	public String linkNrToOffice(@RequestParam Long idOffice,@RequestParam Long idNr) {
-		officeService.linkNrToOffice(idOffice, nrService.findNrById(idNr));
+		officeService.linkNrToOffice(idOffice, idNr);
+		return OFFICEHOMEPAGE;
+	}
+	
+	@PostMapping("/removeNrOfOffice")
+	public String removeNrToOffice(@RequestParam(value = "idOffice" , required = true) Long idOffice,
+								   @RequestParam(value = "idNr" , required = true) Long idNr) {
+		officeService.removeNrToOffice(idOffice,idNr);
 		return OFFICEHOMEPAGE;
 	}
 	
@@ -47,8 +57,8 @@ public class OfficeController {
 		return OFFICEHOMEPAGE;
 	}
 	
-	@PostMapping("/deleteOffice/{idOffice}")
-	public String deleteOffice(@PathVariable Long idOffice) {
+	@PostMapping("/deleteOffice")
+	public String deleteOffice(@RequestParam Long idOffice) {
 		officeService.deleteOffice(idOffice);
 		return OFFICEHOMEPAGE;
 	}

@@ -1,5 +1,6 @@
 header {
-    display: grid;
+    display: flex;
+    flex-direction: row;
     grid-template-columns: 25% 50% 15%;
     justify-content: space-around;
     align-items: center; 
@@ -93,6 +94,17 @@ header .navContent a:hover{
     justify-content: space-evenly;
     align-items: center;
     height: 50px;
+  }
+  #btnLogOut{
+    border: none;
+    background-color: #f9f9f9;
+  }
+  .iconBtnLogout{
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
   }
 
 @media (max-width: 1070px) {

@@ -43,7 +43,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("email")
                         .failureUrl("/login?error")
-                        .defaultSuccessUrl("/user", true)
+                        .defaultSuccessUrl("/user/home", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

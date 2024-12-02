@@ -18,15 +18,23 @@ public class UserNrService {
 	}
 	
 	public void vinculedUserToNr(User user , Office office) {
-		for(NR nr : office.getListNR()) {
-			UserNR userNr = new UserNR();
-			userNr.setUser(user);
-			userNr.setNr(nr);
-			userNr.setStatus(false);
-			
-			userNrRepository.save(userNr);
-		}
+		office.getListNR().forEach(nr -> {
+            UserNR userNr = new UserNR();
+            userNr.setUser(user);
+            userNr.setNr(nr);
+            userNr.setStatus(false);
+
+            userNrRepository.save(userNr);
+        });
 	}
+	
+	public UserNR findByUserIdAndNrNumber(Long userId, int nrNumber) {
+        return userNrRepository.findByUserIdAndNrNumber(userId, nrNumber);
+    }
+
+    public void updateUserNR(UserNR userNR) {
+        userNrRepository.save(userNR);
+    }
 	
 	public List<UserNR> getListNrUserByUser (Long userId){
 		return userNrRepository.findAllNrUserByUserId(userId);

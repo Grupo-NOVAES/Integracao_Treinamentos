@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -28,9 +31,24 @@ public class UserService {
 		this.userNrRepository=userNrRepository;
 	}
 	
+	public boolean getTypeUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+        boolean ifEmployee = userDetails.getAuthorities().stream()
+        		.anyMatch(authority -> authority.getAuthority()
+        				.equals("ROLE_ADMIN"));
+        
+        return ifEmployee;
+	}
+	
+	public User getUserLogged() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+		return user;
+	}
+	
 	protected void addUser(User user) {
-		String encodePassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodePassword);
 		userRepository.save(user);
 	}
 	
@@ -78,6 +96,7 @@ public class UserService {
 	}
 	
 	protected void deleteUser(Long idUser) {
+		userNrRepository.deleteUserNrByUserId(idUser);
 		userRepository.deleteById(idUser);
 	}
 	
@@ -93,7 +112,7 @@ public class UserService {
         }
     }
 	
-	@Scheduled(fixedRate = 60000)
+	@Scheduled(fixedRate = 6000000)
     protected void deactivateExpiredAccounts() {
         List<User> clients = userRepository.findByRole(Role.USER); 
         for (User user : clients) {

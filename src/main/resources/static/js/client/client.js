@@ -10,7 +10,6 @@ document.querySelectorAll(".single-select").forEach((checkbox) => {
         document.querySelectorAll(".single-select").forEach((otherCheckbox) => {
             if (otherCheckbox !== this) {
               otherCheckbox.checked = false;
-              otherCheckbox.disabled = true; // Desabilita os outros checkboxes
               document.getElementById(
                 `description-${otherCheckbox.id}`
               ).style.display = "none";

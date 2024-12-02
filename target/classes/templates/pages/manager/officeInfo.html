@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <script src="https://kit.fontawesome.com/a56b5a1294.js" integrity="sha384-UmDXR4qQvJEgFif4C+KL8+8iFyYdsjajPl+1hzvoQKPQLHu05pTOq61y03WQk4+I" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/a56b5a1294.js" integrity="sha384-UmDXR4qQvJEgFif4C+KL8+8iFyYdsjajPl+1hzvoQKPQLHu05pTOq61y03WQk4+I" crossorigin="anonymous"></script>    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="../../CSS/manager/roledata.css" />
     <link rel="stylesheet" href="../../CSS/manager/addmodalstandart.css">
     <link rel="stylesheet" href="../../CSS/manager/header.css">
@@ -16,55 +14,49 @@
     <div th:replace="fragments/header :: header"></div>
       <main>
         <div class="header">
-          <h2>Operador de Máquinas</h2>
+          <p th:text="${officeData.specialization}"></p>
         </div>
 
         <div class="content">
 
           <div class="table">
             <table aria-hidden="true">
-                <tr>
+                <tr th:each="nr: ${listNr}">
                   <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
-                  <td>NR 6</td>
-                </tr>
-                <tr>
-                  <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
-                  <td>NR 10</td>
-                </tr>
-                <tr>
-                  <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
-                  <td>NR 11</td>
+                  <td><p>Numero: </p><p th:text="${nr.number}"></p></td>
+                  <td>
+                    <form method="post" th:action="@{/office/removeNrOfOffice}" id="containerFormsRemoveNrToOffice">
+                      <input id="inputIdOfficeToRemoveNr" th:value="${officeData.id}" name="idOffice" type="number" hidden>
+                      <input id="inputIdNrToRemoveNr" th:value="${nr.id}" name="idNr" type="number" hidden>
+                      <button id="btnRmvNrOffice"><i id="iconRemoveNr" class="fa-solid fa-trash" style="color: #fb6555;"></i></button>
+                    </form>
+                  </td>
                 </tr>
             </table>
           </div>
 
           <div class="button-add">
-            <button class="btnAdd" onclick="showModalAdd(this)">Adicionar NR</button>
+            <button class="btnAdd" onclick="showModalAddOffice(this)">Adicionar NR</button>
           </div>
 
         </div>
   
         <div class="addModal" id="addModal">
-          <form>
-            <div class="img-form">
-              <i class="fa-solid fa-scale-balanced fa-2xl" style="color: #007b8f;"></i>
-            </div>
+          <form method="post" th:action="@{/office/linkNr}">
+            <input hidden th:value="${officeData.id}" name="idOffice">
+            <select class="selectInputNrToAddOffice" name="idNr">
+              <option value="0" selected>Selecione a NR</option>
+              <option th:each="nr : ${listNrByAdd}" th:value="${nr.id}" th:text="${nr.number} + '-' + ${nr.title}"></option>
+            </select>
             <div class="header-form">
-              <input class="introInput" type="number" placeholder="Numero">
-              <input class="introInput" type="text" placeholder="Título">
-            </div>
-            <div class="main-form">
-              <input class="mainInput" type="text" placeholder="Descrição">
-              <input class="mainInput" type="number" placeholder="Carga Horária">
-              <textarea class="textArea" name="9" rows="4" cols="50" placeholder="Lista de Requisitos"></textarea>            
-            </div>
-            <div class="header-form">
-              <button class="btnSave">Enviar</button>
-              <button onclick="hideModelAdd()" class="btnExit"> <p class="cancel">Cancelar</p></button>
+              <button class="btnSave" type="submit">Enviar</button>
+              <button onclick="hideModelAddOffice()" class="btnExit" type="button"><p class="cancel">Cancelar</p></button>
             </div>
           </form>
         </div>
       </main>
-      <script src="../../JS/manager/options.js" defer></script>
+      <script th:src="@{/js/manager/optionsOffice.js}"></script>
+      <script th:src="@{/js/header.js}"></script>
+
   </body>
 </html>

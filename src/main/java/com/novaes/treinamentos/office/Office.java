@@ -56,4 +56,9 @@ public class Office {
 	public void addNrToList(NR nr) {
 		this.listNR.add(nr);
 	}
+	
+	public void removeNrToList(NR nr) {
+		this.listNR.remove(nr);
+	}
+	
 }

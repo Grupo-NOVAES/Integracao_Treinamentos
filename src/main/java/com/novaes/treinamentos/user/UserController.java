@@ -3,6 +3,7 @@ package com.novaes.treinamentos.user;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.office.OfficeService;
+import com.novaes.treinamentos.usernr.UserNR;
 import com.novaes.treinamentos.usernr.UserNrService;
 
 @Controller
@@ -36,12 +39,21 @@ public class UserController {
 		this.officeService=officeService;
 	}
 	
-	@GetMapping
-	public String allClientPage(Model model) {
-		System.out.println("redirecionamento para /user");
-		model.addAttribute("listUser", userService.getAllClients());
-		model.addAttribute("listOffice",officeService.getAllOffice());
-		return "pages/manager/user";
+	@GetMapping("/home")
+	public String HomePage(Model model) {
+		if(userService.getTypeUser()) {
+			model.addAttribute("listUser", userService.getAllClients());
+			model.addAttribute("listOffice",officeService.getAllOffice());
+			return "pages/manager/user";
+		}else {
+			User user = userService.getUserLogged();
+			
+			model.addAttribute("listUserNR", userNrService.getListNrUserByUser(user.getId()));
+			for(UserNR userNR: userNrService.getListNrUserByUser(user.getId())) {
+				System.out.println(userNR.isStatus());
+			}
+			return "pages/client/home";
+		}
 	}
 	
 	
@@ -71,6 +83,7 @@ public class UserController {
 		
 	    if(password.equals(confirmPassword)) {
 	    	Office officeFound = officeService.findOfficeByName(office);
+	    	System.out.println(password);
 	    	User user = userService.createUser(name,lastname,phoneNumber,login,password,Role.USER,officeFound);
 		    if(!ObjectUtils.isEmpty(user)) {
 		    	userService.addUser(user);

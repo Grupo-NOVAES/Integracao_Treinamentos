@@ -5,9 +5,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.novaes.treinamentos.office.OfficeRepository;
 import com.novaes.treinamentos.user.Role;
 import com.novaes.treinamentos.user.User;
 import com.novaes.treinamentos.user.UserRepository;
+import com.novaes.treinamentos.usernr.UserNrService;
 
 @Component
 public class DatabaseInit  implements CommandLineRunner{
@@ -16,7 +18,17 @@ public class DatabaseInit  implements CommandLineRunner{
 	private UserRepository userRepository;
 	
 	@Autowired
+	private OfficeRepository officeRepository;
+	
+	private UserNrService userNrService;
+	
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	public DatabaseInit(UserNrService userNrService) {
+		this.userNrService=userNrService;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -51,7 +63,9 @@ public class DatabaseInit  implements CommandLineRunner{
 			client.setPhoneNumber("(16) 99738-3588");
 			client.setPassword(passwordEncoder.encode("123456"));
 			client.setRole(Role.USER);
+			client.setOffice(officeRepository.findByName("Operador de Maquina Cortadora de Asfalto"));
 			userRepository.save(client);
+			userNrService.vinculedUserToNr(client, client.getOffice());
 		}
 	}
 }

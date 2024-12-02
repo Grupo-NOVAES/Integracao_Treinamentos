@@ -16,7 +16,6 @@ form{
     display: grid;
     grid-template-rows: 15% 15% 35% 20% 15%;
     min-height: 100%;
-    padding: 10px;
 }
 
 .img-form{

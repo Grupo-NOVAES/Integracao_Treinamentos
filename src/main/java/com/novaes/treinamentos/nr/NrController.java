@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.novaes.treinamentos.office.OfficeService;
 import com.novaes.treinamentos.questions.QuestionService;
 
 @Controller
@@ -25,6 +26,7 @@ public class NrController {
 	public NrController(NrService nrService,QuestionService questionService) {
 		this.nrService=nrService;
 		this.questionService=questionService;
+
 	}
 
 	
@@ -72,6 +74,8 @@ public class NrController {
 			nr.setListRequiriments(listRequiriments);
 			nr.setWorkload(workload);
 			nrService.addNewNr(nr);
+		}else {
+			System.out.println("something is null");
 		}
 		
 		return NRHOMEPAGE;
@@ -95,9 +99,9 @@ public class NrController {
 		return NRHOMEPAGE;
 	}
 	
-	@PostMapping("/deleteNr/{idNr}")
-	public String deleteNr(@PathVariable Long idNr) {
-		nrService.deleteNr(idNr);
+	@PostMapping("/deleteNr")
+	public String deleteNr(@RequestParam Long idNr) {
+		nrService.deleteNrById(idNr);
 		return NRHOMEPAGE;
 	}
 	

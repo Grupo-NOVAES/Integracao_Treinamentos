@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/a56b5a1294.js" integrity="sha384-UmDXR4qQvJEgFif4C+KL8+8iFyYdsjajPl+1hzvoQKPQLHu05pTOq61y03WQk4+I" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/css/manager/addmodalstandart.css}">
+    <script src="https://kit.fontawesome.com/a56b5a1294.js" integrity="sha384-UmDXR4qQvJEgFif4C+KL8+8iFyYdsjajPl+1hzvoQKPQLHu05pTOq61y03WQk4+I" crossorigin="anonymous"></script>    <link rel="stylesheet" th:href="@{/css/manager/addmodalstandart.css}">
     <link rel="stylesheet" th:href="@{/css/manager/standart.css}">
     <link rel="stylesheet" th:href="@{/css/manager/header.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,22 +49,22 @@
       </div>
 
       <div class="addModal" id="addModal">
-        <form>
+        <form method="post" th:action="@{/Nr/newNr}">
           <div class="img-form">
             <i class="fa-solid fa-scale-balanced fa-2xl" style="color: #007b8f;"></i>
           </div>
           <div class="header-form">
-            <input class="introInput" type="number" placeholder="Numero">
-            <input class="introInput" type="text" placeholder="Título">
+            <input class="introInput" type="number" placeholder="Numero" name="number">
+            <input class="introInput" type="text" placeholder="Título" name="title">
           </div>
           <div class="main-form">
-            <input class="mainInput" type="text" placeholder="Descrição">
-            <input class="mainInput" type="number" placeholder="Carga Horária">
-            <textarea class="textArea" name="9" rows="4" cols="50" placeholder="Lista de Requisitos"></textarea>            
+            <input class="mainInput" type="text" placeholder="Descrição" name="description">
+            <input class="mainInput" type="number" placeholder="Carga Horária" name="workload">
+            <textarea class="textArea" rows="4" cols="50" placeholder="Lista de Requisitos"  name="listRequiriments"></textarea>            
           </div>
           <div class="header-form">
-            <button class="btnSave">Enviar</button>
-            <button onclick="hideModelAddNr()" class="btnExit"> <p class="cancel">Cancelar</p></button>
+            <button class="btnSave" type="submit">Enviar</button>
+            <button onclick="hideModalAddNr()" class="btnExit" type="button"> <p class="cancel">Cancelar</p></button>
           </div>
         </form>
       </div>
@@ -73,11 +72,16 @@
       <div class="options" id="options">
         <button class="btnOption" onclick="redirectToNrInfo()"><i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Informações</button>
         <button class="btnOption" onclick="redirectToQuestionBynR()"><i class="fa-solid fa-list-ol fa-lg" style="color: #007b8f;"></i> Perguntas</button>
-        <a href=""><button class="btnOptionDelete"> <i class="fa-solid fa-trash fa-lg" style="color: #fb5555"></i> Deletar</button></a>
+        <form id="containerFormDeleteNr" method="post" th:action="@{/Nr/deleteNr}">
+          <input hidden type="number" id="nrIdInput" value="" name="idNr">
+          <button class="btnOptionDelete" type="submit"><i class="fa-solid fa-trash fa-lg" style="color: #fb5555"></i> Deletar</button>
+        </form>
       </div>
 
       <script th:src="@{/js/manager/optionsNr.js}" defer></script>
-      <script th:src="@{js/manager/showMenu.js}"></script>
+      <script th:src="@{/js/manager/showMenu.js}"></script>
+      <script th:src="@{/js/header.js}"></script>
+
   </main>
 
 </body>

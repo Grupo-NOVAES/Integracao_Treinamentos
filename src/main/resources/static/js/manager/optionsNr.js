@@ -6,6 +6,7 @@ document.addEventListener('click', function(event) {
     const btnOptions = document.getElementById('options');
     const ModalAdd = document.getElementById('addModal');
     const target = event.target;
+    document.getElementById("nrIdInput").value = selectedNrId;
 
     if (modalVisible && !btnOptions.contains(target) && !target.closest('button')) {
         hideModalOptionsNr();
@@ -17,7 +18,6 @@ document.addEventListener('click', function(event) {
 
 });
 
-document.getElementById("btnOptionUser").addEventListener('click',showModalOptionsNr)
 
 function showModalOptionsNr(button){
     const options = document.getElementById('options');
