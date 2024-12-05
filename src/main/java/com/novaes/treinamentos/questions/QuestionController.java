@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.nr.NrService;
+import com.novaes.treinamentos.responses.ResponsesService;
 import com.novaes.treinamentos.user.UserService;
 import com.novaes.treinamentos.usernr.UserNR;
 import com.novaes.treinamentos.usernr.UserNrService;
@@ -26,13 +27,15 @@ public class QuestionController {
 	private final NrService nrService;
 	private final UserNrService userNrService;
 	private final UserService userService;
+	private final ResponsesService responsesService;
 	private static final String NRHOMEPAGE = "redirect:/Nr";
 	
-	public QuestionController(QuestionService questionService,NrService nrService,UserNrService userNrService,UserService userService) {
+	public QuestionController(QuestionService questionService,NrService nrService,UserNrService userNrService,UserService userService,ResponsesService responsesService) {
 		this.questionService=questionService;
 		this.nrService=nrService;
 		this.userNrService=userNrService;
 		this.userService=userService;
+		this.responsesService=responsesService;
 	}
 	
 	
@@ -116,6 +119,8 @@ public class QuestionController {
 	            Long questionId = Long.parseLong(questionIdStr);
 
 	            Questions question = questionService.getQuestionById(questionId);
+	            
+	            responsesService.addNewResponse(questionId, userId, entry.getValue());
 
 	            if (question.getCorrectAnwser().equals(entry.getValue())) {
 	                correctCount++;
@@ -144,6 +149,7 @@ public class QuestionController {
 	
 	@PostMapping("/deleteQuestion")
 	public String deleteQuestion(@RequestParam Long idQuestion) {
+		responsesService.deleteByIdQuestion(idQuestion);
 		questionService.deleteQuestion(idQuestion);
 		return NRHOMEPAGE;	
 	}

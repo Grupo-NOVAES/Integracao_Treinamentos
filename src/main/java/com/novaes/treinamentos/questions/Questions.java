@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.novaes.treinamentos.nr.NR;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -24,19 +26,22 @@ public class Questions {
 	@ManyToOne
 	private NR nr;
 	
+	@Column(length = 1280000000)
+    @Lob
 	private List<String> listAlternative;
 	
-	private String anwserUser;
+	private String answserUser;
+	
+	private String correctAnswer;
 	
 	public String getAnwserUser() {
-		return anwserUser;
+		return answserUser;
 	}
 
-	public void setAnwserUser(String anwserUser) {
-		this.anwserUser = anwserUser;
+	public void setAnwserUser(String answserUser) {
+		this.answserUser = answserUser;
 	}
 
-	private String correctAnwser;
 
 	public Long getId() {
 		return id;
@@ -71,11 +76,11 @@ public class Questions {
 	}
 
 	public String getCorrectAnwser() {
-		return correctAnwser;
+		return correctAnswer;
 	}
 
-	public void setCorrectAnwser(String correctAnwser) {
-		this.correctAnwser = correctAnwser;
+	public void setCorrectAnwser(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
 	}
 	
 	public int getQuestionNumber() {

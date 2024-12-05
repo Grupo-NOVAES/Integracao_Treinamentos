@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.office.OfficeService;
+import com.novaes.treinamentos.questions.QuestionService;
+import com.novaes.treinamentos.questions.Questions;
+import com.novaes.treinamentos.responses.Responses;
+import com.novaes.treinamentos.responses.ResponsesService;
 import com.novaes.treinamentos.usernr.UserNR;
 import com.novaes.treinamentos.usernr.UserNrService;
 
@@ -30,13 +33,19 @@ public class UserController {
 	
 	private final OfficeService officeService;
 	
+	private final QuestionService questionService;
+	
+	private final ResponsesService responsesService;
+	
 	private static final String USERHOMEPAGE = "redirect:/user";
 	private static final String USERINFOPAGE = "redirect:/user/infoClient/";
 	
-	public UserController(UserService userService,UserNrService userNrService,OfficeService officeService) {
+	public UserController(UserService userService,UserNrService userNrService,OfficeService officeService,QuestionService questionService,ResponsesService responsesService) {
 		this.userService=userService;
 		this.userNrService=userNrService;
 		this.officeService=officeService;
+		this.questionService=questionService;
+		this.responsesService=responsesService;
 	}
 	
 	@GetMapping("/home")
@@ -72,6 +81,32 @@ public class UserController {
 		return "pages/manager/userdata";
 	}
 	
+	@GetMapping("/infoClient/{idUser}/{nrNumber}")
+	public String getResponseByUserAndNr(@PathVariable Long idUser, @PathVariable int nrNumber, Model model) {
+	    List<Questions> questions = questionService.getQuestionsByNRNumber(nrNumber);
+
+	    List<Responses> responses = responsesService.listResposesByUserAndNR(idUser, nrNumber);
+
+	    for (Questions question : questions) {
+	        Responses response = responses.stream()
+	            .filter(r -> r.getQuestion().getId().equals(question.getId()))
+	            .findFirst()
+	            .orElse(null);
+
+	        question.setAnwserUser(response != null ? response.getOptionAnswered() : null);
+	    }
+	    
+	    questions.forEach(q -> System.out.println("Correct Answer: " + q.getCorrectAnwser()));
+
+
+	    model.addAttribute("nrNumber", nrNumber);
+	    model.addAttribute("userId", idUser);
+	    model.addAttribute("listQuestions", questions);
+
+	    return "pages/manager/responseList";
+	}
+
+	
 	@PostMapping
 	public String addNewClient(@RequestParam(value = "name" , required = true) String name,
 			 @RequestParam(value = "lastname" , required = true) String lastname,
@@ -96,7 +131,6 @@ public class UserController {
 	
 	@PostMapping("/updateUser")
 	public String updateClient(UserDTO user , Long id) {
-		
 		userService.updateUser(user, id);
 		return USERHOMEPAGE;
 	}
