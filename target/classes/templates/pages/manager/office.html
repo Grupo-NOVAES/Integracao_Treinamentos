@@ -36,7 +36,8 @@
                 th:data-id="${office.id}">
                   <td><i class="fa-solid fa-screwdriver-wrench fa-xl" style="color: #007b8f;"></i></td>
                   <td th:text="${office.specialization}"></td>
-                  <td><button class="btnAction" onclick="showModalOptionsOffice(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
+                  <td><button class="btnAction" onclick="showModalOptionsOffice(this)">                    <img th:src="@{/img/icons/3dots.png}" alt="3dots" height="25">
+                  </button></td>
 
                 </tr>
               </tbody>

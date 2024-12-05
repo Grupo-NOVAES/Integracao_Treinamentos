@@ -15,7 +15,7 @@ body{
 
 main{
     display: grid;
-    grid-template-rows: 25vh 75vh;
+    grid-template-rows: 30vh 70vh;
     min-height: 100vh;
     padding: 5px;
     background-color: white;
@@ -58,6 +58,7 @@ main{
     grid-template-columns: 90%;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
 }
 
 .table{
@@ -84,13 +85,15 @@ thead{
 th, td{
     text-align: center;
 }
-tbody tr{
+tbody, tr{
     background-color: #fff;
     box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
     border-radius: 5px; 
+    height: 40px;
+    transition: height 0.3s ease;
 }
 
-tbody tr:hover{
+tbody, tr:hover{
     height: 60px;
 }
 
@@ -118,4 +121,19 @@ td{
     border: none;
     background-color: #007b8f;
     color: white;
+}
+
+.linkResponseList{
+    border:none;
+    width: 100px;
+    height: 35px;
+    background-color: #007b8f;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    transition: height 0.2s ease;
+}
+.linkResponseList:hover{
+    height: 40px;
+    background-color: #1e3050;
 }

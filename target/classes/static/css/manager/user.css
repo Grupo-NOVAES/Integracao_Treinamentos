@@ -67,6 +67,7 @@ main{
     border-radius: 10px;
 }
 
+
 .table{
     display: flex;
     justify-content: center;
@@ -87,6 +88,7 @@ thead{
     position: sticky;  
     top: 0;
     background-color: #f9f9f9;
+    text-align: center;
 }
 
 th, td{
@@ -102,13 +104,11 @@ tbody tr{
 
 tbody tr:hover{
     height: 60px;
-
 }
 
 td{
     height: 40px;
 }
-
 
 .table::-webkit-scrollbar {
     width: 4px;

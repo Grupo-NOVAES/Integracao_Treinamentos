@@ -40,7 +40,8 @@
               <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
                 <td th:text="${nr.number}"></td>
                 <td th:text="${nr.title}"></td>
-                <td><button class="btnAction" onclick="showModalOptionsNr(this)"><i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: #007b8f;"></i></button></td>
+                <td><button class="btnAction" onclick="showModalOptionsNr(this)">                    <img th:src="@{/img/icons/3dots.png}" alt="3dots" height="25">
+                </button></td>
             </tr>
           </tbody>
         </table>
