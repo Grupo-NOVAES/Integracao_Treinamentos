@@ -28,14 +28,21 @@
         <div class="content">
           <div class="table">
             <table aria-hidden="true">
-                <tr th:each="userNr: ${listNrUser}">
-                  <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></i></td>
-                  <td th:text="${userNr.nr.number}"></td>
-                  <td th:text="${userNr.nr.title}"></td>
-                  <td th:if="${userNr.status}"><i class="fa-regular fa-circle-check fa-lg" style="color: #0fa958;"></i></td>
-                  <td th:enless="${userNr.status}"><i class="fa-regular fa-circle-xmark fa-lg" style="color: #f5665e;"></i></td>
-                </tr>
+              <tr th:each="userNr: ${listNrUser}">
+                <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></i></td>
+                <td th:text="${userNr.nr.number}"></td>
+                <td th:text="${userNr.nr.title}"></td>
+                <td>
+                  <button 
+                    class="linkResponseList" 
+                    th:data-iduser="${infoUser.id}" 
+                    th:data-nrnumber="${userNr.nr.number}">
+                    Visualizar Respostas
+                  </button>
+                </td>
+              </tr>
             </table>
+            
           </div>
          
         </div>

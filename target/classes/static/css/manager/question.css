@@ -112,7 +112,7 @@ select:focus{
 .box-questions{
     display: grid;
     justify-self: center;
-    height: 400px;
+    height: auto;
     width: 500px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.9);
     padding: 15px;
