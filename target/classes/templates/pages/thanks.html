@@ -12,24 +12,14 @@
 </head>
 
 <body>
-    <header>
-        <a href="https://grupo-novaes.github.io/Treinamento-Seguranca-Trabalho/index.html"><img id="logo"
-                src="../IMAGES/IdentidadeVisual/Logos Grupo Novaes.png" alt="Novaes Logo" height="50px"
-                width="200px"></a>
-    </header>
 
     <main>
         <div class="thankyou">
             <h1 id="title">Recebemos o seu formulário! <img id="imagem_correct" src="IMAGES/icons/image_correct.png" alt=""></h1>
-            <p id="textOk">Agradecemos por toda a dedicação em assistir aos vídeos e realizar o formulário! Agora
-                aguarde, pois em breve, entraremos em contato.
-            </p>
-            <a id="back" th:href="@{/user/home}">Voltar ao início</a>
+           
             <div id="feedbackContainer">
-                <h3>Obrigado por participar!</h3>
-                <p>Você acertou <span th:text="${correctCount}">0</span> de <span th:text="${totalQuestions}">0</span> questões.</p>
+                <p class="textFeedback">Você acertou <span th:text="${correctCount}">0</span> de <span th:text="${totalQuestions}">0</span> questões.</p>
 
-                <h4>Seu desempenho:</h4>
                 <table>
                     <thead>
                         <tr>
@@ -52,39 +42,7 @@
     </main>
 
     <footer>
-        <section id="footer">
-            <div id="_text_footer" class="text">
-                <p><b>Endereço</b></p>
-                <p>Rua Sao Joaquim, 550</p>
-                <p>São Carlos-SP</p>
-            </div>
-            <div class="text">
-                <p><b>Horario</b></p>
-                <p>Seg-Sex: 8h00 - 18h00</p>
-            </div>
-            <div class="text">
-                <p><b>Contato</b></p>
-                <p>(16)3419-0906</p>
-                <p>adm@novaes.eng.br</p>
-            </div>
-            <div class="text">
-                <p><b>Redes Sociais</b></p>
-                <section id="icones">
-                    <a href="https://www.instagram.com/grupo_novaes/" class="icons">
-                        <img src="../IMAGES/icons/instagram.png" width="27px" class="iconsRedes" alt="redes-sociais">
-                    </a>
-                    <a href="https://www.facebook.com/gruponovaes/" class="icons">
-                        <img src="../IMAGES/icons/facebook.png" width="24px" class="iconsRedes" alt="redes-sociais">
-                    </a>
-                    <a href="https://www.youtube.com/channel/UC0HGGKKsSjs9tDrGgZGUwnw" class="icons">
-                        <img src="../IMAGES/icons/youtube.png" width="30px" class="iconsRedes" alt="redes-sociais">
-                    </a>
-                    <a href="https://www.linkedin.com/company/gruponovaes" class="icons">
-                        <img src="../IMAGES/icons/linkedin.png" width="23px" class="iconsRedes" alt="redes-sociais">
-                    </a>
-                </section>
-            </div>
-        </section>
+        
         <section id="text_footer">
             <p id="titulo_footer"><b>Política de Privacidade</b></p>
             <p id="devby">&copy; 2024 Grupo Novaes - Todos os direitos reservados. Desenvolvidos por programadores Novaes</p>

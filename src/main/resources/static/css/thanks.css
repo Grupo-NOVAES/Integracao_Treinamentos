@@ -7,24 +7,11 @@
     font-family: "Montserrat", sans-serif;
 }
 
-header {
-    width: 100%;
-    height: 15vh;
-    background-color: white;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 20px;
-}
 
-#logo {
-    margin-top: 20px;
-    margin-left: 50px;
-    width: 200px;
-}
 
 main {
     width: 100%;
-    height: 50vh;
+    height: 80vh;
     background-color: rgb(226, 226, 226);
     display: flex;
     flex-direction: column;
@@ -40,8 +27,6 @@ main {
     text-align: center;
     align-items: center;
     flex-wrap: wrap;
-    background-color: rgb(226, 226, 226);
-    padding: 50px;
     width: 100%;
     height: auto;
 }
@@ -65,10 +50,79 @@ main {
     font-size: 15pt;
 }
 
+.textFeedback{
+    margin-top: 50px;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
 footer {
     width: 100%;
-    background-color: red;
 }
+
+
+
+.table{
+    display: flex;
+    justify-content: center;
+    max-height: 350px;
+    overflow-y: auto;
+    justify-self: center;
+    width: 90%;
+    margin-top: 100px;
+}
+
+table{
+    width: 90%;
+    border-spacing: 0 10px;
+}
+
+thead{
+    height: 25px;
+    position: sticky;  
+    top: 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+th, td{
+    text-align: center;
+}
+tbody tr{
+    background-color: #fff;
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px; 
+    height: 40px;
+    transition: height 0.3s ease;
+}
+
+tbody tr:hover{
+    height: 60px;
+}
+
+td{
+    height: 40px;
+}
+
+.table::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.table::-webkit-scrollbar-thumb {
+    background-color: #007b8f;
+    border-radius: 10px;
+}
+
+.table::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+}
+
+
+
+
+
+
 
 #footer {
     font-family: "Montserrat", sans-serif;
@@ -126,7 +180,10 @@ footer {
 }
 
 #feedbackContainer{
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 @media screen and (max-width: 862px) {
     main {
