@@ -16,7 +16,8 @@
     <main>
         <div class="thankyou">
             <h1 id="title">Recebemos o seu formulário! <img id="imagem_correct" src="IMAGES/icons/image_correct.png" alt=""></h1>
-           
+            <a id="back" th:href="@{/user/home}">Voltar ao início</a>
+
             <div id="feedbackContainer">
                 <p class="textFeedback">Você acertou <span th:text="${correctCount}">0</span> de <span th:text="${totalQuestions}">0</span> questões.</p>
 
