@@ -27,7 +27,6 @@ body{
     height: 100%;
     width: 40%;
     background-color: #083C52;
-    border: 2px solid red;
 }
 .inputEnunciation{
     width: 90%;
@@ -58,5 +57,5 @@ body{
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-size: 16pt;
+    font-size: 12pt;
 }

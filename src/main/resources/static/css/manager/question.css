@@ -87,7 +87,7 @@ select:focus{
 }
 .btnDeleteQuestion{
     border: none;
-    background-color: none;
+    background-color: white;
 }
 .options .btnOptionDelete{
     width: 100%;

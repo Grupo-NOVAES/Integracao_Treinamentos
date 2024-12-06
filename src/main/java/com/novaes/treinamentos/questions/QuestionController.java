@@ -111,32 +111,35 @@ public class QuestionController {
 	    userNrService.updateUserNR(userNr);
 	    
 	    responses.entrySet().removeIf(entry -> !entry.getKey().startsWith("question-"));
+	    if(responses.size() > 0) {
+	    	for (Map.Entry<String, String> entry : responses.entrySet()) {
+		        String questionIdStr = entry.getKey().replace("question-", "");
 
-	    for (Map.Entry<String, String> entry : responses.entrySet()) {
-	        String questionIdStr = entry.getKey().replace("question-", "");
+		        try {
+		            Long questionId = Long.parseLong(questionIdStr);
 
-	        try {
-	            Long questionId = Long.parseLong(questionIdStr);
+		            Questions question = questionService.getQuestionById(questionId);
+		            
+		            responsesService.addNewResponse(questionId, userId, entry.getValue());
 
-	            Questions question = questionService.getQuestionById(questionId);
-	            
-	            responsesService.addNewResponse(questionId, userId, entry.getValue());
+		            if (question.getCorrectAnwser().equals(entry.getValue())) {
+		                correctCount++;
+		            }
 
-	            if (question.getCorrectAnwser().equals(entry.getValue())) {
-	                correctCount++;
-	            }
+		            feedbackList.add(new String[] {
+		                question.getEnunciation(), 
+		                entry.getValue(),             
+		                question.getCorrectAnwser()
+		            });
 
-	            feedbackList.add(new String[] {
-	                question.getEnunciation(), 
-	                entry.getValue(),             
-	                question.getCorrectAnwser()
-	            });
-
-	            totalQuestions++;
-	        } catch (NumberFormatException e) {
-	            System.out.println("Erro ao tentar converter a chave para número: " + questionIdStr);
-	        }
+		            totalQuestions++;
+		        } catch (NumberFormatException e) {
+		            System.out.println("Erro ao tentar converter a chave para número: " + questionIdStr);
+		        }
+		    }
 	    }
+
+	    
 
 	    model.addAttribute("correctCount", correctCount);
 	    model.addAttribute("totalQuestions", totalQuestions);
