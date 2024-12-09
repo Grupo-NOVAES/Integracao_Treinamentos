@@ -1,5 +1,6 @@
 package com.novaes.treinamentos.nr;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.novaes.treinamentos.office.OfficeService;
 import com.novaes.treinamentos.questions.QuestionService;
 
 @Controller
@@ -61,25 +61,29 @@ public class NrController {
 	}
 	
 	@PostMapping("/newNr")
-	public String newNr(@RequestParam(value = "number",required = true) Integer number,
-						@RequestParam(value = "title" , required = true) String title,
-						@RequestParam(value = "description" , required = true) String description,
-						@RequestParam(value = "listRequiriments" , required = true) List<String> listRequiriments,
-						@RequestParam(value = "workload" , required = true) String workload) {
-		if(!nrService.validateIfSomethingIsNull(number,title,description,listRequiriments,workload)) {
-			NR nr = new NR();
-			nr.setNumber(number);
-			nr.setTitle(title);
-			nr.setDescription(description);
-			nr.setListRequiriments(listRequiriments);
-			nr.setWorkload(workload);
-			nrService.addNewNr(nr);
-		}else {
-			System.out.println("something is null");
-		}
-		
-		return NRHOMEPAGE;
+	public String newNr(@RequestParam(value = "number", required = true) Integer number,
+	                    @RequestParam(value = "title", required = true) String title,
+	                    @RequestParam(value = "description", required = true) String description,
+	                    @RequestParam(value = "listRequiriments", required = true) String listRequiriments,
+	                    @RequestParam(value = "workload", required = true) String workload) {
+	    if (!nrService.validateIfSomethingIsNull(number, title, description, listRequiriments, workload)) {
+	        NR nr = new NR();
+	        nr.setNumber(number);
+	        nr.setTitle(title);
+	        nr.setDescription(description);
+
+	        List<String> requirementsList = Arrays.asList(listRequiriments.split("\\r?\\n"));
+	        nr.setListRequiriments(requirementsList);
+
+	        nr.setWorkload(workload);
+	        nrService.addNewNr(nr);
+	    } else {
+	        System.out.println("something is null");
+	    }
+
+	    return NRHOMEPAGE;
 	}
+
 	
 	@PostMapping("/updateNr/{idNr}")
 	public String updateNr(@PathVariable Long idNr,

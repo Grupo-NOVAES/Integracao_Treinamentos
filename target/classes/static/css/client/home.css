@@ -5,7 +5,7 @@ body{
 }
 header{
 	display:flex;
-	flex-direction:column;
+	flex-direction:row;
     align-items: center;
 }
 main{
@@ -62,7 +62,7 @@ main{
     flex-direction: column;
     align-items: center;
     width: 230px;
-    height: 250px;
+    height: 280px;
     background-color: white;
     box-shadow: 1.5px 1.5px 5px 1px rgba(0, 0, 0, 0.5);
     padding: 10px;
@@ -82,7 +82,7 @@ main{
 }
 .iconNRCard{
     width: 70%;
-    height: 80%;
+    height: 70%;
 }
 .btnPerformNR{
     width: 150px;
@@ -91,6 +91,7 @@ main{
     background-color: #083C52;
     color: white;
     border-radius: 5px;
+    margin-top: 20px;
 }
 
 

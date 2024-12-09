@@ -79,7 +79,7 @@ public class NrService {
         nrRepository.delete(nr);
     }
 	
-	protected boolean validateIfSomethingIsNull(Integer number,String title,String description,List<String> listRequiriments, String workload) {
+	protected boolean validateIfSomethingIsNull(Integer number,String title,String description,String listRequiriments, String workload) {
 		boolean somethingIsNull=false;
 		if(number == null || number == 0) {
 			somethingIsNull=true;
@@ -90,7 +90,7 @@ public class NrService {
 		if(description == null|| description.equals("")) {
 			somethingIsNull=true;
 		}
-		if(listRequiriments.isEmpty()) {
+		if(listRequiriments == null || listRequiriments.equals("")) {
 			somethingIsNull=true;
 		}
 		if(workload == null|| workload.equals("")) {
