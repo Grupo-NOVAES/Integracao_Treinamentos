@@ -137,7 +137,7 @@ public class QuestionController {
 
 		            totalQuestions++;
 		        } catch (NumberFormatException e) {
-		        	e.printStackTrace();
+		        	throw new RuntimeException();
 		        }
 		    }
 	    }
