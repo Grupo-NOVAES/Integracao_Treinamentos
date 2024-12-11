@@ -137,7 +137,7 @@ public class QuestionController {
 
 		            totalQuestions++;
 		        } catch (NumberFormatException e) {
-		        	throw new RuntimeException();
+		        	throw new IllegalArgumentException("Some value is not correct type");
 		        }
 		    }
 	    }
