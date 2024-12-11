@@ -78,7 +78,7 @@ public class NrController {
 	        nr.setWorkload(workload);
 	        nrService.addNewNr(nr);
 	    } else {
-	        System.out.println("something is null");
+	    	throw new RuntimeException();
 	    }
 
 	    return NRHOMEPAGE;

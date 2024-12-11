@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.nr.NrService;
 import com.novaes.treinamentos.responses.ResponsesService;
+import com.novaes.treinamentos.user.User;
 import com.novaes.treinamentos.user.UserService;
 import com.novaes.treinamentos.usernr.UserNR;
 import com.novaes.treinamentos.usernr.UserNrService;
@@ -47,8 +48,10 @@ public class QuestionController {
 
 	@GetMapping("/{nrNumber}")
 	public String questionByNR(@PathVariable int nrNumber, Model model) {
+		User user =  userService.getUserLogged();
 	    model.addAttribute("nrNumber", nrNumber);
 	    model.addAttribute("userId", userService.getUserLogged().getId());
+	    model.addAttribute("username",user.getName()+" "+user.getLastname());
 	    model.addAttribute("listQuestions", questionService.getQuestionsByNRNumber(nrNumber));
 	    
 	    return "pages/client/question";
@@ -134,7 +137,7 @@ public class QuestionController {
 
 		            totalQuestions++;
 		        } catch (NumberFormatException e) {
-		            System.out.println("Erro ao tentar converter a chave para número: " + questionIdStr);
+		        	e.printStackTrace();
 		        }
 		    }
 	    }

@@ -100,7 +100,6 @@ public class User implements UserDetails {
     public void activate() {
         this.enabled = true; 
         this.activationDate =  ZonedDateTime.now();
-        System.out.println(activationDate);
     }
 
     public void deactivate() {

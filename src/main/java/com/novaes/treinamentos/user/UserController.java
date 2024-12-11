@@ -49,7 +49,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/home")
-	public String HomePage(Model model) {
+	public String homePage(Model model) {
 		if(userService.getTypeUser()) {
 			model.addAttribute("listUser", userService.getAllClients());
 			model.addAttribute("listOffice",officeService.getAllOffice());
@@ -58,9 +58,6 @@ public class UserController {
 			User user = userService.getUserLogged();
 			
 			model.addAttribute("listUserNR", userNrService.getListNrUserByUser(user.getId()));
-			for(UserNR userNR: userNrService.getListNrUserByUser(user.getId())) {
-				System.out.println(userNR.isStatus());
-			}
 			return "pages/client/home";
 		}
 	}
@@ -95,9 +92,6 @@ public class UserController {
 
 	        question.setAnwserUser(response != null ? response.getOptionAnswered() : null);
 	    }
-	    
-	    questions.forEach(q -> System.out.println("Correct Answer: " + q.getCorrectAnwser()));
-
 
 	    model.addAttribute("nrNumber", nrNumber);
 	    model.addAttribute("userId", idUser);
@@ -118,7 +112,6 @@ public class UserController {
 		
 	    if(password.equals(confirmPassword)) {
 	    	Office officeFound = officeService.findOfficeByName(office);
-	    	System.out.println(password);
 	    	User user = userService.createUser(name,lastname,phoneNumber,login,password,Role.USER,officeFound);
 		    if(!ObjectUtils.isEmpty(user)) {
 		    	userService.addUser(user);

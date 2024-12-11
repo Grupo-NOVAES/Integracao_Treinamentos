@@ -35,17 +35,14 @@ public class UserService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
         UserDetails userDetails = (UserDetails) principal;
-        boolean ifEmployee = userDetails.getAuthorities().stream()
+        return userDetails.getAuthorities().stream()
         		.anyMatch(authority -> authority.getAuthority()
         				.equals("ROLE_ADMIN"));
-        
-        return ifEmployee;
 	}
 	
 	public User getUserLogged() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-		return user;
+		return (User) authentication.getPrincipal();
 	}
 	
 	protected void addUser(User user) {
