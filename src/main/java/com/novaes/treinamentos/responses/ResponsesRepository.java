@@ -26,5 +26,11 @@ public interface ResponsesRepository extends JpaRepository<Responses, Long>{
     @Transactional
     @Query("DELETE FROM Responses r WHERE r.questions.id = :idQuestion")
 	public void deleteByQuestionsId(Long idQuestion);
+	
+	
+	@Modifying
+    @Transactional
+    @Query("DELETE FROM Responses r WHERE r.user.id = :userId")
+	public void deleteAllResponsesByUserId(Long userId);
 
 }

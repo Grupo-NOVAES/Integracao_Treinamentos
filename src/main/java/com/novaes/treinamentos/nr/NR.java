@@ -23,7 +23,7 @@ public class NR {
 	
 	private String description;
 	
-	
+	private String videoURL;
 	
 	private List<String> listRequiriments;
 	
@@ -90,6 +90,14 @@ public class NR {
 
 	public void setListQuestions(List<Questions> listQuestions) {
 		this.listQuestions = listQuestions;
+	}
+	
+	public String getVideoUrl() {
+		return this.videoURL;
+	}
+	
+	public void setVideoUrl(String videoURL) {
+		this.videoURL=videoURL;
 	}
 	
 	

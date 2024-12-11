@@ -13,7 +13,7 @@
 <body>
   <main>
     <img alt="iconImg" th:src="@{/img/IdentidadeVisual/Logos Grupo Novaes.png}" id="logo">
-    <section id="formResponses">
+    <form id="formResponses" method="post" th:action="@{/question/submitResponses}">
       <input hidden type="number" name="nrNumber" th:value="${nrNumber}">
       <input hidden type="number" name="userId" th:value="${userId}">
       <input type="hidden" id="username" th:value="${username}">
@@ -33,10 +33,9 @@
       </div>
     
       <div class="btnOptionContainer">
-          <button type="submit" class="btnOption" id="btnSendResponses">Finalizar</button>
-          <button class="btnOption" id="btnSendEmail">send email</button>
+          <button type="submit" class="btnOption" id="btnSendResponses btnSendEmail">Finalizar</button>
       </div>
-    </section>
+    </form>
     
   </main>
   <script th:src="@{/js/client/forms.js}"></script>

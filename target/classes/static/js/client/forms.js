@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const btnSendEmail = document.getElementById("btnSendEmail");
   const usernameInput = document.getElementById("username");
+  const form = document.getElementById("formResponses");
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    sendEmail();
+  });
 
   async function sendEmail(){
     const username = usernameInput.value;
-    console.log(username);
 
     const data = {
       service_id: 'service_798mtu5',
@@ -24,11 +28,14 @@ document.addEventListener('DOMContentLoaded', function () {
               'Accept': 'application/json'
           }
       });
-      console.log("certo: ", res);
+
+      if (res.ok) {
+        form.submit();
+      } else {
+        console.log("Falha ao enviar o e-mail.");
+      }
     } catch (err) {
-      console.log("erro: ", err.stack);
+      console.log("Erro ao tentar enviar o e-mail: ", err.stack);
     }
   }
-
-  btnSendEmail.addEventListener('click', sendEmail);
 });

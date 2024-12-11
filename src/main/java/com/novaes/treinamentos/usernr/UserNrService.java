@@ -1,6 +1,7 @@
 package com.novaes.treinamentos.usernr;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,14 @@ public class UserNrService {
         });
 	}
 	
+	public void vinculeOneNrToUser(User user , NR nr) {
+		UserNR userNR = new UserNR();
+		userNR.setNr(nr);
+		userNR.setUser(user);
+		userNR.setStatus(false);
+		userNrRepository.save(userNR);
+	}
+	
 	public UserNR findByUserIdAndNrNumber(Long userId, int nrNumber) {
         return userNrRepository.findByUserIdAndNrNumber(userId, nrNumber);
     }
@@ -42,6 +51,18 @@ public class UserNrService {
 	
 	public List<NR> getListNrByUser(Long userId){
 		return userNrRepository.findAllNrByUserId(userId);
+	}
+	
+	public List<UserNR> getListNrUserByUserWithQuestions(Long userId) {
+        List<UserNR> userNRList = getListNrUserByUser(userId);
+
+        return userNRList.stream()
+                         .filter(userNR -> userNR.getNr().getListQuestions() != null && !userNR.getNr().getListQuestions().isEmpty())
+                         .collect(Collectors.toList());
+    }
+	
+	public void deleteUserNRByNrId(Long nrId) {
+		userNrRepository.deleteUserNrByNrId(nrId);
 	}
 
 }

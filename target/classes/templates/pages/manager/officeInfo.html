@@ -25,10 +25,10 @@
                   <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></td>
                   <td><p>Numero: </p><p th:text="${nr.number}"></p></td>
                   <td>
-                    <form method="post" th:action="@{/office/removeNrOfOffice}" id="containerFormsRemoveNrToOffice">
-                      <input id="inputIdOfficeToRemoveNr" th:value="${officeData.id}" name="idOffice" type="number" hidden>
-                      <input id="inputIdNrToRemoveNr" th:value="${nr.id}" name="idNr" type="number" hidden>
-                      <button id="btnRmvNrOffice"><i id="iconRemoveNr" class="fa-solid fa-trash" style="color: #fb6555;"></i></button>
+                    <form method="post" th:action="@{/office/removeNrOfOffice}" class="containerFormsRemoveNrToOffice">
+                      <input class="inputIdOfficeToRemoveNr" th:value="${officeData.id}" name="idOffice" type="number" hidden>
+                      <input class="inputIdNrToRemoveNr" th:value="${nr.id}" name="idNr" type="number" hidden>
+                      <button class="btnRmvNrOffice">Remover NR</button>
                     </form>
                   </td>
                 </tr>

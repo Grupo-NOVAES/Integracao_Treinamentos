@@ -43,6 +43,7 @@ public class QuestionController {
 	@GetMapping("/player/{nrNumber}")
 	public String playerVideo(@PathVariable int nrNumber,Model model) {
 		model.addAttribute("nrNumber", nrNumber);
+		model.addAttribute("videoURL", nrService.findNrByNumber(nrNumber).getVideoUrl());
 		return "pages/client/playerVideo";
 	}
 

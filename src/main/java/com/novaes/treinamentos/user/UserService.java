@@ -11,25 +11,26 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.novaes.treinamentos.office.Office;
+import com.novaes.treinamentos.responses.ResponsesRepository;
 import com.novaes.treinamentos.usernr.UserNRRepository;
 
 @Service
 public class UserService {
 
 	
-	private final UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
-	private final UserNRRepository userNrRepository;
+	@Autowired
+	private UserNRRepository userNrRepository;
+	
+	@Autowired
+	private ResponsesRepository responsesRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public UserService(UserRepository userRepository,UserNRRepository userNrRepository) {
-		this.userRepository=userRepository;
-		this.userNrRepository=userNrRepository;
-	}
 	
 	public boolean getTypeUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -44,6 +45,10 @@ public class UserService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return (User) authentication.getPrincipal();
 	}
+	
+	public List<User> getUsersByOfficeId(Long officeId) {
+        return userRepository.findUsersByOfficeId(officeId);
+    }
 	
 	protected void addUser(User user) {
 		userRepository.save(user);
@@ -94,6 +99,7 @@ public class UserService {
 	
 	protected void deleteUser(Long idUser) {
 		userNrRepository.deleteUserNrByUserId(idUser);
+		responsesRepository.deleteAllResponsesByUserId(idUser);
 		userRepository.deleteById(idUser);
 	}
 	
@@ -109,7 +115,7 @@ public class UserService {
         }
     }
 	
-	@Scheduled(fixedRate = 6000000)
+	@Scheduled(fixedRate = 6000)
     protected void deactivateExpiredAccounts() {
         List<User> clients = userRepository.findByRole(Role.USER); 
         for (User user : clients) {

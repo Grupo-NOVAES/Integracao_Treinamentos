@@ -37,7 +37,7 @@ public class UserController {
 	
 	private final ResponsesService responsesService;
 	
-	private static final String USERHOMEPAGE = "redirect:/user";
+	private static final String USERHOMEPAGE = "redirect:/user/home";
 	private static final String USERINFOPAGE = "redirect:/user/infoClient/";
 	
 	public UserController(UserService userService,UserNrService userNrService,OfficeService officeService,QuestionService questionService,ResponsesService responsesService) {
@@ -56,8 +56,8 @@ public class UserController {
 			return "pages/manager/user";
 		}else {
 			User user = userService.getUserLogged();
-			
-			model.addAttribute("listUserNR", userNrService.getListNrUserByUser(user.getId()));
+	        List<UserNR> listNR = userNrService.getListNrUserByUserWithQuestions(user.getId());
+			model.addAttribute("listUserNR", listNR);
 			return "pages/client/home";
 		}
 	}
@@ -67,7 +67,7 @@ public class UserController {
 	public String getInfoCurseCompleteClient(@PathVariable Long idUser,Model model) {
 		User user = userService.getUserById(idUser);
 		if(user.getActivationDate() != null) {
-			ZonedDateTime dateTime = user.getActivationDate().withZoneSameInstant(ZoneId.of("America/Sao_Paulo")).plusMinutes(5);
+			ZonedDateTime dateTime = user.getActivationDate().withZoneSameInstant(ZoneId.of("America/Sao_Paulo")).plusMinutes(60);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");
 			String formattedDate = dateTime.format(formatter);
 			model.addAttribute("dateTimeActivation", formattedDate);
@@ -130,7 +130,9 @@ public class UserController {
 	
 	@PostMapping("/activeUser/{idUser}")
 	public String activeUser(@PathVariable Long idUser) {
+		System.out.println("ativando usuario");
 	    userService.activateUser(idUser);
+	    System.out.println("finalizano ativacao usuario");
 	    return USERINFOPAGE+idUser;
 	}
 

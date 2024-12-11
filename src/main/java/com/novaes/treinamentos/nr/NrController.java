@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.novaes.treinamentos.office.OfficeService;
 import com.novaes.treinamentos.questions.QuestionService;
+import com.novaes.treinamentos.usernr.UserNrService;
 
 @Controller
 @RequestMapping("/Nr")
@@ -21,12 +23,15 @@ public class NrController {
 	
 	private final NrService nrService;
 	private final QuestionService questionService;
+	private final OfficeService officeService;
+	private final UserNrService userNrService;
 	private static final String NRHOMEPAGE = "redirect:/Nr";
 	
-	public NrController(NrService nrService,QuestionService questionService) {
+	public NrController(NrService nrService,QuestionService questionService,UserNrService userNrService,OfficeService officeService) {
 		this.nrService=nrService;
 		this.questionService=questionService;
-
+		this.userNrService=userNrService;
+		this.officeService=officeService;
 	}
 
 	
@@ -65,12 +70,14 @@ public class NrController {
 	                    @RequestParam(value = "title", required = true) String title,
 	                    @RequestParam(value = "description", required = true) String description,
 	                    @RequestParam(value = "listRequiriments", required = true) String listRequiriments,
+	                    @RequestParam(value = "videoURL", required = true) String videoURL,
 	                    @RequestParam(value = "workload", required = true) String workload) {
 	    if (!nrService.validateIfSomethingIsNull(number, title, description, listRequiriments, workload)) {
 	        NR nr = new NR();
 	        nr.setNumber(number);
 	        nr.setTitle(title);
 	        nr.setDescription(description);
+	        nr.setVideoUrl(videoURL);
 
 	        List<String> requirementsList = Arrays.asList(listRequiriments.split("\\r?\\n"));
 	        nr.setListRequiriments(requirementsList);
@@ -105,6 +112,8 @@ public class NrController {
 	
 	@PostMapping("/deleteNr")
 	public String deleteNr(@RequestParam Long idNr) {
+		userNrService.deleteUserNRByNrId(idNr);
+		officeService.removeNrFromAllOffices(idNr);
 		nrService.deleteNrById(idNr);
 		return NRHOMEPAGE;
 	}

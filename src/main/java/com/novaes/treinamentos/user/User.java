@@ -109,9 +109,13 @@ public class User implements UserDetails {
 
     public boolean isActive() {
         if (activationDate == null) {
-            return false; 
+            return false;
         }
-        return ZonedDateTime.now().isBefore(activationDate.plusMinutes(5));
+        ZonedDateTime expirationTime = activationDate.plusMinutes(60);
+        System.out.println("Activation Date: " + activationDate);
+        System.out.println("Expiration Time: " + expirationTime);
+        System.out.println("Current Time: " + ZonedDateTime.now());
+        return ZonedDateTime.now().isBefore(expirationTime);
     }
 
     public Long getId() {

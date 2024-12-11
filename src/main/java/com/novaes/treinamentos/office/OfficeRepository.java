@@ -18,5 +18,8 @@ public interface OfficeRepository extends JpaRepository<Office, Long>{
 	
 	@Query("SELECT o.listNR FROM Office o WHERE o.id = :officeId")
     List<NR> findNrsByOfficeId(@Param("officeId") Long officeId);
+	
+	@Query("SELECT o FROM Office o JOIN o.listNR nr WHERE nr.id = :nrId")
+    List<Office> findByNrId(@Param("nrId") Long nrId);
 
 }

@@ -28,7 +28,7 @@
         th:data-number="${userNR.nr.number}">
           <p class="titleCard" th:text="'NR '+ ${userNR.nr.number}"></p>
           <img alt="IconNR" class="iconNRCard" 
-              th:src="@{'/img/nrIcons/Icon NR' + ${userNR.nr.number} + '.png'}">
+              th:src="@{'/img/nrIcons/Icon NR6.png'}">
           <button class="btnPerformNR" th:if="${userNR.status == false}" onclick="performNr(this)">Realizar</button>
             <p th:if="${userNR.status == true}" class="statusMessage">Esta NR já foi realizada</p>
         </div>

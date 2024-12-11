@@ -57,8 +57,11 @@ public class Office {
 		this.listNR.add(nr);
 	}
 	
-	public void removeNrToList(NR nr) {
-		this.listNR.remove(nr);
+	public void deleteNrFromList(Long idNr) {
+	    if (this.listNR != null) {
+	        this.listNR.removeIf(nr -> nr.getId().equals(idNr));
+	    }
 	}
+
 	
 }

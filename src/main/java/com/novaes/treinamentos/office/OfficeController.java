@@ -41,6 +41,7 @@ public class OfficeController {
 	@PostMapping("/linkNr")
 	public String linkNrToOffice(@RequestParam Long idOffice,@RequestParam Long idNr) {
 		officeService.linkNrToOffice(idOffice, idNr);
+		
 		return OFFICEHOMEPAGE;
 	}
 	
