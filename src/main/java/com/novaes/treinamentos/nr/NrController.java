@@ -114,6 +114,8 @@ public class NrController {
 	public String deleteNr(@RequestParam Long idNr) {
 		userNrService.deleteUserNRByNrId(idNr);
 		officeService.removeNrFromAllOffices(idNr);
+		
+		questionService.deleteAllQuestionsByNr(idNr);
 		nrService.deleteNrById(idNr);
 		return NRHOMEPAGE;
 	}

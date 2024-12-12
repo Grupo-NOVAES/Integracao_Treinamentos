@@ -4,13 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.novaes.treinamentos.responses.ResponsesService;
+
 @Service
 public class QuestionService {
 
 	private final QuestionsRepository questionsRepository;
+	private final ResponsesService responsesService;
 	
-	public QuestionService(QuestionsRepository questionsRepository) {
+	public QuestionService(QuestionsRepository questionsRepository,ResponsesService responsesService) {
 		this.questionsRepository=questionsRepository;
+		this.responsesService=responsesService;
 	}
 	
 	public void addQuestion(Questions question){
@@ -27,6 +31,12 @@ public class QuestionService {
 	
 	public Questions getQuestionById(Long idQuestion) {
 		return questionsRepository.findById(idQuestion).orElseThrow(QuestionNotFoundException::new);
+	}
+	
+	public void deleteAllQuestionsByNr(Long nrId) {
+	    List<Long> questionIds = questionsRepository.findQuestionIdsByNrId(nrId);
+	    questionIds.forEach(questionId -> responsesService.deleteByIdQuestion(questionId));
+	    questionsRepository.deleteAllQuestionByNr(nrId);
 	}
 	
 	
