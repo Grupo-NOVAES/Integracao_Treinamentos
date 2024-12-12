@@ -10,6 +10,7 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
     <main id="container">
+        <h3>Formulário para Pergunta</h3>
         <form id="formContainer" method="post" th:action="@{/question/newQuestion}">
             <input type="text" name="enunciation" class="inputEnunciation" id="enunciationInput" placeholder="Enunciado">
             <input type="text" name="anwser1" class="input" id="anwser1Input" placeholder="alternativa 1">
@@ -25,7 +26,7 @@
             </select>
             
             <input hidden type="number" name="nrId" th:value="${nrData.id}">
-            <button type="submit" id="sendBtn">Adicionar Pergunta</button>
+            <button type="submit" id="sendBtn">Adicionar</button>
         </form>
     </main>
     

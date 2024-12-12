@@ -13,49 +13,84 @@ body{
 }
 #container{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     width: 100%;
-    height: 65%;
-    margin-top: 5%;
+    height: 85vh;
+    margin-top: 2%;
 }
+
+h3{
+    font-size: 22pt;
+    color: #007B8F;
+}
+
 #formContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 40%;
+    height: 80%;
+    width: 50%;
     background-color: #083C52;
+    border-radius: 5px;
+    padding: 7.5px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.9);
+
 }
+
 .inputEnunciation{
     width: 90%;
-    height: 120px;
+    height: 100px;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: white;
     margin-top: 10px;
     margin-bottom: 10px;
     padding-bottom: 90px ;
-    padding-left: 5px;
+    padding-top: 15px;
+    padding-left: 10px;
+    font-size: 12pt;
 }
 .input{
     width: 90%;
-    height: 40px;
+    height: 50px;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: white;
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 5px;
+    font-size: 12pt;
 }
 #sendBtn{
-    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 60%;
     height: 40px;
     border: none;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 3px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 12pt;
+}
+
+@media (max-width: 510px) {
+    #sendBtn{
+        font-size: 10pt;
+    }
+}
+@media (max-width: 400px) {
+    #sendBtn{
+        font-size: 10pt;
+    }
+}
+@media (max-width: 360px) {
+    h3{
+        font-size: 18pt;
+    }
 }

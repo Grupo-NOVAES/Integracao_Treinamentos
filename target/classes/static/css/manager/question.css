@@ -13,27 +13,32 @@ body{
 
 main{
     display: grid;
-    padding: 5px;
+    padding: 20px;
     gap: 5px;
 }
 
-.title{
-    align-self: end;
+.headerQ{
     margin-left: 70px;
-}
-.title h3{
-    color: #007B8F;
-}
-
-.content{
-    width: 100%;
+    max-height: 20vh;
     display: flex;
     flex-direction: row;
-
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
+}
+.headerQ h3{
+    color: #007B8F;
+}
+#btnNewQuestion{
+    width: 20%;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #083C52;
+    color: #ffffff;
+    cursor: pointer;
     align-self: end;
-
+    font-size: 12pt;
+    margin-right: 40px;
 }
 
 select{
@@ -70,16 +75,7 @@ select:focus{
     z-index: 1000;
 }
 
-#btnNewQuestion{
-    width: 10%;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    background-color: #083C52;
-    color: #ffffff;
-    cursor: pointer;
-    margin-right: 20%;
-}
+
 .headerQuestion{
     display: flex;
     flex-direction: row;

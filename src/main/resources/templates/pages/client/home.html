@@ -10,25 +10,23 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" th:href="@{/css/client/home.css}" />
-    <link rel="stylesheet" th:href="@{/css/manager/header.css}">
     <title>Home</title>
   </head>
   <body>
     <header>
-      <p id="titlePage">Seja Bem-Vindo a plataforma NOVAES Treinamentos</p>
+      <img class="logo" th:src="@{/img/IdentidadeVisual/Logos Grupo Novaes.png}" alt="Logo_NOVAES" width="170px" height="50px"/>
       <button id="btnLogOut"><img class="iconBtnLogout" th:src="@{/img/icons/logout.png}" alt="iconBtnLogou"></button>
     </header>
     <main id="main">
       
+      <p id="titlePage">Seja Bem-Vindo a plataforma NOVAES Treinamentos</p>
 
       <p id="subtitlePage">Selecione uma NR para assistir</p>
       <section id="containerCards" class="row ">
 
-        <div class="card-content col-6 col-sm-4" th:each="userNR : ${listUserNR}"
-        th:data-number="${userNR.nr.number}">
-          <p class="titleCard" th:text="'NR '+ ${userNR.nr.number}"></p>
-          <img alt="IconNR" class="iconNRCard" 
-              th:src="@{'/img/nrIcons/Icon NR6.png'}">
+        <div class="card-content col-6 col-sm-4" th:each="userNR : ${listUserNR}" th:data-number="${userNR.nr.number}">
+            <p class="titleCard" th:text="'NR '+ ${userNR.nr.number}"></p>
+          <img alt="IconNR" class="iconNRCard" th:src="@{'/img/nrIcons/Icon NR6.png'}">
           <button class="btnPerformNR" th:if="${userNR.status == false}" onclick="performNr(this)">Realizar</button>
             <p th:if="${userNR.status == true}" class="statusMessage">Esta NR já foi realizada</p>
         </div>

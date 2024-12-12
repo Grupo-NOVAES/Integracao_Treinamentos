@@ -15,12 +15,12 @@
   <div th:replace="fragments/header :: header"></div>
 
       <main>
-        <div class="title">
-            <h3>Perguntas</h3>
+        <div class="headerQ">
+          <h3>Perguntas</h3>
+          <button id="btnNewQuestion">Nova Pergunta</button>
         </div>
-        <div class="content">
-              <button id="btnNewQuestion">Nova Pergunta</button>
-          </div>
+        
+
 
         <div 
           th:each="question : ${listQuestions}"
