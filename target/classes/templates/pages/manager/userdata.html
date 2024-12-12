@@ -22,8 +22,10 @@
           <div th:if="${dateTimeActivation != null}"><p th:text="${'O usuario sera desativado: '+dateTimeActivation}"></p></div>
           <p th:if="${infoUser.enabled}" class="user-active">Usuario Ativo</p>
           <p th:unless="${infoUser.enabled}" class="user-disabled">Usuario Desativado</p>
-          <input id="userId" type="hidden" th:value="${infoUser.id}">
-          <button id="btnActiveUser" onclick="activeUser()">Ativar Usuario</button>
+          <form method="post" th:action="@{/user/activeUser}">
+            <input id="userId" type="hidden" th:value="${infoUser.id}" name="idUser">
+            <button id="btnActiveUser">Ativar Usuario</button>
+          </form>
         </div>
         <div class="content">
           <div class="table">

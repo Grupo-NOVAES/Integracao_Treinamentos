@@ -128,8 +128,8 @@ public class UserController {
 		return USERHOMEPAGE;
 	}
 	
-	@PostMapping("/activeUser/{idUser}")
-	public String activeUser(@PathVariable Long idUser) {
+	@PostMapping("/activeUser")
+	public String activeUser(@RequestParam(value="idUser") Long idUser) {
 		System.out.println("ativando usuario");
 	    userService.activateUser(idUser);
 	    System.out.println("finalizano ativacao usuario");
