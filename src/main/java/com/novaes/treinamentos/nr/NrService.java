@@ -99,6 +99,18 @@ public class NrService {
 		return somethingIsNull;
 	}
 	
+	public String transformToEmbedUrl(String videoUrl) {
+        if (videoUrl == null || !videoUrl.contains("youtube.com/watch?v=")) {
+            throw new IllegalArgumentException("Invalid YouTube URL");
+        }
+        
+        String videoId = videoUrl.split("v=")[1];
+        
+        if (videoId.contains("&")) {
+            videoId = videoId.split("&")[0];
+        }
+        return "https://www.youtube.com/embed/" + videoId;
+    }
 	
 	
 }
