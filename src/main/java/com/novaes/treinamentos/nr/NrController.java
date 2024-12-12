@@ -77,7 +77,8 @@ public class NrController {
 	        nr.setNumber(number);
 	        nr.setTitle(title);
 	        nr.setDescription(description);
-	        nr.setVideoUrl(videoURL);
+	        String embedUrl = nrService.transformToEmbedUrl(videoURL);
+	        nr.setVideoUrl(embedUrl);
 
 	        List<String> requirementsList = Arrays.asList(listRequiriments.split("\\r?\\n"));
 	        nr.setListRequiriments(requirementsList);
