@@ -33,7 +33,6 @@ public class DatabaseInit  implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		insertAdmin();
-		insertClient();
 		
 	}
 
@@ -51,21 +50,5 @@ public class DatabaseInit  implements CommandLineRunner{
 			userRepository.save(user);
 		}
 		
-	}
-	
-	private void insertClient() {
-		User clientFound = userRepository.findByLogin("client@gmail.com");
-		if(clientFound == null) {
-			User client = new User();
-			client.setName("cliente");
-			client.setLastname("teste");
-			client.setLogin("client@gmail.com");
-			client.setPhoneNumber("(16) 99738-3588");
-			client.setPassword(passwordEncoder.encode("123456"));
-			client.setRole(Role.USER);
-			client.setOffice(officeRepository.findByName("Operador de Maquina Cortadora de Asfalto"));
-			userRepository.save(client);
-			userNrService.vinculedUserToNr(client, client.getOffice());
-		}
 	}
 }
