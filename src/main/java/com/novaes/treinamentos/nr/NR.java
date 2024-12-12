@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.novaes.treinamentos.questions.Questions;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -21,10 +23,14 @@ public class NR {
 	
 	private String title;
 	
+	@Column(length = 1280000000)
+    @Lob
 	private String description;
 	
 	private String videoURL;
 	
+	@Column(length = 1280000000)
+    @Lob
 	private List<String> listRequiriments;
 	
 	private String workload;
