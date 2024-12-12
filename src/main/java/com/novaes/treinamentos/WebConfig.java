@@ -14,12 +14,4 @@ public class WebConfig implements WebMvcConfigurer{
         registry.addViewController("/client/thanks").setViewName("pages/thanks");
     }
 
-	@Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("https://simple-sawfish-lucky.ngrok-free.app")
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("Authorization", "Content-Type")
-                .allowCredentials(true);
-    }
 }
