@@ -115,7 +115,7 @@ public class UserService {
         }
     }
 	
-	@Scheduled(fixedRate = 6000)
+	@Scheduled(fixedRate = 3600000)
     protected void deactivateExpiredAccounts() {
         List<User> clients = userRepository.findByRole(Role.USER); 
         for (User user : clients) {
