@@ -57,8 +57,8 @@ public class UserNrService {
         List<UserNR> userNRList = getListNrUserByUser(userId);
 
         return userNRList.stream()
-                         .filter(userNR -> userNR.getNr().getListQuestions() != null && !userNR.getNr().getListQuestions().isEmpty())
-                         .collect(Collectors.toList());
+                .filter(userNR -> userNR.getNr().getListQuestions() != null && !userNR.getNr().getListQuestions().isEmpty())
+                .toList();
     }
 	
 	public void deleteUserNRByNrId(Long nrId) {

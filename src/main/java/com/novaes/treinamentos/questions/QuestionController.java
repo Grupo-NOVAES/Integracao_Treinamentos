@@ -30,6 +30,7 @@ public class QuestionController {
 	private final UserService userService;
 	private final ResponsesService responsesService;
 	private static final String NRHOMEPAGE = "redirect:/Nr";
+	private static final String NR_NUMBER_PARAM = "nrNumber";
 	
 	public QuestionController(QuestionService questionService,NrService nrService,UserNrService userNrService,UserService userService,ResponsesService responsesService) {
 		this.questionService=questionService;
@@ -42,7 +43,7 @@ public class QuestionController {
 	
 	@GetMapping("/player/{nrNumber}")
 	public String playerVideo(@PathVariable int nrNumber,Model model) {
-		model.addAttribute("nrNumber", nrNumber);
+		model.addAttribute(NR_NUMBER_PARAM, nrNumber);
 		model.addAttribute("videoURL", nrService.findNrByNumber(nrNumber).getVideoUrl());
 		return "pages/client/playerVideo";
 	}
@@ -50,7 +51,7 @@ public class QuestionController {
 	@GetMapping("/{nrNumber}")
 	public String questionByNR(@PathVariable int nrNumber, Model model) {
 		User user =  userService.getUserLogged();
-	    model.addAttribute("nrNumber", nrNumber);
+	    model.addAttribute(NR_NUMBER_PARAM, nrNumber);
 	    model.addAttribute("userId", userService.getUserLogged().getId());
 	    model.addAttribute("username",user.getName()+" "+user.getLastname());
 	    model.addAttribute("listQuestions", questionService.getQuestionsByNRNumber(nrNumber));
@@ -107,7 +108,7 @@ public class QuestionController {
 	    List<String[]> feedbackList = new ArrayList<>();
 	    
 	    Long userId = Long.parseLong(responses.get("userId"));
-	    Integer nrNumber = Integer.parseInt(responses.get("nrNumber"));
+	    Integer nrNumber = Integer.parseInt(responses.get(NR_NUMBER_PARAM));
 	    
 	    UserNR userNr = userNrService.findByUserIdAndNrNumber(userId, nrNumber);
 
