@@ -112,9 +112,6 @@ public class User implements UserDetails {
             return false;
         }
         ZonedDateTime expirationTime = activationDate.plusMinutes(60);
-        System.out.println("Activation Date: " + activationDate);
-        System.out.println("Expiration Time: " + expirationTime);
-        System.out.println("Current Time: " + ZonedDateTime.now());
         return ZonedDateTime.now().isBefore(expirationTime);
     }
 
