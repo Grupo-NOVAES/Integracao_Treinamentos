@@ -35,12 +35,23 @@
                 <td th:text="${userNr.nr.number}"></td>
                 <td th:text="${userNr.nr.title}"></td>
                 <td>
-                  <button 
+                  <button
+                    onclick="showModalOptionsUser(this)"
+                    style="
+                      border: none;
+                      height: 40px;
+                      width: 40px;
+                      border-radius: 15px;
+                    "
+                    >
+                    <img th:src="@{/img/icons/3dots.png}" alt="3dots" height="25">
+                  </button>
+                  <!-- <button 
                     class="linkResponseList" 
                     th:data-iduser="${infoUser.id}" 
                     th:data-nrnumber="${userNr.nr.number}">
                     Respostas
-                  </button>
+                  </button> -->
                 </td>
               </tr>
             </table>
@@ -49,6 +60,20 @@
          
         </div>
   
+
+
+        <div class="options" id="options">
+          <button class="btnOption" id="btnOptionUser" onclick="redirectToInfo()">
+            <i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Informações
+          </button>
+          <form th:action="@{/manager/userCertificate.html}" class="containerFromDeleteUser">
+            <input id="userIdFormInput" hidden th:name="userId" value="">
+            <button class="btnOptionDelete" id="btnOptionUser">
+              <i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Certificados
+            </button>
+          </form>
+          
+      </div>
       </main>
 
       <script th:src="@{/js/manager/userData.js}" defer></script>
