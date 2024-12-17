@@ -185,6 +185,15 @@ td{
     align-items: center;
     width: 100%;
 }
+#btnDowloadCertificate{
+    width: auto;
+    height: auto;
+    padding: 20px;
+    background-color: #007B8F;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
 @media screen and (max-width: 862px) {
     main {
         width: 100%;

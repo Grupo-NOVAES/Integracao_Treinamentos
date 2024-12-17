@@ -36,16 +36,19 @@ public class ResponsesService {
 		return responsesRepository.findResponsesByUserAndQuestion(userId,idQuestion);
 	}
 	
-	public void addNewResponse(Long idQuestion,Long idUser,String optionAnswered) {		
-		if(responsesRepository.findResponsesByUserAndQuestion(idUser,idQuestion) != null) {
-			Responses responses = new Responses();
-			responses.setOptionAnswered(optionAnswered);
-			responses.setUser(userRepository.findById(idUser).orElseThrow(UserNotFoundException::new));
-			responses.setQuestion(questionRepository.findById(idQuestion).orElseThrow(QuestionNotFoundException::new));
-			
-			responsesRepository.save(responses);
-		}
+	public void addNewResponse(Long idQuestion, Long idUser, String optionAnswered) {        
+	    responsesRepository.deleteByUserIdAndQuestionId(idUser, idQuestion);
+
+	    Responses newResponse = new Responses();
+	    newResponse.setOptionAnswered(optionAnswered);
+	    newResponse.setUser(userRepository.findById(idUser).orElseThrow(UserNotFoundException::new));
+	    newResponse.setQuestion(questionRepository.findById(idQuestion).orElseThrow(QuestionNotFoundException::new));
+
+	    responsesRepository.save(newResponse);
 	}
+
+
+
 	
 	public void deleteRespnsesById(Long idResponse) {
 		responsesRepository.deleteById(idResponse);

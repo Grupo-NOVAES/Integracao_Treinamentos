@@ -20,23 +20,7 @@
 
             <div id="feedbackContainer">
                 <p class="textFeedback">Você acertou <span th:text="${correctCount}">0</span> de <span th:text="${totalQuestions}">0</span> questões.</p>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Enunciado da Questão</th>
-                            <th>Sua Resposta</th>
-                            <th>Resposta Correta</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="feedback : ${feedbackList}">
-                            <td th:text="${feedback[0]}"></td> 
-                            <td th:text="${feedback[1]}"></td> 
-                            <td th:text="${feedback[2]}"></td> 
-                        </tr>
-                    </tbody>
-                </table>
+                <button id="btnDowloadCertificate">Baixar do certificado</button>
             </div>
 
         </div>

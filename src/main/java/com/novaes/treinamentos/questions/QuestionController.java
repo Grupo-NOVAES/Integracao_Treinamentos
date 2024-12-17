@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.nr.NrService;
@@ -102,7 +103,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping("/submitResponses")
-	public String submitResponses(@RequestParam Map<String, String> responses, Model model) {
+	public String submitResponses(@RequestParam Map<String, String> responses, Model model, RedirectAttributes redirectAttributes) {
 	    int correctCount = 0;
 	    int totalQuestions = 0;
 	    List<String[]> feedbackList = new ArrayList<>();
@@ -111,47 +112,52 @@ public class QuestionController {
 	    Integer nrNumber = Integer.parseInt(responses.get(NR_NUMBER_PARAM));
 	    
 	    UserNR userNr = userNrService.findByUserIdAndNrNumber(userId, nrNumber);
-
 	    userNr.setStatus(true);
 	    userNrService.updateUserNR(userNr);
 	    
 	    responses.entrySet().removeIf(entry -> !entry.getKey().startsWith("question-"));
-	    if(responses.size() > 0) {
-	    	for (Map.Entry<String, String> entry : responses.entrySet()) {
-		        String questionIdStr = entry.getKey().replace("question-", "");
-
-		        try {
-		            Long questionId = Long.parseLong(questionIdStr);
-
-		            Questions question = questionService.getQuestionById(questionId);
-		            
-		            responsesService.addNewResponse(questionId, userId, entry.getValue());
-
-		            if (question.getCorrectAnwser().equals(entry.getValue())) {
-		                correctCount++;
-		            }
-
-		            feedbackList.add(new String[] {
-		                question.getEnunciation(), 
-		                entry.getValue(),             
-		                question.getCorrectAnwser()
-		            });
-
-		            totalQuestions++;
-		        } catch (NumberFormatException e) {
-		        	throw new IllegalArgumentException("Some value is not correct type");
-		        }
-		    }
-	    }
-
 	    
+	    if (responses.size() > 0) {
+	        for (Map.Entry<String, String> entry : responses.entrySet()) {
+	            String questionIdStr = entry.getKey().replace("question-", "");
 
-	    model.addAttribute("correctCount", correctCount);
-	    model.addAttribute("totalQuestions", totalQuestions);
-	    model.addAttribute("feedbackList", feedbackList);
+	            try {
+	                Long questionId = Long.parseLong(questionIdStr);
 
-	    return "pages/thanks"; // Página de agradecimento
+	                Questions question = questionService.getQuestionById(questionId);
+
+	                responsesService.addNewResponse(questionId, userId, entry.getValue());
+
+	                if (question.getCorrectAnwser().equals(entry.getValue())) {
+	                    correctCount++;
+	                }
+
+	                feedbackList.add(new String[] {
+	                    question.getEnunciation(), 
+	                    entry.getValue(),             
+	                    question.getCorrectAnwser()
+	                });
+
+	                totalQuestions++;
+	            } catch (NumberFormatException e) {
+	                throw new IllegalArgumentException("Some value is not correct type");
+	            }
+	        }
+	    }
+	    
+	    double scorePercentage = (double) correctCount / totalQuestions * 100;
+
+	    if (scorePercentage >= 60.0) {
+	        model.addAttribute("correctCount", correctCount);
+	        model.addAttribute("totalQuestions", totalQuestions);
+	        model.addAttribute("feedbackList", feedbackList);
+	        return "pages/thanks";
+	    } else {
+	        redirectAttributes.addFlashAttribute("errorMessage", "Você não atingiu a pontuação mínima de 60%. Por favor, refaça o questionário.");
+	        return "redirect:/question/"+nrNumber; 
+	    }
 	}
+
 
 
 	
