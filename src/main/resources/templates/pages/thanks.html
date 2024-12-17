@@ -32,10 +32,13 @@
             <p id="titulo_footer"><b>Política de Privacidade</b></p>
             <p id="devby">&copy; 2024 Grupo Novaes - Todos os direitos reservados. Desenvolvidos por programadores Novaes</p>
         </section>
+        <input hidden type="number" name="nrNumber" th:value="${nrNumber}">
+        <input hidden type="number" name="userId" th:value="${userId}">
+        <input type="hidden" id="username" th:value="${username}">
     </footer>
 
 
-    <script type="module" src="../JS/thanks.js"></script>
+    <script type="module" th:src="@{/js/client/thanks.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

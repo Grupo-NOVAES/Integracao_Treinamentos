@@ -107,16 +107,13 @@ public class QuestionController {
 	    int correctCount = 0;
 	    int totalQuestions = 0;
 	    List<String[]> feedbackList = new ArrayList<>();
-	    
+
 	    Long userId = Long.parseLong(responses.get("userId"));
 	    Integer nrNumber = Integer.parseInt(responses.get(NR_NUMBER_PARAM));
-	    
+
 	    UserNR userNr = userNrService.findByUserIdAndNrNumber(userId, nrNumber);
-	    userNr.setStatus(true);
-	    userNrService.updateUserNR(userNr);
-	    
+
 	    responses.entrySet().removeIf(entry -> !entry.getKey().startsWith("question-"));
-	    
 	    if (responses.size() > 0) {
 	        for (Map.Entry<String, String> entry : responses.entrySet()) {
 	            String questionIdStr = entry.getKey().replace("question-", "");
@@ -125,16 +122,15 @@ public class QuestionController {
 	                Long questionId = Long.parseLong(questionIdStr);
 
 	                Questions question = questionService.getQuestionById(questionId);
-
 	                responsesService.addNewResponse(questionId, userId, entry.getValue());
 
 	                if (question.getCorrectAnwser().equals(entry.getValue())) {
 	                    correctCount++;
 	                }
 
-	                feedbackList.add(new String[] {
-	                    question.getEnunciation(), 
-	                    entry.getValue(),             
+	                feedbackList.add(new String[]{
+	                    question.getEnunciation(),
+	                    entry.getValue(),
 	                    question.getCorrectAnwser()
 	                });
 
@@ -144,19 +140,32 @@ public class QuestionController {
 	            }
 	        }
 	    }
-	    
-	    double scorePercentage = (double) correctCount / totalQuestions * 100;
 
-	    if (scorePercentage >= 60.0) {
-	        model.addAttribute("correctCount", correctCount);
-	        model.addAttribute("totalQuestions", totalQuestions);
-	        model.addAttribute("feedbackList", feedbackList);
-	        return "pages/thanks";
+
+	    double score = (double) correctCount / totalQuestions;
+	    System.out.println("Pontuação: " + score);
+
+	    if (score >= 0.6) {
+
+	        userNr.setStatus(true);
+	        userNrService.updateUserNR(userNr);
+	        model.addAttribute("sendEmail", true); 
 	    } else {
+	        model.addAttribute("sendEmail", false); 
 	        redirectAttributes.addFlashAttribute("errorMessage", "Você não atingiu a pontuação mínima de 60%. Por favor, refaça o questionário.");
-	        return "redirect:/question/"+nrNumber; 
+	        return "redirect:/question/"+nrNumber;
 	    }
+
+	    model.addAttribute("correctCount", correctCount);
+	    model.addAttribute("totalQuestions", totalQuestions);
+	    model.addAttribute("feedbackList", feedbackList);
+	    model.addAttribute("userId", userService.getUserLogged().getId());
+	    model.addAttribute("username",userService.getUserById(userId).getName()+" "+userService.getUserById(userId).getLastname());
+	    model.addAttribute(NR_NUMBER_PARAM, nrNumber);
+	    
+	    return "pages/thanks";
 	}
+
 
 
 

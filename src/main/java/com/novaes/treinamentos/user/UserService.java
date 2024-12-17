@@ -86,7 +86,7 @@ public class UserService {
 		}
 	}
 	
-	protected User getUserById(Long idUser) {
+	public User getUserById(Long idUser) {
 		return userRepository.findById(idUser).orElseThrow(UserNotFoundException :: new);
 	}
 	protected User getUserByLogin(String login) {
