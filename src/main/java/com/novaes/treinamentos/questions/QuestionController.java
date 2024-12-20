@@ -32,6 +32,7 @@ public class QuestionController {
 	private final ResponsesService responsesService;
 	private static final String NRHOMEPAGE = "redirect:/Nr";
 	private static final String NR_NUMBER_PARAM = "nrNumber";
+	private static final String USER_ID_PARAM = "userId";
 	
 	public QuestionController(QuestionService questionService,NrService nrService,UserNrService userNrService,UserService userService,ResponsesService responsesService) {
 		this.questionService=questionService;
@@ -53,7 +54,7 @@ public class QuestionController {
 	public String questionByNR(@PathVariable int nrNumber, Model model) {
 		User user =  userService.getUserLogged();
 	    model.addAttribute(NR_NUMBER_PARAM, nrNumber);
-	    model.addAttribute("userId", userService.getUserLogged().getId());
+	    model.addAttribute(USER_ID_PARAM, userService.getUserLogged().getId());
 	    model.addAttribute("username",user.getName()+" "+user.getLastname());
 	    model.addAttribute("listQuestions", questionService.getQuestionsByNRNumber(nrNumber));
 	    
@@ -108,7 +109,7 @@ public class QuestionController {
 	    int totalQuestions = 0;
 	    List<String[]> feedbackList = new ArrayList<>();
 
-	    Long userId = Long.parseLong(responses.get("userId"));
+	    Long userId = Long.parseLong(responses.get(USER_ID_PARAM));
 	    Integer nrNumber = Integer.parseInt(responses.get(NR_NUMBER_PARAM));
 
 	    UserNR userNr = userNrService.findByUserIdAndNrNumber(userId, nrNumber);
@@ -159,7 +160,7 @@ public class QuestionController {
 	    model.addAttribute("correctCount", correctCount);
 	    model.addAttribute("totalQuestions", totalQuestions);
 	    model.addAttribute("feedbackList", feedbackList);
-	    model.addAttribute("userId", userService.getUserLogged().getId());
+	    model.addAttribute(USER_ID_PARAM, userService.getUserLogged().getId());
 	    model.addAttribute("username",userService.getUserById(userId).getName()+" "+userService.getUserById(userId).getLastname());
 	    model.addAttribute(NR_NUMBER_PARAM, nrNumber);
 	    

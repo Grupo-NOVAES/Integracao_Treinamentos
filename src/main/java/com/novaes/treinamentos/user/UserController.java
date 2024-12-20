@@ -40,6 +40,7 @@ public class UserController {
 	
 	private static final String USERHOMEPAGE = "redirect:/user/home";
 	private static final String USERINFOPAGE = "redirect:/user/infoClient/";
+	private static final String ERROR_MESSAGE = "errorMessage";
 	
 	public UserController(UserService userService,UserNrService userNrService,OfficeService officeService,QuestionService questionService,ResponsesService responsesService) {
 		this.userService=userService;
@@ -115,19 +116,19 @@ public class UserController {
 	                           RedirectAttributes redirectAttributes) {
 
 	    if (!password.equals(confirmPassword)) {
-	        redirectAttributes.addFlashAttribute("errorMessage", "As senhas não coincidem!");
+	        redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "As senhas não coincidem!");
 	        return USERHOMEPAGE;
 	    }
 	    
 	    if (userService.existsByLogin(login)) {
-	    	redirectAttributes.addFlashAttribute("errorMessage", "Login já cadastrado!");
-	        return "redirect:/user/home";
+	    	redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "Login já cadastrado!");
+	        return USERHOMEPAGE;
 	    }
 
 	    try {
 	        Office officeFound = officeService.findOfficeByName(office);
 	        if (officeFound == null) {
-	            redirectAttributes.addFlashAttribute("errorMessage", "Cargo inválido!");
+	            redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "Cargo inválido!");
 	            return USERHOMEPAGE;
 	        }
 
@@ -140,16 +141,16 @@ public class UserController {
 	        }
 
 	    } catch (ThisCPFAlreadyExistException e) {
-	        redirectAttributes.addFlashAttribute("errorMessage", "CPF já cadastrado ou invalido!");
+	        redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "CPF já cadastrado ou invalido!");
 	        return USERHOMEPAGE;
 	    } catch (ThisRGAlreadyExistException e) {
-	        redirectAttributes.addFlashAttribute("errorMessage", "RG já cadastrado ou invalido!");
+	        redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "RG já cadastrado ou invalido!");
 	        return USERHOMEPAGE;
 	    } catch (IllegalArgumentException e) {
-	        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+	        redirectAttributes.addFlashAttribute(ERROR_MESSAGE, e.getMessage());
 	        return USERHOMEPAGE;
 	    } catch (Exception e) {
-	        redirectAttributes.addFlashAttribute("errorMessage", "Erro inesperado: " + e.getMessage());
+	        redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "Erro inesperado: " + e.getMessage());
 	        return USERHOMEPAGE;
 	    }
 

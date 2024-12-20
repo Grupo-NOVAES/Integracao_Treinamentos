@@ -81,23 +81,35 @@ public class UserService {
 	
 
 	public String unformatedCPF(String cpf) {
-		if (cpf == null) return null;
-        return cpf.replaceAll("\\D", "");
+		if (cpf == null) {
+			return null;
+		}else {
+			return cpf.replaceAll("\\D", "");
+		}
 	}
 	
 	public String unformatedRG(String rg) {
-		if (rg == null) return null;
-        return rg.replaceAll("\\D", "");
+		if (rg == null) {
+			return null;
+		}else {
+			return rg.replaceAll("\\D", "");
+		}
 	}
 	
 	public String formatedCPF(String cpfNumber) {
-		if (cpfNumber == null || cpfNumber.length() != 11) return cpfNumber;
-        return cpfNumber.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+		if (cpfNumber == null || cpfNumber.length() != 11) {
+			return cpfNumber;
+		}else {
+			return cpfNumber.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+		}
 	}
 	
 	public String formatedRG(String rgNumber) {
-		if (rgNumber == null || rgNumber.length() != 9) return rgNumber;
-		return rgNumber.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{1})", "$1.$2.$3-$4");
+		if (rgNumber == null || rgNumber.length() != 9) {
+			return rgNumber;
+		} else {
+			return rgNumber.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{1})", "$1.$2.$3-$4");
+		}
 	}
 	
 	public List<User> getUsersByOfficeId(Long officeId) {
@@ -117,11 +129,11 @@ public class UserService {
 			throw new IllegalArgumentException("Todos os campos são obrigatórios!");
 		}
 		
-		if (userRepository.existsByCPF(cpf) || verifyCPF(cpf)) {
+		if (userRepository.existsBycpf(cpf) || verifyCPF(cpf)) {
 			throw new ThisCPFAlreadyExistException();
 		}
 		
-		if (userRepository.existsByRG(rg)) {
+		if (userRepository.existsByrg(rg)) {
 			throw new ThisRGAlreadyExistException();
 		}
 		

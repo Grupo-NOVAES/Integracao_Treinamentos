@@ -21,9 +21,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	List<User> findByRole(Role role);
 	
-	boolean existsByCPF(String cpf);
+	boolean existsBycpf(String cpf);
 
-    boolean existsByRG(String rg);
+    boolean existsByrg(String rg);
     
     boolean existsByLogin(String login);
 	

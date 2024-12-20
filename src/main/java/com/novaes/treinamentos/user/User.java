@@ -34,9 +34,9 @@ public class User implements UserDetails {
 
     private String password;
     
-    private String CPF;
+    private String cpf;
 
-	private String RG;
+	private String rg;
     
     private String phoneNumber;
 
@@ -57,19 +57,19 @@ public class User implements UserDetails {
 	}
 	
 	public String getCPF() {
-		return CPF;
+		return cpf;
 	}
 
 	public void setCPF(String cPF) {
-		CPF = cPF;
+		cpf = cPF;
 	}
 
 	public String getRG() {
-		return RG;
+		return rg;
 	}
 
 	public void setRG(String rG) {
-		RG = rG;
+		rg = rG;
 	}
 
 	private boolean enabled;
