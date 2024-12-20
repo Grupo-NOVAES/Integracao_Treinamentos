@@ -34,6 +34,10 @@ public class User implements UserDetails {
 
     private String password;
     
+    private String CPF;
+
+	private String RG;
+    
     private String phoneNumber;
 
     public String getPhoneNumber() {
@@ -50,6 +54,22 @@ public class User implements UserDetails {
 
 	public void setOffice(Office office) {
 		this.office = office;
+	}
+	
+	public String getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(String cPF) {
+		CPF = cPF;
+	}
+
+	public String getRG() {
+		return RG;
+	}
+
+	public void setRG(String rG) {
+		RG = rG;
 	}
 
 	private boolean enabled;

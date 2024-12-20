@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.office.OfficeService;
@@ -102,24 +103,61 @@ public class UserController {
 
 	
 	@PostMapping
-	public String addNewClient(@RequestParam(value = "name" , required = true) String name,
-			 @RequestParam(value = "lastname" , required = true) String lastname,
-			 @RequestParam(value = "login" , required = true) String login,
-			 @RequestParam(value = "password" , required = true) String password,
-			 @RequestParam(value = "confirmPassword" , required = true) String confirmPassword,
-			 @RequestParam(value = "office" , required = true) String office,
-			 @RequestParam(value = "phoneNumber" , required = true) String phoneNumber) {
-		
-	    if(password.equals(confirmPassword)) {
-	    	Office officeFound = officeService.findOfficeByName(office);
-	    	User user = userService.createUser(name,lastname,phoneNumber,login,password,Role.USER,officeFound);
-		    if(!ObjectUtils.isEmpty(user)) {
-		    	userService.addUser(user);
-		    	userNrService.vinculedUserToNr(user, user.getOffice());
-		    }
+	public String addNewClient(@RequestParam(value = "name", required = true) String name,
+	                           @RequestParam(value = "lastname", required = true) String lastname,
+	                           @RequestParam(value = "login", required = true) String login,
+	                           @RequestParam(value = "password", required = true) String password,
+	                           @RequestParam(value = "confirmPassword", required = true) String confirmPassword,
+	                           @RequestParam(value = "office", required = true) String office,
+	                           @RequestParam(value = "phoneNumber", required = true) String phoneNumber,
+	                           @RequestParam(value = "cpf", required = true) String cpf,
+	                           @RequestParam(value = "rg", required = true) String rg,
+	                           RedirectAttributes redirectAttributes) {
+
+	    if (!password.equals(confirmPassword)) {
+	        redirectAttributes.addFlashAttribute("errorMessage", "As senhas não coincidem!");
+	        return USERHOMEPAGE;
 	    }
+	    
+	    if (userService.existsByLogin(login)) {
+	    	redirectAttributes.addFlashAttribute("errorMessage", "Login já cadastrado!");
+	        return "redirect:/user/home";
+	    }
+
+	    try {
+	        Office officeFound = officeService.findOfficeByName(office);
+	        if (officeFound == null) {
+	            redirectAttributes.addFlashAttribute("errorMessage", "Cargo inválido!");
+	            return USERHOMEPAGE;
+	        }
+
+	        User user = userService.createUser(name, lastname, phoneNumber, cpf, rg, login, password, Role.USER, officeFound);
+
+	        if (user != null) {
+	            userService.addUser(user);
+	            userNrService.vinculedUserToNr(user, user.getOffice());
+	            return USERHOMEPAGE;
+	        }
+
+	    } catch (ThisCPFAlreadyExistException e) {
+	        redirectAttributes.addFlashAttribute("errorMessage", "CPF já cadastrado ou invalido!");
+	        return USERHOMEPAGE;
+	    } catch (ThisRGAlreadyExistException e) {
+	        redirectAttributes.addFlashAttribute("errorMessage", "RG já cadastrado ou invalido!");
+	        return USERHOMEPAGE;
+	    } catch (IllegalArgumentException e) {
+	        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+	        return USERHOMEPAGE;
+	    } catch (Exception e) {
+	        redirectAttributes.addFlashAttribute("errorMessage", "Erro inesperado: " + e.getMessage());
+	        return USERHOMEPAGE;
+	    }
+
 	    return USERHOMEPAGE;
 	}
+
+
+
 
 	
 	@PostMapping("/updateUser")

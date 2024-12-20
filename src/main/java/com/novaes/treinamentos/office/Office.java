@@ -21,6 +21,8 @@ public class Office {
 	
 	private String specialization;
 	
+	private String description;
+	
 	@ManyToMany
     @JoinTable(
         name = "office_nr",
@@ -62,6 +64,13 @@ public class Office {
 	        this.listNR.removeIf(nr -> nr.getId().equals(idNr));
 	    }
 	}
+	
+	public String getDescription() {
+		return this.description;
+	}
 
+	public void setDescription(String desciption) {
+		this.description=desciption;
+	}
 	
 }

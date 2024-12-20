@@ -19,6 +19,7 @@
 const btnOptions = document.getElementById("btnOptionUser").addEventListener('click',showModalOptionsUser)
 
 let selectedUserId = null;
+let selectedNrId = null;
 let modalVisible = false;
 
 
@@ -34,11 +35,12 @@ document.addEventListener('click', function(event) {
 });
 
 
-function showModalOptionsUser(button){
+function showModalOptionsUser(button) {
   const options = document.getElementById('options');
   const rect = button.getBoundingClientRect();
-  selectedUserId = button.closest('tr').getAttribute('data-id');
-  userIdFormInput.value = selectedUserId;
+  selectedUserId = button.closest('tr').getAttribute('data-iduser'); // Corrigido para data-iduser
+  selectedNrId = button.closest('tr').getAttribute('data-nrnumber');
+  document.getElementById('userIdFormInput').value = selectedUserId;
 
   const marginLeft = 125;
   const marginTop = -40;
@@ -53,6 +55,7 @@ function showModalOptionsUser(button){
   modalVisible = true;
 }
 
+
 function hideModalOptionsUser(){
   const options = document.getElementById('options');
   options.style.display="none";
@@ -62,7 +65,7 @@ function hideModalOptionsUser(){
 
 
 function redirectToInfo(){
-  window.location.href="/user/infoClient/"+selectedUserId;
+  window.location.href="/user/infoClient/"+selectedUserId+"/"+selectedNrId;
 }
 
 function redirectToCertificados(){

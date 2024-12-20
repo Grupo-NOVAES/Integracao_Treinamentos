@@ -30,13 +30,20 @@
         <div class="content">
           <div class="table">
             <table aria-hidden="true">
-              <tr th:each="userNr: ${listNrUser}">
+              <tr th:each="userNr: ${listNrUser}"
+                  th:data-iduser="${infoUser.id}" 
+                  th:data-nrnumber="${userNr.nr.number}">
                 <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></i></td>
                 <td th:text="${userNr.nr.number}"></td>
                 <td th:text="${userNr.nr.title}"></td>
                 <td>
+                  <img th:if="${userNr.isStatus}" th:src="@{/img/icons/correct.png}" alt="icon" width="35px" height="35px">
+                  <img th:unless="${userNr.isStatus}" th:src="@{/img/icons/incorrect.png}" alt="icon" width="30px" height="30px">
+                </td>
+                <td>
                   <button
                     onclick="showModalOptionsUser(this)"
+                    
                     style="
                       border: none;
                       height: 40px;
@@ -46,12 +53,6 @@
                     >
                     <img th:src="@{/img/icons/3dots.png}" alt="3dots" height="25">
                   </button>
-                  <!-- <button 
-                    class="linkResponseList" 
-                    th:data-iduser="${infoUser.id}" 
-                    th:data-nrnumber="${userNr.nr.number}">
-                    Respostas
-                  </button> -->
                 </td>
               </tr>
             </table>
@@ -64,7 +65,7 @@
 
         <div class="options" id="options">
           <button class="btnOption" id="btnOptionUser" onclick="redirectToInfo()">
-            <i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Informações
+            <i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Respostas
           </button>
           <form th:action="@{/manager/userCertificate.html}" class="containerFromDeleteUser">
             <input id="userIdFormInput" hidden th:name="userId" value="">
