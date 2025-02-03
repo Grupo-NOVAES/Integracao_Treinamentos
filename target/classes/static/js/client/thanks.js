@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const usernameInput = document.getElementById("username");
-    const form = document.getElementById("formResponses");
   
       const username = usernameInput.value;
   

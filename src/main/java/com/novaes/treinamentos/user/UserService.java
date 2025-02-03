@@ -154,14 +154,14 @@ public class UserService {
 			throw new IllegalArgumentException("Todos os campos são obrigatórios!");
 		}
 		
-//		if (userRepository.existsBycpf(cpf) || verifyCPF(cpf)) {
-//			throw new ThisCPFAlreadyExistException();
-//		}
-		
-//		if (userRepository.existsByrg(rg)) {
-//			throw new ThisRGAlreadyExistException();
-//		}
-		System.out.println("Usuario sendo adicionado!");
+
+		if (userRepository.existsBycpf(cpf) || verifyCPF(cpf)) { 
+			throw new ThisCPFAlreadyExistException();
+		}
+		if (userRepository.existsByrg(rg)) {
+			throw new ThisRGAlreadyExistException();
+		 }
+		  
 		User user = new User();
 		user.setName(name);
 		user.setLastname(lastname);
@@ -246,7 +246,7 @@ public class UserService {
 		
 	}
 	
-	public ResponseEntity<ByteArrayResource> generateCertificate(Map<String, String> placeholders,Resource resource) throws Exception {
+	public ResponseEntity<?> generateCertificate(Map<String, String> placeholders,Resource resource) throws Exception {
 
         if (!resource.exists()) {
             throw new RuntimeException("Modelo não encontrado: " + resource.getFilename());
@@ -284,11 +284,9 @@ public class UserService {
         for (XSLFTextParagraph paragraph : textShape.getTextParagraphs()) {
             for (XSLFTextRun textRun : paragraph.getTextRuns()) {
                 String text = textRun.getRawText();
-                System.out.println("Texto encontrado: " + text);
 
                 for (Map.Entry<String, String> entry : placeholders.entrySet()) {
                     if (text.contains(entry.getKey())) {
-                        System.out.println("Substituindo " + entry.getKey() + " por " + entry.getValue());
                         text = text.replace(entry.getKey(), entry.getValue());
                         textRun.setText(text);
                     }

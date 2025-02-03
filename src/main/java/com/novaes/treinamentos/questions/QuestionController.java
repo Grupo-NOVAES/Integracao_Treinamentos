@@ -144,7 +144,6 @@ public class QuestionController {
 
 
 	    double score = (double) correctCount / totalQuestions;
-	    System.out.println("Pontuação: " + score);
 
 	    if (score >= 0.6) {
 
