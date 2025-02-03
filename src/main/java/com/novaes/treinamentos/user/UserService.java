@@ -1,18 +1,42 @@
 package com.novaes.treinamentos.user;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
+import org.apache.poi.xslf.usermodel.XSLFShape;
+import org.apache.poi.xslf.usermodel.XSLFSlide;
+import org.apache.poi.xslf.usermodel.XSLFTable;
+import org.apache.poi.xslf.usermodel.XSLFTableCell;
+import org.apache.poi.xslf.usermodel.XSLFTableRow;
+import org.apache.poi.xslf.usermodel.XSLFTextParagraph;
+import org.apache.poi.xslf.usermodel.XSLFTextRun;
+import org.apache.poi.xslf.usermodel.XSLFTextShape;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.responses.ResponsesRepository;
+import com.novaes.treinamentos.usernr.UserNR;
 import com.novaes.treinamentos.usernr.UserNRRepository;
 
 @Service
@@ -126,17 +150,18 @@ public class UserService {
 	
 	public User createUser(String name, String lastname, String phoneNumber, String cpf, String rg, String login, String password, Role role, Office office) {
 		if (cpf == null || cpf.isEmpty() || rg == null || rg.isEmpty() || name == null || name.isEmpty() || lastname == null || lastname.isEmpty() || login == null || login.isEmpty() || password == null || password.isEmpty()) {
+			System.out.println("campo vazio");
 			throw new IllegalArgumentException("Todos os campos são obrigatórios!");
 		}
 		
-		if (userRepository.existsBycpf(cpf) || verifyCPF(cpf)) {
-			throw new ThisCPFAlreadyExistException();
-		}
+//		if (userRepository.existsBycpf(cpf) || verifyCPF(cpf)) {
+//			throw new ThisCPFAlreadyExistException();
+//		}
 		
-		if (userRepository.existsByrg(rg)) {
-			throw new ThisRGAlreadyExistException();
-		}
-		
+//		if (userRepository.existsByrg(rg)) {
+//			throw new ThisRGAlreadyExistException();
+//		}
+		System.out.println("Usuario sendo adicionado!");
 		User user = new User();
 		user.setName(name);
 		user.setLastname(lastname);
@@ -185,6 +210,116 @@ public class UserService {
             userRepository.save(user);
         } else {
             throw new OnlyClientUsersCanBeActivatedException();
+        }
+    }
+	
+	public ResponseEntity<?> downloadCertificate(Long idUser,int nrNumber) throws Exception{
+		UserNR userNR = userNrRepository.findByUserIdAndNrNumber(idUser,nrNumber);
+		
+        if(userNR.isStatus()) {
+        	User user = getUserById(idUser);
+    		
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("{{NOME}}", user.getName()+" "+user.getLastname());
+            placeholders.put("{{RG}}", user.getRG());
+            placeholders.put("{{CPF}}", user.getCPF());
+            placeholders.put("{{DATA}}", getDateFormated());
+            
+        	return generateCertificate(placeholders, selectModelNR(nrNumber));
+        }else {
+        	return ResponseEntity
+        			.status(HttpStatus.BAD_REQUEST)
+        			.body("This user did not complete this NR");
+        }
+	}
+	
+	public Resource selectModelNR(int nrNumber) {
+		
+		return new ClassPathResource("models/"+"CertificateNR"+nrNumber+".pptx");
+	}
+	
+	public String getDateFormated() {
+		Date data =  new Date();
+		Locale local = new Locale("pt","BR");
+		DateFormat formato = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy",local);
+		return formato.format(data);
+		
+	}
+	
+	public ResponseEntity<ByteArrayResource> generateCertificate(Map<String, String> placeholders,Resource resource) throws Exception {
+
+        if (!resource.exists()) {
+            throw new RuntimeException("Modelo não encontrado: " + resource.getFilename());
+        }
+
+        try (InputStream inputStream = resource.getInputStream();
+             XMLSlideShow pptx = new XMLSlideShow(inputStream)) {
+
+            for (XSLFSlide slide : pptx.getSlides()) {
+                for (XSLFShape shape : slide.getShapes()) {
+                    if (shape instanceof XSLFTextShape) {
+                        replacePlaceholdersInTextShape((XSLFTextShape) shape, placeholders);
+                    } else if (shape instanceof XSLFTable) {
+                        replacePlaceholdersInTable((XSLFTable) shape, placeholders);
+                    }
+                }
+            }
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            pptx.write(outputStream);
+
+            ByteArrayResource byteArrayResource = new ByteArrayResource(outputStream.toByteArray());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename());
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(byteArrayResource);
+        }
+    }
+
+    private void replacePlaceholdersInTextShape(XSLFTextShape textShape, Map<String, String> placeholders) {
+        for (XSLFTextParagraph paragraph : textShape.getTextParagraphs()) {
+            for (XSLFTextRun textRun : paragraph.getTextRuns()) {
+                String text = textRun.getRawText();
+                System.out.println("Texto encontrado: " + text);
+
+                for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                    if (text.contains(entry.getKey())) {
+                        System.out.println("Substituindo " + entry.getKey() + " por " + entry.getValue());
+                        text = text.replace(entry.getKey(), entry.getValue());
+                        textRun.setText(text);
+                    }
+                }
+            }
+        }
+    }
+
+    private void replacePlaceholdersInTable(XSLFTable table, Map<String, String> placeholders) {
+        
+        for (XSLFTableRow row : table.getRows()) {
+           
+            for (XSLFTableCell cell : row.getCells()) {
+               
+                for (XSLFTextParagraph paragraph : cell.getTextParagraphs()) {
+                    
+                    for (XSLFTextRun textRun : paragraph.getTextRuns()) {
+                        String text = textRun.getRawText();
+                        System.out.println("Texto na tabela: " + text);
+
+                        
+                        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                            if (text.contains(entry.getKey())) {
+                                System.out.println("Substituindo " + entry.getKey() + " por " + entry.getValue());
+                                text = text.replace(entry.getKey(), entry.getValue());
+                                textRun.setText(text);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 	

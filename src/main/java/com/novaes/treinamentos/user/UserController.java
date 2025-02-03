@@ -3,8 +3,12 @@ package com.novaes.treinamentos.user;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -80,6 +84,11 @@ public class UserController {
 		return "pages/manager/userdata";
 	}
 	
+	@GetMapping("/downloadCertify/{idUser}/{nrNumber}")
+    public ResponseEntity<?> downloadCertify(@PathVariable Long idUser,@PathVariable int nrNumber, Model model) throws Exception {
+            return userService.downloadCertificate(idUser, nrNumber);
+    }
+	
 	@GetMapping("/infoClient/{idUser}/{nrNumber}")
 	public String getResponseByUserAndNr(@PathVariable Long idUser, @PathVariable int nrNumber, Model model) {
 	    List<Questions> questions = questionService.getQuestionsByNRNumber(nrNumber);
@@ -119,12 +128,10 @@ public class UserController {
 	        redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "As senhas não coincidem!");
 	        return USERHOMEPAGE;
 	    }
-	    
 	    if (userService.existsByLogin(login)) {
 	    	redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "Login já cadastrado!");
 	        return USERHOMEPAGE;
 	    }
-
 	    try {
 	        Office officeFound = officeService.findOfficeByName(office);
 	        if (officeFound == null) {
@@ -135,6 +142,7 @@ public class UserController {
 	        User user = userService.createUser(name, lastname, phoneNumber, cpf, rg, login, password, Role.USER, officeFound);
 
 	        if (user != null) {
+	        	
 	            userService.addUser(user);
 	            userNrService.vinculedUserToNr(user, user.getOffice());
 	            return USERHOMEPAGE;

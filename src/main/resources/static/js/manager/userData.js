@@ -40,7 +40,6 @@ function showModalOptionsUser(button) {
   const rect = button.getBoundingClientRect();
   selectedUserId = button.closest('tr').getAttribute('data-iduser'); // Corrigido para data-iduser
   selectedNrId = button.closest('tr').getAttribute('data-nrnumber');
-  document.getElementById('userIdFormInput').value = selectedUserId;
 
   const marginLeft = 125;
   const marginTop = -40;
@@ -70,4 +69,8 @@ function redirectToInfo(){
 
 function redirectToCertificados(){
   window.location.href="/user/infoClient/"+selectedUserId;
+}
+
+function downloadCertificate() {
+  window.location.href=`/user/downloadCertify/${selectedUserId}/${selectedNrId}`
 }

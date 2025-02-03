@@ -67,12 +67,9 @@
           <button class="btnOption" id="btnOptionUser" onclick="redirectToInfo()">
             <i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Respostas
           </button>
-          <form th:action="@{/manager/userCertificate.html}" class="containerFromDeleteUser">
-            <input id="userIdFormInput" hidden th:name="userId" value="">
-            <button class="btnOptionDelete" id="btnOptionUser">
-              <i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Certificados
-            </button>
-          </form>
+          <button class="btnOption" onclick="downloadCertificate()">
+            <i class="fa-solid fa-eye fa-lg" style="color: #007b8f;"></i> Certificado
+          </button>
           
       </div>
       </main>
