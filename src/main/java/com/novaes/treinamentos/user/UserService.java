@@ -245,80 +245,50 @@ public class UserService {
 		
 	}
 	
-	public ResponseEntity<?> generateCertificate(Map<String, String> placeholders,Resource resource) throws Exception {
+	public ResponseEntity<?> generateCertificate(Map<String, String> placeholders, Resource resource) throws Exception {
+	    if (!resource.exists()) {
+	        throw new ModelNotFoundException(resource);
+	    }
 
-        if (!resource.exists()) {
-            throw new ModelNotFoundException(resource);
-        }
+	    try (InputStream inputStream = resource.getInputStream();
+	         XMLSlideShow pptx = new XMLSlideShow(inputStream);
+	         ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+	        
+	        pptx.getSlides().forEach(slide -> processSlide(slide, placeholders));
+	        
+	        pptx.write(outputStream);
 
-        try (InputStream inputStream = resource.getInputStream();
-             XMLSlideShow pptx = new XMLSlideShow(inputStream)) {
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename());
 
-            for (XSLFSlide slide : pptx.getSlides()) {
-                for (XSLFShape shape : slide.getShapes()) {
-                    if (shape instanceof XSLFTextShape) {
-                        replacePlaceholdersInTextShape((XSLFTextShape) shape, placeholders);
-                    } else if (shape instanceof XSLFTable) {
-                        replacePlaceholdersInTable((XSLFTable) shape, placeholders);
-                    }
-                }
-            }
+	        return ResponseEntity.ok()
+	                .headers(headers)
+	                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	                .body(new ByteArrayResource(outputStream.toByteArray()));
+	    }
+	}
 
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            pptx.write(outputStream);
+	private void processSlide(XSLFSlide slide, Map<String, String> placeholders) {
+	    slide.getShapes().forEach(shape -> {
+	        if (shape instanceof XSLFTextShape) {
+	            replacePlaceholders(((XSLFTextShape) shape).getTextParagraphs(), placeholders);
+	        } else if (shape instanceof XSLFTable) {
+	            ((XSLFTable) shape).getRows()
+	                .forEach(row -> row.getCells()
+	                .forEach(cell -> replacePlaceholders(cell.getTextParagraphs(), placeholders)));
+	        }
+	    });
+	}
 
-            ByteArrayResource byteArrayResource = new ByteArrayResource(outputStream.toByteArray());
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename());
-
-            return ResponseEntity.ok()
-                    .headers(headers)
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(byteArrayResource);
-        }
-    }
-
-    private void replacePlaceholdersInTextShape(XSLFTextShape textShape, Map<String, String> placeholders) {
-        for (XSLFTextParagraph paragraph : textShape.getTextParagraphs()) {
-            for (XSLFTextRun textRun : paragraph.getTextRuns()) {
-                String text = textRun.getRawText();
-
-                for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-                    if (text.contains(entry.getKey())) {
-                        text = text.replace(entry.getKey(), entry.getValue());
-                        textRun.setText(text);
-                    }
-                }
-            }
-        }
-    }
-
-    private void replacePlaceholdersInTable(XSLFTable table, Map<String, String> placeholders) {
-        
-        for (XSLFTableRow row : table.getRows()) {
-           
-            for (XSLFTableCell cell : row.getCells()) {
-               
-                for (XSLFTextParagraph paragraph : cell.getTextParagraphs()) {
-                    
-                    for (XSLFTextRun textRun : paragraph.getTextRuns()) {
-                        String text = textRun.getRawText();
-                        System.out.println("Texto na tabela: " + text);
-
-                        
-                        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-                            if (text.contains(entry.getKey())) {
-                                System.out.println("Substituindo " + entry.getKey() + " por " + entry.getValue());
-                                text = text.replace(entry.getKey(), entry.getValue());
-                                textRun.setText(text);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+	private void replacePlaceholders(List<XSLFTextParagraph> paragraphs, Map<String, String> placeholders) {
+	    paragraphs.forEach(paragraph -> 
+	        paragraph.getTextRuns().forEach(textRun -> 
+	            placeholders.forEach((key, value) -> 
+	                textRun.setText(textRun.getRawText().replace(key, value))
+	            )
+	        )
+	    );
+	}
 	
 	@Scheduled(fixedRate = 3600000)
     protected void deactivateExpiredAccounts() {
