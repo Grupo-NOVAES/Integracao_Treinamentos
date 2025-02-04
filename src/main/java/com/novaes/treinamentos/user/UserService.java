@@ -121,20 +121,21 @@ public class UserService {
 	}
 	
 	public String formatedCPF(String cpfNumber) {
-		if (cpfNumber == null || cpfNumber.length() != 11) {
-			return cpfNumber;
-		}else {
-			return cpfNumber.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
-		}
+	    if (cpfNumber == null || cpfNumber.length() != 11) {
+	        return cpfNumber;
+	    } else {
+	        return cpfNumber.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d)", "$1.$2.$3-$4");
+	    }
 	}
 	
 	public String formatedRG(String rgNumber) {
-		if (rgNumber == null || rgNumber.length() != 9) {
-			return rgNumber;
-		} else {
-			return rgNumber.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{1})", "$1.$2.$3-$4");
-		}
+	    if (rgNumber == null || rgNumber.length() != 9) {
+	        return rgNumber;
+	    } else {
+	        return rgNumber.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d)", "$1.$2.$3-$4");
+	    }
 	}
+
 	
 	public List<User> getUsersByOfficeId(Long officeId) {
         return userRepository.findUsersByOfficeId(officeId);
@@ -270,10 +271,10 @@ public class UserService {
 
 	private void processSlide(XSLFSlide slide, Map<String, String> placeholders) {
 	    slide.getShapes().forEach(shape -> {
-	        if (shape instanceof XSLFTextShape) {
-	            replacePlaceholders(((XSLFTextShape) shape).getTextParagraphs(), placeholders);
-	        } else if (shape instanceof XSLFTable) {
-	            ((XSLFTable) shape).getRows()
+	        if (shape instanceof XSLFTextShape textShape) {
+	            replacePlaceholders(textShape.getTextParagraphs(), placeholders);
+	        } else if (shape instanceof XSLFTable table) {
+	            table.getRows()
 	                .forEach(row -> row.getCells()
 	                .forEach(cell -> replacePlaceholders(cell.getTextParagraphs(), placeholders)));
 	        }
