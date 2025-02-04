@@ -138,8 +138,14 @@ public class UserController {
 	            redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "Cargo inválido!");
 	            return USERHOMEPAGE;
 	        }
-
-	        User user = userService.createUser(name, lastname, phoneNumber, cpf, rg, login, password, Role.USER, officeFound);
+	        
+	        UserDTO userDto = new UserDTO();
+	        userDto.setName(name);
+	        userDto.setLastname(lastname);
+	        userDto.setLogin(login);
+	        userDto.setPassword(password);
+	        
+	        User user = userService.createUser(userDto, phoneNumber, cpf, rg, Role.USER, officeFound);
 
 	        if (user != null) {
 	        	

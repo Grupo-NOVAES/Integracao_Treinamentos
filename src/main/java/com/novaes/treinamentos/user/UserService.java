@@ -148,9 +148,8 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	public User createUser(String name, String lastname, String phoneNumber, String cpf, String rg, String login, String password, Role role, Office office) {
-		if (cpf == null || cpf.isEmpty() || rg == null || rg.isEmpty() || name == null || name.isEmpty() || lastname == null || lastname.isEmpty() || login == null || login.isEmpty() || password == null || password.isEmpty()) {
-			System.out.println("campo vazio");
+	public User createUser(UserDTO usetDto, String phoneNumber, String cpf, String rg, Role role, Office office) {
+		if (cpf == null || cpf.isEmpty() || rg == null || rg.isEmpty() || usetDto.getName() == null || usetDto.getName().isEmpty() || usetDto.getLastname() == null || usetDto.getLastname().isEmpty() || usetDto.getLogin() == null || usetDto.getLogin().isEmpty() || usetDto.getPassword() == null || usetDto.getPassword().isEmpty()) {
 			throw new IllegalArgumentException("Todos os campos são obrigatórios!");
 		}
 		
@@ -163,14 +162,14 @@ public class UserService {
 		 }
 		  
 		User user = new User();
-		user.setName(name);
-		user.setLastname(lastname);
+		user.setName(usetDto.getName());
+		user.setLastname(usetDto.getLastname());
 		user.setPhoneNumber(phoneNumber);
-		user.setLogin(login);
+		user.setLogin(usetDto.getLogin());
 		user.setCPF(cpf);
 		user.setRG(rg);
 		user.setRole(role);
-		user.setPassword(passwordEncoder.encode(password));
+		user.setPassword(passwordEncoder.encode(usetDto.getPassword()));
 		user.setOffice(office);
 
 		return user;
@@ -249,7 +248,7 @@ public class UserService {
 	public ResponseEntity<?> generateCertificate(Map<String, String> placeholders,Resource resource) throws Exception {
 
         if (!resource.exists()) {
-            throw new RuntimeException("Modelo não encontrado: " + resource.getFilename());
+            throw new ModelNotFoundException(resource);
         }
 
         try (InputStream inputStream = resource.getInputStream();
