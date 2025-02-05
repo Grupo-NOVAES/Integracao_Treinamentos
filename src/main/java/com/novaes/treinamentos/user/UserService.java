@@ -213,6 +213,21 @@ public class UserService {
         }
     }
 	
+	
+	
+	public Resource selectModelNR(int nrNumber) {
+		
+		return new ClassPathResource("models/"+"CertificateNR"+nrNumber+".pptx");
+	}
+	
+	public String getDateFormated() {
+		Date data =  new Date();
+		Locale local = new Locale("pt","BR");
+		DateFormat formato = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy",local);
+		return formato.format(data);
+		
+	}
+	
 	public ResponseEntity<?> downloadCertificate(Long idUser,int nrNumber) throws Exception{
 		UserNR userNR = userNrRepository.findByUserIdAndNrNumber(idUser,nrNumber);
 		
@@ -231,19 +246,6 @@ public class UserService {
         			.status(HttpStatus.BAD_REQUEST)
         			.body("This user did not complete this NR");
         }
-	}
-	
-	public Resource selectModelNR(int nrNumber) {
-		
-		return new ClassPathResource("models/"+"CertificateNR"+nrNumber+".pptx");
-	}
-	
-	public String getDateFormated() {
-		Date data =  new Date();
-		Locale local = new Locale("pt","BR");
-		DateFormat formato = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy",local);
-		return formato.format(data);
-		
 	}
 	
 	public ResponseEntity<?> generateCertificate(Map<String, String> placeholders, Resource resource) throws Exception {
