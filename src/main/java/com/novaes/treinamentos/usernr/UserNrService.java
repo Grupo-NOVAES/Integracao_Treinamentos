@@ -1,10 +1,15 @@
 package com.novaes.treinamentos.usernr;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.novaes.treinamentos.alertUserNr.AlertUserNR;
+import com.novaes.treinamentos.alertUserNr.AlertUserNRService;
+import com.novaes.treinamentos.alertUserNr.AlertUserNrRepository;
 import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.user.User;
@@ -14,8 +19,11 @@ public class UserNrService {
 	
 	private final UserNRRepository userNrRepository;
 	
-	public UserNrService(UserNRRepository userNrRepository) {
+	private final AlertUserNRService alertUserNRService;
+	
+	public UserNrService(UserNRRepository userNrRepository,AlertUserNRService alertUserNRService) {
 		this.userNrRepository=userNrRepository;
+		this.alertUserNRService=alertUserNRService;
 	}
 	
 	public void vinculedUserToNr(User user , Office office) {
@@ -23,7 +31,7 @@ public class UserNrService {
             UserNR userNr = new UserNR();
             userNr.setUser(user);
             userNr.setNr(nr);
-            userNr.setStatus(false);
+            userNr.setStatus(Status.Valida);
 
             userNrRepository.save(userNr);
         });
@@ -33,7 +41,7 @@ public class UserNrService {
 		UserNR userNR = new UserNR();
 		userNR.setNr(nr);
 		userNR.setUser(user);
-		userNR.setStatus(false);
+		userNR.setStatus(Status.Valida);
 		userNrRepository.save(userNR);
 	}
 	
@@ -63,6 +71,27 @@ public class UserNrService {
 	
 	public void deleteUserNRByNrId(Long nrId) {
 		userNrRepository.deleteUserNrByNrId(nrId);
+	}
+	
+	@Scheduled(cron = "0 0 0 1 * ?")
+	public List<UserNR> VerifyIfSomeNRiSInvalidWithOutTime() {
+		List<UserNR> userNrList = new ArrayList<>();
+		userNrRepository.findAll().forEach(user -> {
+			if(user.getDateValidate() != null) {
+				if(user.getDateValidate().isBefore(LocalDate.now().minusMonths(1))) {
+					System.out.println("Mudando status para em Alerta!");
+					user.setStatus(Status.Alerta);
+				}else if(user.getDateValidate().isBefore(LocalDate.now())) {
+					System.out.println("Mudando status para Vencido!");
+					user.setStatus(Status.Vencida);
+				}
+				
+				alertUserNRService.createNewAlert(user.getUser().getUsername(), user.getNr().getNumber(), user.getStatus());
+				userNrList.add(user);
+			}
+		});
+		
+		return userNrList;
 	}
 
 }

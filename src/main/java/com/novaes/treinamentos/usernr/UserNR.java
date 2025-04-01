@@ -1,5 +1,8 @@
 package com.novaes.treinamentos.usernr;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.user.User;
 
@@ -22,7 +25,15 @@ public class UserNR {
 	@ManyToOne
 	private NR nr;
 	
-	private boolean status;
+	private LocalDate dateOfRealization;
+	
+	private LocalDate dateValidate;
+	
+	private Status status;
+	
+	private boolean isConcluded;
+
+	
 
 	public Long getId() {
 		return id;
@@ -48,12 +59,44 @@ public class UserNR {
 		this.nr = nr;
 	}
 
-	public boolean isStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(Status status) {
 		this.status = status;
+	}
+	
+	public LocalDate getDateResponse() {
+		return this.dateOfRealization;
+	}
+	
+	public void setDate(LocalDate dateOfRealization) {
+		this.dateOfRealization=dateOfRealization;
+	}
+	
+	public LocalDate getDateOfRealization() {
+		return dateOfRealization;
+	}
+
+	public void setDateOfRealization(LocalDate dateOfRealization) {
+		this.dateOfRealization = dateOfRealization;
+	}
+
+	public LocalDate getDateValidate() {
+		return dateValidate;
+	}
+
+	public void setDateValidate(LocalDate dateValidate) {
+		this.dateValidate = dateValidate;
+	}
+
+	public boolean isConcluded() {
+		return isConcluded;
+	}
+
+	public void setConcluded(boolean isConcluded) {
+		this.isConcluded = isConcluded;
 	}
 	
 	

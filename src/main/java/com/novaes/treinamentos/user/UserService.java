@@ -4,20 +4,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xslf.usermodel.XSLFShape;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.apache.poi.xslf.usermodel.XSLFTable;
-import org.apache.poi.xslf.usermodel.XSLFTableCell;
-import org.apache.poi.xslf.usermodel.XSLFTableRow;
 import org.apache.poi.xslf.usermodel.XSLFTextParagraph;
-import org.apache.poi.xslf.usermodel.XSLFTextRun;
 import org.apache.poi.xslf.usermodel.XSLFTextShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -36,6 +32,7 @@ import org.springframework.stereotype.Service;
 
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.responses.ResponsesRepository;
+import com.novaes.treinamentos.usernr.Status;
 import com.novaes.treinamentos.usernr.UserNR;
 import com.novaes.treinamentos.usernr.UserNRRepository;
 
@@ -96,12 +93,17 @@ public class UserService {
 	            segundoDigitoVerificador = 0;
 	        }
 
+	        System.out.println("CPF: " + cpf);
+	        System.out.println("Primeiro Dígito Calculado: " + primeiroDigitoVerificador);
+	        System.out.println("Segundo Dígito Calculado: " + segundoDigitoVerificador);
+
 	        return primeiroDigitoVerificador == Character.getNumericValue(cpf.charAt(9)) &&
 	               segundoDigitoVerificador == Character.getNumericValue(cpf.charAt(10));
 	    } catch (NumberFormatException e) {
 	        return false;
 	    }
 	}
+
 	
 
 	public String unformatedCPF(String cpf) {
@@ -153,15 +155,7 @@ public class UserService {
 		if (cpf == null || cpf.isEmpty() || rg == null || rg.isEmpty() || usetDto.getName() == null || usetDto.getName().isEmpty() || usetDto.getLastname() == null || usetDto.getLastname().isEmpty() || usetDto.getLogin() == null || usetDto.getLogin().isEmpty() || usetDto.getPassword() == null || usetDto.getPassword().isEmpty()) {
 			throw new IllegalArgumentException("Todos os campos são obrigatórios!");
 		}
-		
 
-		if (userRepository.existsBycpf(cpf) || verifyCPF(cpf)) { 
-			throw new ThisCPFAlreadyExistException();
-		}
-		if (userRepository.existsByrg(rg)) {
-			throw new ThisRGAlreadyExistException();
-		 }
-		  
 		User user = new User();
 		user.setName(usetDto.getName());
 		user.setLastname(usetDto.getLastname());
@@ -220,8 +214,8 @@ public class UserService {
 		return new ClassPathResource("models/"+"CertificateNR"+nrNumber+".pptx");
 	}
 	
-	public String getDateFormated() {
-		Date data =  new Date();
+	public String getDateFormated(Long idUser,int nrNumber) {
+		LocalDate data =  userNrRepository.findByUserIdAndNrNumber(idUser, nrNumber).getDateResponse();
 		Locale local = new Locale("pt","BR");
 		DateFormat formato = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy",local);
 		return formato.format(data);
@@ -231,20 +225,20 @@ public class UserService {
 	public ResponseEntity<?> downloadCertificate(Long idUser,int nrNumber) throws Exception{
 		UserNR userNR = userNrRepository.findByUserIdAndNrNumber(idUser,nrNumber);
 		
-        if(userNR.isStatus()) {
+        if(!(userNR.getStatus() == Status.Vencida)) {
         	User user = getUserById(idUser);
     		
             Map<String, String> placeholders = new HashMap<>();
             placeholders.put("{{NOME}}", user.getName()+" "+user.getLastname());
             placeholders.put("{{RG}}", user.getRG());
             placeholders.put("{{CPF}}", user.getCPF());
-            placeholders.put("{{DATA}}", getDateFormated());
+            placeholders.put("{{DATA}}", getDateFormated(idUser,nrNumber));
             
         	return generateCertificate(placeholders, selectModelNR(nrNumber));
         }else {
         	return ResponseEntity
         			.status(HttpStatus.BAD_REQUEST)
-        			.body("This user did not complete this NR");
+        			.body("This user did not complete this NR or expired");
         }
 	}
 	

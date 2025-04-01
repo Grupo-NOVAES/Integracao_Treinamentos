@@ -9,5 +9,7 @@ public interface NrRepository extends JpaRepository<NR, Long>{
 	
 	@Query("SELECT n FROM NR n WHERE n.number = :nrNumber")
 	public NR findNrByNumber(int nrNumber);
+	
+	public boolean existsByNumber(int nrNumber);
 
 }

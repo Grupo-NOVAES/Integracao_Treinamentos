@@ -35,10 +35,12 @@
                   th:data-nrnumber="${userNr.nr.number}">
                 <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></i></td>
                 <td th:text="${userNr.nr.number}"></td>
+                <td th:text="${userNr.status}"></td>
                 <td th:text="${userNr.nr.title}"></td>
+                
                 <td>
-                  <img th:if="${userNr.isStatus}" th:src="@{/img/icons/correct.png}" alt="icon" width="35px" height="35px">
-                  <img th:unless="${userNr.isStatus}" th:src="@{/img/icons/incorrect.png}" alt="icon" width="30px" height="30px">
+                  <img th:if="${userNr.isConcluded}" th:src="@{/img/icons/correct.png}" alt="icon" width="35px" height="35px">
+                  <img th:unless="${userNr.isConcluded}" th:src="@{/img/icons/incorrect.png}" alt="icon" width="30px" height="30px">
                 </td>
                 <td>
                   <button

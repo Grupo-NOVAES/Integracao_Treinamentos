@@ -1,5 +1,6 @@
 package com.novaes.treinamentos.office;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.novaes.treinamentos.nr.NR;
@@ -29,7 +30,7 @@ public class Office {
         joinColumns = @JoinColumn(name = "office_id"),
         inverseJoinColumns = @JoinColumn(name = "nr_id")
     )
-	private List<NR> listNR;
+	private List<NR> listNR = new ArrayList<>();
 
 	public Long getId() {
 		return id;

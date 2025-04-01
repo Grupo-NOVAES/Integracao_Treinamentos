@@ -1,5 +1,6 @@
 package com.novaes.treinamentos.questions;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import com.novaes.treinamentos.nr.NrService;
 import com.novaes.treinamentos.responses.ResponsesService;
 import com.novaes.treinamentos.user.User;
 import com.novaes.treinamentos.user.UserService;
+import com.novaes.treinamentos.usernr.Status;
 import com.novaes.treinamentos.usernr.UserNR;
 import com.novaes.treinamentos.usernr.UserNrService;
 
@@ -147,7 +149,10 @@ public class QuestionController {
 
 	    if (score >= 0.6) {
 
-	        userNr.setStatus(true);
+	        userNr.setStatus(Status.Valida);
+	        userNr.setDate(LocalDate.now());
+	        userNr.setDateValidate(LocalDate.now().plusYears(1));
+	        userNr.setConcluded(true);
 	        userNrService.updateUserNR(userNr);
 	        model.addAttribute("sendEmail", true); 
 	    } else {

@@ -3,15 +3,11 @@ package com.novaes.treinamentos.user;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.novaes.treinamentos.alertUserNr.AlertUserNR;
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.office.OfficeService;
 import com.novaes.treinamentos.questions.QuestionService;
@@ -195,9 +192,4 @@ public class UserController {
 		userService.deleteUser(id);
 		return USERHOMEPAGE;
 	}
-	
-	
-
-	
-
 }
