@@ -191,3 +191,10 @@ td{
     background-color: lightgrey;
 
 }
+
+.titleUserNr{
+    display: flex;
+    justify-content: start;
+    margin-left: 2%;
+    align-items: center;
+}

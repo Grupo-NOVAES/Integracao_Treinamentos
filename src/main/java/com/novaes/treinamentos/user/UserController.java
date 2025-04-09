@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.novaes.treinamentos.alertUserNr.AlertUserNR;
+import com.novaes.treinamentos.alertUserNr.AlertUserNRService;
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.office.OfficeService;
 import com.novaes.treinamentos.questions.QuestionService;
@@ -39,20 +39,24 @@ public class UserController {
 	
 	private final ResponsesService responsesService;
 	
+	private final AlertUserNRService alertUserNRService;
+	
 	private static final String USERHOMEPAGE = "redirect:/user/home";
 	private static final String USERINFOPAGE = "redirect:/user/infoClient/";
 	private static final String ERROR_MESSAGE = "errorMessage";
 	
-	public UserController(UserService userService,UserNrService userNrService,OfficeService officeService,QuestionService questionService,ResponsesService responsesService) {
+	public UserController(UserService userService,UserNrService userNrService,OfficeService officeService,QuestionService questionService,ResponsesService responsesService,AlertUserNRService alertUserNRService) {
 		this.userService=userService;
 		this.userNrService=userNrService;
 		this.officeService=officeService;
 		this.questionService=questionService;
 		this.responsesService=responsesService;
+		this.alertUserNRService=alertUserNRService;
 	}
 	
 	@GetMapping("/home")
 	public String homePage(Model model) {
+		model.addAttribute("listAlert",alertUserNRService.getAllAlert());
 		if(userService.getTypeUser()) {
 			model.addAttribute("listUser", userService.getAllClients());
 			model.addAttribute("listOffice",officeService.getAllOffice());
@@ -108,6 +112,11 @@ public class UserController {
 	    return "pages/manager/responseList";
 	}
 
+	@GetMapping("/reassessmentNr/{idUser}/{nrNumber}")
+	public String reassessmentNr(@PathVariable Long idUser,@PathVariable Integer nrNumber) {
+		userNrService.nrReassessment(idUser, nrNumber);
+		return USERINFOPAGE+idUser;
+	}
 	
 	@PostMapping
 	public String addNewClient(@RequestParam(value = "name", required = true) String name,
@@ -184,8 +193,6 @@ public class UserController {
 	    return USERINFOPAGE+idUser;
 	}
 
-
-	
 	
 	@PostMapping("/deleteUser")
 	public String deleteClient(@RequestParam(value="userId",required = true) Long id) {

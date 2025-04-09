@@ -30,5 +30,12 @@ public interface UserNRRepository extends JpaRepository<UserNR, Long>{
 	
 	@Query("SELECT u FROM UserNR u WHERE u.user.id = :userId AND u.nr.number = :nrNumber")
 	UserNR findByUserIdAndNrNumber(Long userId, int nrNumber);
+	
+	@Query("SELECT u FROM UserNR u WHERE u.dateValidate IS NOT NULL")
+	List<UserNR> findUserNrWithDateValidate();
+
+	
+	List<UserNR> findByStatus(Status status);
+
 
 }

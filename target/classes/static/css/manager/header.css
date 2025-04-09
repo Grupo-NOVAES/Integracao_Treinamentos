@@ -107,6 +107,66 @@ header .navContent a:hover{
     cursor: pointer;
   }
 
+  #btnNotification{
+    border: none;
+    background-color: #f9f9f9;
+  }
+
+  .iconBtnNotification{
+    width: 27px;
+    height: 27px;
+    border: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
+
+  #notificationsModal{
+    position: absolute;
+      top: 6%;
+      left: 57%;
+      width: 400px;
+      height: 700px;
+      background-color: #f2f2f2;
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      z-index: 1000;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border-top-left-radius: 20px;
+      border: 2px solid black;
+  }
+
+  #notificationsModalContent{
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+  }
+
+  #notificationsModal[hidden]{
+    display: none;
+  }
+  #notificationModalTitle{
+    font-size: 18pt;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+  .iconWarning{
+    width: 50px;
+    height: 50px;
+  }
+
+  .iconDefeated{
+    width: 50px;
+    height: 50px;
+  }
+
+  .alertItem{
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
 @media (max-width: 1070px) {
 
     header .navContent{

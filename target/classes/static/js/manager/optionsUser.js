@@ -1,5 +1,6 @@
 const btnOptions = document.getElementById("btnOptionUser").addEventListener('click',showModalOptionsUser)
 const userIdFormInput = document.getElementById("userIdFormInput");
+
 let selectedUserId = null;
 let modalVisible = false;
 

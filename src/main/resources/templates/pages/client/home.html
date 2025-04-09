@@ -24,12 +24,17 @@
       <p id="subtitlePage">Selecione uma NR para assistir</p>
       <section id="containerCards" class="row ">
 
-        <div class="card-content col-6 col-sm-4" th:each="userNR : ${listUserNR}" th:data-number="${userNR.nr.number}">
-            <p class="titleCard" th:text="'NR '+ ${userNR.nr.number}"></p>
-          <img alt="IconNR" class="iconNRCard" th:src="@{'/img/nrIcons/Icon NR6.png'}">
-          <button class="btnPerformNR" th:if="${userNR.isConcluded == false}" onclick="performNr(this)">Realizar</button>
-            <p th:if="${userNR.isConcluded == true}" class="statusMessage">Esta NR já foi realizada</p>
+        <div class="card-content col-6 col-sm-4" th:each="userNR : ${listUserNR}" th:data-number="${userNR.nr.number}" th:data-status="${userNR.status}">
+          <p class="titleCard" th:text="'NR ' + ${userNR.nr.number}"></p>
+          <img alt="IconNR" class="iconNRCard" th:src="@{'/img/nrIcons/Icon NR' + ${userNR.nr.number} + '.png'}" />
+        
+          <div class="nr-status-indicator">
+            <span class="statusNr" th:text="${userNR.getStatus}"></span>
+          </div>
+          <button class="btnPerformNR" onclick="performNr(this)">Realizar</button>
+          <p hidden class="statusMessage">Esta NR já foi realizada</p>
         </div>
+        
 
       </section>
     </main>

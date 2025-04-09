@@ -152,7 +152,6 @@ public class QuestionController {
 	        userNr.setStatus(Status.Valida);
 	        userNr.setDate(LocalDate.now());
 	        userNr.setDateValidate(LocalDate.now().plusYears(1));
-	        userNr.setConcluded(true);
 	        userNrService.updateUserNR(userNr);
 	        model.addAttribute("sendEmail", true); 
 	    } else {

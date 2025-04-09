@@ -30,8 +30,6 @@ public class UserNR {
 	private LocalDate dateValidate;
 	
 	private Status status;
-	
-	private boolean isConcluded;
 
 	
 
@@ -89,14 +87,6 @@ public class UserNR {
 
 	public void setDateValidate(LocalDate dateValidate) {
 		this.dateValidate = dateValidate;
-	}
-
-	public boolean isConcluded() {
-		return isConcluded;
-	}
-
-	public void setConcluded(boolean isConcluded) {
-		this.isConcluded = isConcluded;
 	}
 	
 	

@@ -2,9 +2,11 @@ package com.novaes.treinamentos.usernr;
 
 public enum Status {
 	
+	Inconcluida("Inconcluida"),
 	Valida("Valida"),
 	Alerta("Alerta"),
-	Vencida("Vencida");
+	Vencida("Vencida"),
+	Reavaliacao("Reavaliacao");
 	
 	String Status;
 	

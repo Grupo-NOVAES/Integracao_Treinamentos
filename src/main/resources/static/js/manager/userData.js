@@ -56,3 +56,7 @@ function redirectToCertificados(){
 function downloadCertificate() {
   window.location.href=`/user/downloadCertify/${selectedUserId}/${selectedNrId}`
 }
+
+function reassessmentUserNr(){
+  window.location.href=`/user/reassessmentNr/${selectedUserId}/${selectedNrId}`
+}

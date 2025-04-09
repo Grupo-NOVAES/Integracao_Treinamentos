@@ -88,7 +88,30 @@ main{
     border-radius: 5px;
     margin-top: 20px;
 }
-
+.statusNr {
+    font-weight: bold;
+  }
+  
+  .valida {
+    color: green;
+  }
+  
+  .inconcluida {
+    color: gray;
+  }
+  
+  .alerta {
+    color: orange;
+  }
+  
+  .vencida {
+    color: red;
+  }
+  
+  .reavaliacao {
+    color: rgb(0, 0, 0);
+  }
+  
 
 @media (max-width: 890px) {
     #titlePage{

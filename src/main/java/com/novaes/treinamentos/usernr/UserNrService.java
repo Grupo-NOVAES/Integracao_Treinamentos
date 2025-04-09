@@ -12,6 +12,7 @@ import com.novaes.treinamentos.alertUserNr.AlertUserNRService;
 import com.novaes.treinamentos.alertUserNr.AlertUserNrRepository;
 import com.novaes.treinamentos.nr.NR;
 import com.novaes.treinamentos.office.Office;
+import com.novaes.treinamentos.responses.ResponsesService;
 import com.novaes.treinamentos.user.User;
 
 @Service
@@ -21,9 +22,12 @@ public class UserNrService {
 	
 	private final AlertUserNRService alertUserNRService;
 	
-	public UserNrService(UserNRRepository userNrRepository,AlertUserNRService alertUserNRService) {
+	private final ResponsesService responsesService;
+	
+	public UserNrService(UserNRRepository userNrRepository,AlertUserNRService alertUserNRService,ResponsesService responsesService) {
 		this.userNrRepository=userNrRepository;
 		this.alertUserNRService=alertUserNRService;
+		this.responsesService=responsesService;
 	}
 	
 	public void vinculedUserToNr(User user , Office office) {
@@ -31,7 +35,7 @@ public class UserNrService {
             UserNR userNr = new UserNR();
             userNr.setUser(user);
             userNr.setNr(nr);
-            userNr.setStatus(Status.Valida);
+            userNr.setStatus(Status.Inconcluida);
 
             userNrRepository.save(userNr);
         });
@@ -73,25 +77,73 @@ public class UserNrService {
 		userNrRepository.deleteUserNrByNrId(nrId);
 	}
 	
-	@Scheduled(cron = "0 0 0 1 * ?")
-	public List<UserNR> VerifyIfSomeNRiSInvalidWithOutTime() {
-		List<UserNR> userNrList = new ArrayList<>();
-		userNrRepository.findAll().forEach(user -> {
-			if(user.getDateValidate() != null) {
-				if(user.getDateValidate().isBefore(LocalDate.now().minusMonths(1))) {
-					System.out.println("Mudando status para em Alerta!");
-					user.setStatus(Status.Alerta);
-				}else if(user.getDateValidate().isBefore(LocalDate.now())) {
-					System.out.println("Mudando status para Vencido!");
-					user.setStatus(Status.Vencida);
-				}
-				
-				alertUserNRService.createNewAlert(user.getUser().getUsername(), user.getNr().getNumber(), user.getStatus());
-				userNrList.add(user);
-			}
-		});
-		
-		return userNrList;
+	
+	public void nrReassessment(Long idUser,int nrNumber) {
+		UserNR userNr = userNrRepository.findByUserIdAndNrNumber(idUser, nrNumber);
+		userNr.setDate(null);
+		userNr.setDateValidate(null);
+		userNr.setStatus(Status.Reavaliacao);
+		alertUserNRService.deleteAlert(userNr.getUser().getUsername(), nrNumber);
+		responsesService.deleteResponsesByUser(idUser);
 	}
+	
+	
+	
+	@Scheduled(cron = "*/10 * * * * *")
+	//@Scheduled(cron = "0 0 0 1 * ?")
+	public void verificarStatusUserNRComNotificacoes() {
+	    LocalDate hoje = LocalDate.now();
+	    List<UserNR> todosUserNR = userNrRepository.findUserNrWithDateValidate();
+
+	    for (UserNR user : todosUserNR) {
+	    	System.out.println("name: "+user.getUser().getName());
+	        LocalDate validade = user.getDateValidate();
+	        Status statusAtual = user.getStatus();
+
+	        if (validade == null) continue;
+
+	        if (validade.isAfter(hoje) && validade.isBefore(hoje.plusMonths(1))) {
+	            if (statusAtual == Status.Valida) {
+	                user.setStatus(Status.Alerta);
+	                alertUserNRService.createNewAlert(
+	                    user.getUser().getUsername(), user.getNr().getNumber(), Status.Alerta
+	                );
+	                userNrRepository.save(user);
+	            }
+	        }
+
+	        else if (validade.isBefore(hoje)) {
+	            if (statusAtual == Status.Alerta) {
+	                user.setStatus(Status.Vencida);
+	                alertUserNRService.deleteAlert(
+	                    user.getUser().getUsername(), user.getNr().getNumber(), Status.Alerta
+	                );
+	                alertUserNRService.createNewAlert(
+	                    user.getUser().getUsername(), user.getNr().getNumber(), Status.Vencida
+	                );
+	                userNrRepository.save(user);
+	            }
+	            else if (statusAtual == Status.Valida) {
+	                user.setStatus(Status.Vencida);
+	                alertUserNRService.createNewAlert(
+	                    user.getUser().getUsername(), user.getNr().getNumber(), Status.Vencida
+	                );
+	                userNrRepository.save(user);
+	            }
+	        }
+
+	        else if (validade.isAfter(hoje.plusMonths(1))) {
+	            if (statusAtual == Status.Alerta || statusAtual == Status.Vencida) {
+	                user.setStatus(Status.Valida);
+	                alertUserNRService.deleteAlert(
+	                    user.getUser().getUsername(), user.getNr().getNumber(), statusAtual
+	                );
+	                userNrRepository.save(user);
+	            }
+	        }
+	    }
+	}
+
+
 
 }

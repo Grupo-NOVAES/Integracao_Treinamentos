@@ -19,6 +19,9 @@ public interface ResponsesRepository extends JpaRepository<Responses, Long>{
 	@Query("SELECT r FROM Responses r WHERE r.questions.id = :idQuestion AND r.user.id = :userId")
 	public List<Responses>findResponsesByUserAndQuestion(Long userId,Long idQuestion);
 	
+	@Modifying
+    @Transactional
+    @Query("DELETE FROM Responses r WHERE r.user.id = :idUser")
 	public void deleteByUserId(Long idUser);
 	
 	

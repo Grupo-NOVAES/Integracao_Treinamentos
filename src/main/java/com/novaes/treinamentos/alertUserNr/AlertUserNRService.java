@@ -35,4 +35,15 @@ public class AlertUserNRService {
 		alertRepository.deleteAll();
 	}
 
+	public void deleteAlert(String username, int nrNumber, Status alerta) {
+		alertRepository.deleteAlert(username,nrNumber,alerta);
+		
+	}
+	
+	public void deleteAlert(String username, int nrNumber) {
+		System.out.println(username+" - "+nrNumber);
+		alertRepository.deleteAlert(username,nrNumber);
+		
+	}
+
 }
