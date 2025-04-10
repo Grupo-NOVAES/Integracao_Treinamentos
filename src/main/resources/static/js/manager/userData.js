@@ -4,8 +4,6 @@ let selectedUserId = null;
 let selectedNrId = null;
 let modalVisible = false;
 
-
-
 document.addEventListener('click', function(event) {
   const btnOptions = document.getElementById('options');
   const target = event.target;
@@ -15,6 +13,20 @@ document.addEventListener('click', function(event) {
   }
 
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const rows = document.querySelectorAll("tr.UserNrData");
+
+  rows.forEach(row => {
+    const status = row.getAttribute("data-status");
+    const statusTd = row.querySelector("td:nth-child(3)");
+
+    if (statusTd) {
+      const statusClass = `status-${status.toLowerCase()}`;
+      statusTd.classList.add(statusClass);
+    }
+  });
+});
+
 
 
 function showModalOptionsUser(button) {

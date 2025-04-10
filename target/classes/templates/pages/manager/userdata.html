@@ -32,7 +32,9 @@
             <table aria-hidden="true">
               <tr th:each="userNr: ${listNrUser}"
                   th:data-iduser="${infoUser.id}" 
-                  th:data-nrnumber="${userNr.nr.number}">
+                  th:data-nrnumber="${userNr.nr.number}"
+                  th:data-status="${userNr.status}"
+                  class="UserNrData">
                 <td><i class="fa-solid fa-scale-balanced fa-xl" style="color: #007b8f;"></i></td>
                 <td class="titleUserNr" th:text="${userNr.nr.title}"></td>
                 <td th:text="${userNr.status}"></td>

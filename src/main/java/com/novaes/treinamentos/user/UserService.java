@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -214,12 +216,14 @@ public class UserService {
 		return new ClassPathResource("models/"+"CertificateNR"+nrNumber+".pptx");
 	}
 	
-	public String getDateFormated(Long idUser,int nrNumber) {
-		LocalDate data =  userNrRepository.findByUserIdAndNrNumber(idUser, nrNumber).getDateResponse();
-		Locale local = new Locale("pt","BR");
-		DateFormat formato = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy",local);
-		return formato.format(data);
-		
+	public String getDateFormated(Long idUser, int nrNumber) {
+	    LocalDate data = userNrRepository.findByUserIdAndNrNumber(idUser, nrNumber).getDateResponse();
+	    Locale local = new Locale("pt", "BR");
+	    DateFormat formato = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy", local);
+	    
+	    Date date = Date.from(data.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+	    return formato.format(date);
 	}
 	
 	public ResponseEntity<?> downloadCertificate(Long idUser,int nrNumber) throws Exception{

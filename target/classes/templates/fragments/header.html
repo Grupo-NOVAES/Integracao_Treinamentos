@@ -39,9 +39,8 @@
               Não há nenhuma notificação
             </p>
 
-            <ul th:if="${!#lists.isEmpty(listAlert)}">
+            <ul th:if="${!#lists.isEmpty(listAlert)}" id="AlertList">
               <li th:each="alert : ${listAlert}" class="alertItem">
-                <!-- Ícones -->
                 <img th:if="${alert.status.name() == 'Alerta'}"
                      th:src="@{/img/icons/warning.png}"
                      alt="Alerta" class="iconWarning"/>
@@ -49,8 +48,7 @@
                 <img th:if="${alert.status.name() == 'Vencida'}"
                      th:src="@{/img/icons/defeated.png}"
                      alt="Vencida" class="iconDefeated"/>
-            
-                <!-- Mensagem dinâmica -->
+
                 <span th:if="${alert.status.name() == 'Alerta'}">
                     A <span th:text="${alert.nrNumber}"></span> de <span th:text="${alert.nameUser}"></span> está a 1 mês de vencer!
                 </span>

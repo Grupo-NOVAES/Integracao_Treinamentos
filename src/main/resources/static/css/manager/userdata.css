@@ -198,3 +198,29 @@ td{
     margin-left: 2%;
     align-items: center;
 }
+
+.status-inconcluida {
+    color: #9c9c9c;
+    font-weight: bold;
+  }
+  
+  .status-valida {
+    color: #4caf50; 
+    font-weight: bold;
+  }
+  
+  .status-alerta {
+    color: #ff9800;
+    font-weight: bold;
+  }
+  
+  .status-vencida {
+    color: #f44336;
+    font-weight: bold;
+  }
+  
+  .status-reavaliacao {
+    color: #2196f3;
+    font-weight: bold;
+  }
+  

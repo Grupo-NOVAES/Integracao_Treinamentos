@@ -89,8 +89,8 @@ public class UserNrService {
 	
 	
 	
-	@Scheduled(cron = "*/10 * * * * *")
-	//@Scheduled(cron = "0 0 0 1 * ?")
+	//@Scheduled(cron = "*/10 * * * * *")
+	@Scheduled(cron = "0 0 0 1 * ?")
 	public void verificarStatusUserNRComNotificacoes() {
 	    LocalDate hoje = LocalDate.now();
 	    List<UserNR> todosUserNR = userNrRepository.findUserNrWithDateValidate();
