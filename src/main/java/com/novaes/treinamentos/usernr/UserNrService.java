@@ -89,8 +89,8 @@ public class UserNrService {
 	
 	
 	
-	//@Scheduled(cron = "*/10 * * * * *")
-	@Scheduled(cron = "0 0 0 1 * ?")
+	@Scheduled(cron = "*/10 * * * * *")
+	//@Scheduled(cron = "0 0 0 1 * ?")
 	public void verificarStatusUserNRComNotificacoes() {
 	    LocalDate hoje = LocalDate.now();
 	    List<UserNR> todosUserNR = userNrRepository.findUserNrWithDateValidate();
@@ -106,7 +106,7 @@ public class UserNrService {
 	            if (statusAtual == Status.Valida) {
 	                user.setStatus(Status.Alerta);
 	                alertUserNRService.createNewAlert(
-	                    user.getUser().getUsername(), user.getNr().getNumber(), Status.Alerta
+	                    user.getUser().getUsername(),user.getUser().getId(), user.getNr().getNumber(), Status.Alerta
 	                );
 	                userNrRepository.save(user);
 	            }
@@ -119,14 +119,14 @@ public class UserNrService {
 	                    user.getUser().getUsername(), user.getNr().getNumber(), Status.Alerta
 	                );
 	                alertUserNRService.createNewAlert(
-	                    user.getUser().getUsername(), user.getNr().getNumber(), Status.Vencida
+	                    user.getUser().getUsername(),user.getUser().getId(), user.getNr().getNumber(), Status.Vencida
 	                );
 	                userNrRepository.save(user);
 	            }
 	            else if (statusAtual == Status.Valida) {
 	                user.setStatus(Status.Vencida);
 	                alertUserNRService.createNewAlert(
-	                    user.getUser().getUsername(), user.getNr().getNumber(), Status.Vencida
+	                    user.getUser().getUsername(),user.getUser().getId(), user.getNr().getNumber(), Status.Vencida
 	                );
 	                userNrRepository.save(user);
 	            }

@@ -32,6 +32,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.novaes.treinamentos.alertUserNr.AlertUserNrRepository;
 import com.novaes.treinamentos.office.Office;
 import com.novaes.treinamentos.responses.ResponsesRepository;
 import com.novaes.treinamentos.usernr.Status;
@@ -50,6 +51,9 @@ public class UserService {
 	
 	@Autowired
 	private ResponsesRepository responsesRepository;
+	
+	@Autowired
+	private AlertUserNrRepository alertUserNrRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -139,6 +143,39 @@ public class UserService {
 	        return rgNumber.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d)", "$1.$2.$3-$4");
 	    }
 	}
+	
+	public static boolean CPFValidate(String cpf) {
+        cpf = cpf.replaceAll("\\D", "");
+
+        if (cpf.length() != 11 || cpf.matches("(\\d)\\1{10}")) {
+            return false;
+        }
+
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+
+        int digito1 = 11 - (soma % 11);
+        digito1 = (digito1 >= 10) ? 0 : digito1;
+
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+
+        int digito2 = 11 - (soma % 11);
+        digito2 = (digito2 >= 10) ? 0 : digito2;
+
+        return digito1 == Character.getNumericValue(cpf.charAt(9)) &&
+               digito2 == Character.getNumericValue(cpf.charAt(10));
+    }
+
+    public static boolean RGValidate(String rg) {
+        rg = rg.replaceAll("\\D", "");
+
+        return rg.length() == 9 && rg.matches("\\d{9}") && !rg.matches("(\\d)\\1{8}");
+    }
 
 	
 	public List<User> getUsersByOfficeId(Long officeId) {
@@ -157,7 +194,16 @@ public class UserService {
 		if (cpf == null || cpf.isEmpty() || rg == null || rg.isEmpty() || usetDto.getName() == null || usetDto.getName().isEmpty() || usetDto.getLastname() == null || usetDto.getLastname().isEmpty() || usetDto.getLogin() == null || usetDto.getLogin().isEmpty() || usetDto.getPassword() == null || usetDto.getPassword().isEmpty()) {
 			throw new IllegalArgumentException("Todos os campos são obrigatórios!");
 		}
+		
+		if(!CPFValidate(cpf)) {
+			throw new ThisCPFAlreadyExistException();
+		}
+		if(!RGValidate(rg)) {
+			throw new ThisRGAlreadyExistException();
+		}
 
+		
+		
 		User user = new User();
 		user.setName(usetDto.getName());
 		user.setLastname(usetDto.getLastname());
@@ -195,6 +241,7 @@ public class UserService {
 		userNrRepository.deleteUserNrByUserId(idUser);
 		responsesRepository.deleteAllResponsesByUserId(idUser);
 		userRepository.deleteById(idUser);
+		alertUserNrRepository.deleteAlert(idUser);
 	}
 	
 	protected void activateUser(Long userId) {
@@ -211,8 +258,7 @@ public class UserService {
 	
 	
 	
-	public Resource selectModelNR(int nrNumber) {
-		
+	public Resource selectModelNR(int nrNumber) {		
 		return new ClassPathResource("models/"+"CertificateNR"+nrNumber+".pptx");
 	}
 	
@@ -226,25 +272,27 @@ public class UserService {
 	    return formato.format(date);
 	}
 	
-	public ResponseEntity<?> downloadCertificate(Long idUser,int nrNumber) throws Exception{
-		UserNR userNR = userNrRepository.findByUserIdAndNrNumber(idUser,nrNumber);
-		
-        if(!(userNR.getStatus() == Status.Vencida)) {
-        	User user = getUserById(idUser);
-    		
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("{{NOME}}", user.getName()+" "+user.getLastname());
-            placeholders.put("{{RG}}", user.getRG());
-            placeholders.put("{{CPF}}", user.getCPF());
-            placeholders.put("{{DATA}}", getDateFormated(idUser,nrNumber));
-            
-        	return generateCertificate(placeholders, selectModelNR(nrNumber));
-        }else {
-        	return ResponseEntity
-        			.status(HttpStatus.BAD_REQUEST)
-        			.body("This user did not complete this NR or expired");
-        }
+	public ResponseEntity<?> downloadCertificate(Long idUser, int nrNumber) throws Exception {
+	    UserNR userNR = userNrRepository.findByUserIdAndNrNumber(idUser, nrNumber);
+
+	    if (userNR.getStatus().equals(Status.Inconcluida) || userNR.getStatus().equals(Status.Reavaliacao)) {
+	        Map<String, String> error = new HashMap<>();
+	        error.put("error", "Não é possível gerar o certificado. A NR está inconcluída ou em reavaliação.");
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	    }
+
+
+	    User user = getUserById(idUser);
+
+	    Map<String, String> placeholders = new HashMap<>();
+	    placeholders.put("{{NOME}}", user.getName() + " " + user.getLastname());
+	    placeholders.put("{{RG}}", user.getRG());
+	    placeholders.put("{{CPF}}", user.getCPF());
+	    placeholders.put("{{DATA}}", getDateFormated(idUser, nrNumber));
+
+	    return generateCertificate(placeholders, selectModelNR(nrNumber));
 	}
+
 	
 	public ResponseEntity<?> generateCertificate(Map<String, String> placeholders, Resource resource) throws Exception {
 	    if (!resource.exists()) {

@@ -20,4 +20,9 @@ public interface AlertUserNrRepository extends JpaRepository<AlertUserNR, Long>{
     @Transactional
     @Query("DELETE FROM AlertUserNR a WHERE a.nameUser = :username AND a.nrNumber = :nrNumber")
     void deleteAlert(@Param("username") String username, @Param("nrNumber") int nrNumber);
+	
+	@Modifying
+    @Transactional
+    @Query("DELETE FROM AlertUserNR a WHERE a.idUser = :idUser")
+    void deleteAlert(@Param("idUser") Long idUser);
 }

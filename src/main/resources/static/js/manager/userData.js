@@ -65,9 +65,30 @@ function redirectToCertificados(){
   window.location.href="/user/infoClient/"+selectedUserId;
 }
 
-function downloadCertificate() {
-  window.location.href=`/user/downloadCertify/${selectedUserId}/${selectedNrId}`
+async function downloadCertificate() {
+  try {
+    const response = await fetch(`/user/downloadCertify/${selectedUserId}/${selectedNrId}`);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      alert(errorData.error); // Aqui você pode usar um modal no lugar do alert, se quiser
+      return;
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `Certificado_NR${selectedNrId}.pptx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    alert("Erro ao tentar baixar o certificado. Tente novamente mais tarde.");
+  }
 }
+
 
 function reassessmentUserNr(){
   window.location.href=`/user/reassessmentNr/${selectedUserId}/${selectedNrId}`

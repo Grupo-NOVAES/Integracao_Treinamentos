@@ -15,9 +15,10 @@ public class AlertUserNRService {
 		this.alertRepository=alertRepository;
 	}
 	
-	public void createNewAlert(String nameUser,int nrNumber,Status status) {
+	public void createNewAlert(String nameUser,Long idUser,int nrNumber,Status status) {
 		AlertUserNR alert = new AlertUserNR();
 		alert.setNameUser(nameUser);
+		alert.setIdUser(idUser);
 		alert.setNrNumber(nrNumber);
 		alert.setStatus(status);
 		alertRepository.save(alert);

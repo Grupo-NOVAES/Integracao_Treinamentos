@@ -1,5 +1,6 @@
 const btnLogout = document.getElementById("btnLogOut");
 const btnNotification = document.getElementById("btnNotification");
+const notificationsModal = document.getElementById("notificationsModal");
 
 function logOut(event) {
     console.log("saindo")
@@ -9,16 +10,14 @@ function logOut(event) {
 }
 
 function toggleNotificationModal() {
-    const modal = document.getElementById("notificationsModal");
-    const icon = document.getElementById("btnNotification");
+    const modal = notificationsModal;
+    const icon = btnNotification;
     const isHidden = modal.hasAttribute("hidden");
 
     if (isHidden) {
         const rect = icon.getBoundingClientRect();
-
         const modalWidth = modal.offsetWidth || 400;
 
-        console.log("modal width: "+modalWidth)
         const top = rect.top + rect.height + window.scrollY;
         const left = rect.right - modalWidth + window.scrollX - 15;
 
@@ -31,6 +30,16 @@ function toggleNotificationModal() {
     }
 }
 
+function handleClickOutside(event) {
+    if (
+        !notificationsModal.hasAttribute("hidden") &&
+        !notificationsModal.contains(event.target) &&
+        !btnNotification.contains(event.target)
+    ) {
+        notificationsModal.setAttribute("hidden", true);
+    }   
+}
 
-btnLogout.addEventListener('click',logOut)
-btnNotification.addEventListener('click',toggleNotificationModal)
+btnLogout.addEventListener('click', logOut);
+btnNotification.addEventListener('click', toggleNotificationModal);
+document.addEventListener('click', handleClickOutside);

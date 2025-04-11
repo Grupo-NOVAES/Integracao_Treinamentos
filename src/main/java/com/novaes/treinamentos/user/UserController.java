@@ -138,6 +138,7 @@ public class UserController {
 	    	redirectAttributes.addFlashAttribute(ERROR_MESSAGE, "Login já cadastrado!");
 	        return USERHOMEPAGE;
 	    }
+	   
 	    try {
 	        Office officeFound = officeService.findOfficeByName(office);
 	        if (officeFound == null) {

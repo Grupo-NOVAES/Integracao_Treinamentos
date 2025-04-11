@@ -16,6 +16,8 @@ public class AlertUserNR {
 	
 	private String nameUser;
 	
+	private Long idUser;
+
 	private int nrNumber;
 	
 	private Status status;
@@ -34,6 +36,14 @@ public class AlertUserNR {
 
 	public void setNameUser(String nameUser) {
 		this.nameUser = nameUser;
+	}
+	
+	public Long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
 	}
 
 	public int getNrNumber() {
