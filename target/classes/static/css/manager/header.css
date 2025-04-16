@@ -1,0 +1,217 @@
+header {
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: 25% 50% 15%;
+    justify-content: space-around;
+    align-items: center; 
+    background-color: #f9f9f9;
+    padding: 5px;
+}
+
+header .menu{
+    display: none;
+}
+
+
+header .navContent{
+    display: grid;
+    grid-template-columns: 175px 175px 175px;
+    gap: 5px;
+
+}
+
+header .navContent a{
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #007b8f;
+    font-size: 1.2em;
+}
+
+header .navContent a:hover{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #007b8f;
+    background-color: lightgrey;
+    border-radius: 5px;
+}
+
+.media{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+.dropdownMenu{
+    display: none;
+    position: fixed;
+    top: 60px; 
+    right: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    height: 200px;
+    width: 95%;
+    z-index: 1000;
+}
+.dropdownMenu ul{
+    height: 70%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #d8d8d8;
+    padding-left: 15px;
+}
+.dropdownMenu li{
+    color: #6B6B6B;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: left;
+  }
+  .dropdownMenu a{
+    text-decoration: none;
+    color: #6B6B6B;
+  }
+  .dropdownMenu a:hover{
+    color: #c2c2c2;
+  }
+  .dropdownMenu .icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+  }
+  #btnLogOut{
+    border: none;
+    background-color: #f9f9f9;
+  }
+  .iconBtnLogout{
+    width: 27px;
+    height: 27px;
+    border: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
+
+  #btnNotification{
+    border: none;
+    background-color: #f9f9f9;
+  }
+
+  .iconBtnNotification{
+    width: 27px;
+    height: 27px;
+    border: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
+
+  #notificationsModal{
+    position: absolute;
+      width: 400px;
+      height: 700px;
+      background-color: #f2f2f2;
+      display: block;
+      align-items: start;
+      justify-content: center;
+      z-index: 1000;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border-top-left-radius: 20px;
+      border: 2px solid black;
+  }
+
+  #notificationsModalContent{
+    display: flex;
+    background-color: white;
+    padding:50px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+
+  }
+
+  #notificationsModal[hidden]{
+    display: none;
+  }
+  #notificationModalTitle{
+    font-size: 18pt;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    padding-left: 30px;
+  }
+  .iconWarning{
+    width: 50px;
+    height: 50px;
+  }
+
+  .iconDefeated{
+    width: 50px;
+    height: 50px;
+  }
+
+  .alertItem{
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  #AlertList{
+    padding-left: 30px;
+  }
+@media (max-width: 1070px) {
+
+    header .navContent{
+        display: grid;
+        grid-template-columns: 30% 30% 30% 30%;
+        gap: 5px;
+    
+    }
+}
+
+@media (max-width: 750px){
+    .media{
+        display: none;
+    }
+    header .navContent{
+        display: none;
+    }
+    header .menu{
+        display: block; 
+        position: absolute;
+        right: 40px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 500px) {
+    .header{
+        padding-left: 30px;
+    }
+    .tdEmail{
+        overflow-y: scroll;
+        max-width: 75px;
+    }
+}
+
+@media (max-width:265px){
+    .logo{
+        height: 50px;
+        width: 150px;
+    }
+}
