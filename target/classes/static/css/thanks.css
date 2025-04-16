@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+
+main {
+    width: 100%;
+    height: 80vh;
+    background-color: rgb(226, 226, 226);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.thankyou {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+}
+
+#title {
+    color: #007B8F;
+    font-weight: 700;
+    font-size: 36pt;
+    flex-wrap: wrap;
+}
+
+#textOk {
+    color: rgb(14, 14, 14);
+    font-weight: 500;
+    font-size: 18pt;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+#back {
+    font-size: 15pt;
+}
+
+.textFeedback{
+    margin-top: 50px;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+}
+
+
+
+.table{
+    display: flex;
+    justify-content: center;
+    max-height: 350px;
+    overflow-y: auto;
+    justify-self: center;
+    width: 90%;
+    margin-top: 100px;
+}
+
+table{
+    width: 90%;
+    border-spacing: 0 10px;
+}
+
+thead{
+    height: 25px;
+    position: sticky;  
+    top: 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+th, td{
+    text-align: center;
+}
+tbody tr{
+    background-color: #fff;
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px; 
+    height: 40px;
+    transition: height 0.3s ease;
+}
+
+tbody tr:hover{
+    height: 60px;
+}
+
+td{
+    height: 40px;
+}
+
+.table::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.table::-webkit-scrollbar-thumb {
+    background-color: #007b8f;
+    border-radius: 10px;
+}
+
+.table::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+}
+
+
+
+
+
+
+
+#footer {
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #007B8F;
+    color: white;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12pt;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+#_text_footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+#text_footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 5px;
+}
+
+#devby {
+    font-size: 13pt;
+}
+
+#titulo_footer {
+    font-size: 13pt;
+    margin-top: 15px;
+}
+
+.icons {
+    margin-left: 10px;
+    margin-right: 10px;
+    filter: invert(100);
+    color: transparent;
+}
+
+#feedbackContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#btnDowloadCertificate{
+    width: auto;
+    height: auto;
+    padding: 20px;
+    background-color: #007B8F;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+@media screen and (max-width: 862px) {
+    main {
+        width: 100%;
+        height: 500px;
+    }
+    #footer {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    main {
+        width: 100%;
+    }
+    #footer {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    header {
+        align-items: center;
+        justify-content: center;
+        height: 78%;
+    }
+
+    #logo {
+        margin-top: 15px;
+        margin-left: 10px;
+        width: 170px;
+    }
+
+    #title {
+        font-weight: 700;
+        font-size: 26pt;
+        flex-wrap: wrap;
+    }
+
+    .thankyou {
+        padding: 10%;
+    }
+
+    #textOk {
+        font-weight: 500;
+        font-size: 14pt;
+    }
+
+    #back {
+        font-size: 13pt;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    main {
+        width: 100%;
+        height: auto;
+    }
+    #footer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .text{
+        font-size: 11pt;
+    }
+}
+
+@media screen and (max-width: 335px) {
+    #logo {
+        margin-top: 12px;
+        margin-left: 10px;
+        width: 130px;
+        height: 40px;
+    }
+
+    #title {
+        font-weight: 700;
+        font-size: 22pt;
+        flex-wrap: wrap;
+    }
+
+    #textOk {
+        font-weight: 500;
+        font-size: 13pt;
+    }
+
+    #back {
+        font-size: 12pt;
+    }
+
+    #text {
+        font-size: 12pt;
+    }
+
+    #titulo_footer {
+        font-size: 12pt;
+    }
+
+    #devby {
+        font-size: 11pt;
+    }
+}
+
+@media screen and (max-width: 240px) {
+    #logo {
+        margin-top: 12px;
+        margin-left: 10px;
+        width: 130px;
+        height: 40px;
+    }
+
+    #title {
+        font-weight: 700;
+        font-size: 20pt;
+        flex-wrap: wrap;
+    }
+
+    #textOk {
+        font-weight: 500;
+        font-size: 11.5pt;
+    }
+
+    #back {
+        font-size: 11pt;
+    }
+
+    #titulo_footer {
+        font-size: 11pt;
+    }
+
+    #devby {
+        font-size: 10pt;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    #logo{
+        width: 400px;
+        height: 110px;
+    }
+    main{
+        background-color: rgb(226, 226, 226);
+    }
+    #title{
+        font-size: 80pt;
+        font-weight: 600;
+    }
+    #textOk{
+        font-size: 30pt;
+        margin-top: 40pt;
+        margin-bottom: 30px;
+    }
+    #back{
+        font-size: 27pt;
+    }
+    .text{
+        font-size: 26pt;
+    }
+    .iconsRedes{
+        width: 50px;
+    }
+    #titulo_footer{
+        font-size: 28pt;
+    }
+    #devby{
+        font-size: 26pt;
+    }
+}
+
+@media screen and (min-width: 1707px) {
+    #logo{
+        width: 230px;
+        height: 67px;
+    }
+    main{
+        background-color: rgb(226, 226, 226);
+    }
+    #title{
+        font-size: 50pt;
+        font-weight: 600;
+    }
+    #textOk{
+        font-size: 24pt;
+        margin-top: 30pt;
+        margin-bottom: 20px;
+    }
+    #back{
+        font-size: 19pt;
+    }
+    .text{
+        font-size: 17pt;
+    }
+    .iconsRedes{
+        width: 35px;
+    }
+    #titulo_footer{
+        font-size: 18pt;
+    }
+    #devby{
+        font-size: 17pt;
+    }
+}
+
+@media screen and (min-width: 1517px) {
+    #logo{
+        width: 210px;
+        height: 62px;
+    }
+    main{
+        background-color: rgb(226, 226, 226);
+    }
+    #title{
+        font-size: 40pt;
+        font-weight: 700;
+    }
+    #textOk{
+        font-size: 20pt;
+        margin-top: 30pt;
+        margin-bottom: 20px;
+    }
+    #back{
+        font-size: 17pt;
+    }
+    .text{
+        font-size: 15pt;
+    }
+    .iconsRedes{
+        width: 30px;
+    }
+    #titulo_footer{
+        font-size: 15pt;
+    }
+    #devby{
+        font-size: 14pt;
+    }
+}

@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    display: grid;
+    grid-template-rows: 10vh 90vh;
+    grid-row: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+
+.intro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sectionMain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.intro .textIntro {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #00434d;
+}
+
+
+.box{
+    background-color: #f9f9f9;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow:  0 1px 1px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+.box_requiriments{
+    background-color: #f9f9f9;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow:  0 1px 1px rgba(0, 0, 0, 0.5);
+    color: #007B8F;
+    padding: 20px;
+}
+
+.box #logo{
+    align-self: center;
+}
+
+.box-content{
+    padding-left: 30px;
+}
+
+.box-content h2{
+    font-weight: bold;
+}
+
+.styled-list {
+    list-style-type: none;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+.styled-list li {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 16px;
+    color: #555;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.styled-list li::before {
+    content: "•";
+    color: #007b8f;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 24px;
+}
+
+.styled-list li:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.styled-list li:last-child {
+    border-bottom: none;
+}
+
+
+
+.styled-list::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.styled-list::-webkit-scrollbar-thumb {
+    background-color: #007B8F;
+    border-radius: 10px;
+}
+
+.styled-list::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+.infoTextNr{
+    display: flex;
+    flex-direction: row;
+}
+.infoTextNr p{
+    margin-right: 20px;
+}
+.labelNrText{
+    color: #007B8F;
+}
+
+
+
+
+@media (max-width: 850px){
+    main{
+        overflow-y: scroll;
+    }
+}
