@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+    <link rel="stylesheet" th:href="@{/css/client/player.css}">
+    <link rel="stylesheet" th:href="@{/css/client/sidebar.css}">
+    <title>Formulário | NR 6 - Módulos I, II, III - Riscos</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" integrity="sha384-YB/DdIkloKoRpclWB8bNcYXWakt57USgtQPDzvnIDHYU0lasD5eWlXVo1S4ODukY" crossorigin="anonymous"></script>
+
+</head>
+<body>
+      <main>
+        <img alt="iconImg" th:src="@{/img/IdentidadeVisual/Logos Grupo Novaes.png}" id="logo">
+        <section id="marginContainer">
+            <div id="container">
+              <p id="titlePalyer">NR 06 - Módulo I - Riscos</p>
+              <iframe id="playerVideo" title="Aula de Segurança"
+                  th:src="${videoURL}" width="560" height="315" allowfullscreen>
+              </iframe>
+            </div>
+        </section>
+        <div id="containerOptions">
+          <button class="btnOption" id="btnCancelPlayer">Cancelar</button>
+          <input id="nrNumberValue" hidden th:value="${nrNumber}">
+          <button onclick="RealizeForm(this)" class="btnOption" id="btnStartForm">Formulario</button>
+        </div>
+      </main>
+</body>
+
+<script th:src="@{/js/client/player.js}"></script>
+</html>
