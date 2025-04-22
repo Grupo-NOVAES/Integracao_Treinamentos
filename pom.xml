@@ -117,6 +117,20 @@
 
 <build>
     <plugins>
+        <!-- Configuração para o maven-resources-plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <encoding>UTF-8</encoding>
+                <filters>
+                    <!-- Defina o caminho do filtro, se necessário -->
+                    <filter>src/main/filters/filter.properties</filter>
+                </filters>
+            </configuration>
+        </plugin>
+
         <!-- Configuração para o maven-jar-plugin para adicionar o Main-Class no MANIFEST.MF -->
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -125,7 +139,7 @@
             <configuration>
                 <archive>
                     <manifestEntries>
-                        <Main-Class>com.example.demo.DemoApplication</Main-Class>
+                        <Main-Class>com.novaes.treinamentos.TreinamentosApplication</Main-Class>
                     </manifestEntries>
                 </archive>
             </configuration>

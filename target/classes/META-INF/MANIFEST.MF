@@ -3,5 +3,5 @@ Build-Jdk-Spec: 17
 Implementation-Title: treinamentos
 Implementation-Version: 0.0.1-SNAPSHOT
 Created-By: Maven Integration for Eclipse
-Main-Class: com.example.demo.DemoApplication
+Main-Class: com.novaes.treinamentos.TreinamentosApplication
 
