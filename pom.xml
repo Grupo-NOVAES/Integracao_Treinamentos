@@ -136,7 +136,7 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
             <version>3.1.0</version> <!-- ou a versão compatível com seu projeto -->
             <configuration>
-                <mainClass>com.example.demo.DemoApplication</mainClass>
+                <mainClass>com.novaes.treinamentos.TreinamentosApplication</mainClass>
             </configuration>
         </plugin>
     </plugins>
