@@ -1,0 +1,5 @@
+# Created at 2025-04-04T08:41:55.923
+Boot Manifest-JAR contains absolute paths in classpath 'D:\PC13\Desktop\teste google cloud\Integracao_Treinamentos\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

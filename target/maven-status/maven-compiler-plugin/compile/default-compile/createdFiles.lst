@@ -13,7 +13,6 @@ com\novaes\treinamentos\usernr\UserNR.class
 com\novaes\treinamentos\nr\NrController.class
 com\novaes\treinamentos\responses\ResponsesService.class
 com\novaes\treinamentos\usernr\UserNRNotFoundException.class
-com\novaes\treinamentos\GlobalInfoHeader.class
 com\novaes\treinamentos\util\DatabaseInit.class
 com\novaes\treinamentos\usernr\UserNrService.class
 com\novaes\treinamentos\user\ThisCPFAlreadyExistException.class
