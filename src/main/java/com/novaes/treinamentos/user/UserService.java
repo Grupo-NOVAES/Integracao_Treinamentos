@@ -120,27 +120,11 @@ public class UserService {
 		}
 	}
 	
-	public String unformatedRG(String rg) {
-		if (rg == null) {
-			return null;
-		}else {
-			return rg.replaceAll("\\D", "");
-		}
-	}
-	
 	public String formatedCPF(String cpfNumber) {
 	    if (cpfNumber == null || cpfNumber.length() != 11) {
 	        return cpfNumber;
 	    } else {
 	        return cpfNumber.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d)", "$1.$2.$3-$4");
-	    }
-	}
-	
-	public String formatedRG(String rgNumber) {
-	    if (rgNumber == null || rgNumber.length() != 9) {
-	        return rgNumber;
-	    } else {
-	        return rgNumber.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d)", "$1.$2.$3-$4");
 	    }
 	}
 	
@@ -171,12 +155,6 @@ public class UserService {
                digito2 == Character.getNumericValue(cpf.charAt(10));
     }
 
-    public static boolean RGValidate(String rg) {
-        rg = rg.replaceAll("\\D", "");
-
-        return rg.length() == 9 && rg.matches("\\d{9}") && !rg.matches("(\\d)\\1{8}");
-    }
-
 	
 	public List<User> getUsersByOfficeId(Long officeId) {
         return userRepository.findUsersByOfficeId(officeId);
@@ -198,9 +176,6 @@ public class UserService {
 		if(!CPFValidate(cpf)) {
 			throw new ThisCPFAlreadyExistException();
 		}
-		if(!RGValidate(rg)) {
-			throw new ThisRGAlreadyExistException();
-		}
 
 		
 		
@@ -210,7 +185,6 @@ public class UserService {
 		user.setPhoneNumber(phoneNumber);
 		user.setLogin(usetDto.getLogin());
 		user.setCPF(cpf);
-		user.setRG(rg);
 		user.setRole(role);
 		user.setPassword(passwordEncoder.encode(usetDto.getPassword()));
 		user.setOffice(office);
@@ -286,7 +260,6 @@ public class UserService {
 
 	    Map<String, String> placeholders = new HashMap<>();
 	    placeholders.put("{{NOME}}", user.getName() + " " + user.getLastname());
-	    placeholders.put("{{RG}}", user.getRG());
 	    placeholders.put("{{CPF}}", user.getCPF());
 	    placeholders.put("{{DATA}}", getDateFormated(idUser, nrNumber));
 
